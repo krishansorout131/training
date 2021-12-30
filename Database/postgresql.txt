@@ -1,0 +1,704 @@
+*** installing postgresql 
+
+$ sudo apt install postgresql
+
+**** To start or stop server.
+
+systemctl status postgresql
+systemctl stop postgresql
+systemctl start postgresql
+
+set root user and password:-
+sudo -u postgres psql
+
+**reset password for user postgres
+
+postgres=# ALTER USER postgres PASSWORD 'PASSOWRD...';
+
+
+TO USE POSTGRESQL use command :-
+psql -u postgres -h localhost
+
+now it promt for the password .fill it and press enter.
+
+****install pgadmin4 
+->curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add -
+
+->sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/focal pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list' 
+
+->sudo apt update
+
+->sudo apt install pgadmin4 
+
+
+To get the list of all databases :-
+
+postgres-# \l
+
+  Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-----------+----------+----------+---------+-------+-----------------------
+ hodal     | postgres | UTF8     | en_IN   | en_IN | 
+ krishan   | postgres | UTF8     | en_IN   | en_IN | 
+ postgres  | postgres | UTF8     | en_IN   | en_IN | 
+ template0 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+(5 rows)
+
+
+To get the list of all user :-
+
+postgres-# \du
+
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+***** for creating new users with semi/all powers:-
+
+CREATE USER krishan WITH CREATEDB LOGIN ENCRYPTED PASSWORD 'krishan';
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ krishan   | Create DB                                                  | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+(END)
+
+
+Grant access privileges to a specified user to a specified database:-
+
+postgres=# GRANT ALL PRIVILEGES ON DATABASE krishan TO krishan; 
+
+
+postgres=# \du
+postgres=# GRANT ALL PRIVILEGES ON DATABASE krishan TO krishan;
+GRANT
+postgres=# 
+
+
+Droping a database:-
+postgres=# DROP DATABASE hodal;
+DROP DATABASE
+postgres=# \l
+                             List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-----------+----------+----------+---------+-------+-----------------------
+ krishan   | postgres | UTF8     | en_IN   | en_IN | =Tc/postgres         +
+           |          |          |         |       | postgres=CTc/postgres+
+           |          |          |         |       | krishan=CTc/postgres
+ postgres  | postgres | UTF8     | en_IN   | en_IN | 
+ template0 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_IN   | en_IN | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+(4 rows)
+
+***switching to databases
+
+postgres=# \c krishan
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "krishan" as user "postgres".
+krishan=# 
+
+
+88creating a table 
+                                 ^
+krishan=# create table sorout(Name char(50),age int); 
+CREATE TABLE
+krishan=# 
+
+**** Drop a table/multiple tables:-
+
+krishan=# drop table dagar,sorout;
+DROP TABLE
+krishan=# \d
+Did not find any relations.
+
+***show tables 
+krishan=# create table sorout(Name char(50),age int); 
+CREATE TABLE
+krishan=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner   
+--------+--------+-------+----------
+ public | dagar  | table | postgres
+ public | sorout | table | postgres
+(2 rows)
+
+***describe a table 
+krishan=# \d dagar
+                  Table "public.dagar"
+ Column |     Type      | Collation | Nullable | Default 
+--------+---------------+-----------+----------+---------
+ name   | character(50) |           |          | 
+ age    | integer       |           |          | 
+
+***see the content of table:-
+
+select * from tablename;
+rishan=# select * from dagar;
+                        name                        | age | city  
+----------------------------------------------------+-----+-------
+ mohit                                              |  22 | 
+ mohit dagar                                        |  23 | 
+ krishan                                            |  21 | hodal
+(3 rows)
+
+***insert data into table :-
+krishan=# insert into dagar values('krishan',21,'hodal');
+INSERT 0 1
+
+***add a column to existing table:-
+
+
+krishan=# alter table dagar add column village varchar(30),add column university varchar;
+ALTER TABLE
+
+krishan=# \d dagar
+                        Table "public.dagar"
+   Column   |         Type          | Collation | Nullable | Default 
+------------+-----------------------+-----------+----------+---------
+ name       | character(50)         |           |          | 
+ age        | integer               |           |          | 
+ city       | character varying(50) |           |          | 
+ village    | character varying(30) |           |          | 
+ university | character varying     |           |          | 
+
+
+*** Drop a column  from a table:-
+
+krishan=# alter table dagar drop column university;
+ALTER TABLE
+krishan=# select * from dagar;
+                        name                        | age | city  | village 
+----------------------------------------------------+-----+-------+---------
+ mohit                                              |  22 |       | 
+ mohit dagar                                        |  23 |       | 
+ krishan                                            |  21 | hodal | 
+ ajay                                               |  22 | kosi  | mvn
+(4 rows)
+
+krishan=# alter table dagar drop column village;
+ALTER TABLE
+krishan=# select * from dagar;
+                        name                        | age | city  
+----------------------------------------------------+-----+-------
+ mohit                                              |  22 | 
+ mohit dagar                                        |  23 | 
+ krishan                                            |  21 | hodal
+ ajay                                               |  22 | kosi
+(4 rows)
+
+
+***Rename Column
+
+krishan=# alter table dagar rename city to supercity;
+ALTER TABLE
+krishan=# select * from dagar;
+                        name                        | age | supercity 
+----------------------------------------------------+-----+-----------
+ mohit                                              |  22 | 
+ mohit dagar                                        |  23 | 
+ krishan                                            |  21 | hodal
+ ajay                                               |  22 | kosi
+(4 rows)
+
+
+**** change data type of a existing column:-
+
+rishan=# \d dagar
+                        Table "public.dagar"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ name      | character(50)         |           |          | 
+ age       | character varying     |           |          | 
+ supercity | character varying(50) |           |          | 
+
+
+krishan=# alter table dagar alter column age type char(30);
+ALTER TABLE
+krishan=# \d dagar
+                        Table "public.dagar"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ name      | character(50)         |           |          | 
+ age       | character(30)         |           |          | 
+ supercity | character varying(50) |           |          | 
+
+
+****Truncate table :- it clear all data inside a table.
+
+krishan=# truncate dagar;
+TRUNCATE TABLE
+krishan=# select * from dagar;
+ name | age | supercity 
+------+-----+-----------
+(0 rows)
+
+
+
+++++>>> Data types :-
+
+    Numeric datatype
+    Character datatype
+    Date/time datatype
+    Monetary data type
+    Binary data type
+    Boolean data type
+    Enumerated data type
+    Geometric data type
+    Text search data type
+    UUID data type
+    Network address type
+    JSON data type
+    Bit string type
+    XML data type
+    Range data type
+    Arrays
+    Composite data type
+    Object identifiers type
+    Pseudo data type
+    pg-Isn data type
+    
+    
+***inserting default date:-
+
+beryl=# alter table berylsystem add column updation date;
+ALTER TABLE
+beryl=# \d berylsystem
+beryl=# alter table berylsystem alter column updation set default current_date;
+ALTER TABLE
+beryl=# insert into berylsystem (employee_name,salary,updation) values ('mohit',500000,'26/07/2000');
+INSERT 0 1
+beryl=# select * from berylsystem;
+ id | employee_name | salary |  updation  
+----+---------------+--------+------------
+  1 | krishan       |        | 
+  2 | mohit         |  20000 | 
+  3 | mohit         | 500000 | 2000-07-26
+(3 rows)
+
+beryl=# insert into berylsystem (employee_name,salary,updation) values ('mohit',500000,default);
+INSERT 0 1
+beryl=# select * from berylsystem;
+ id | employee_name | salary |  updation  
+----+---------------+--------+------------
+  1 | krishan       |        | 
+  2 | mohit         |  20000 | 
+  3 | mohit         | 500000 | 2000-07-26
+  4 | mohit         | 500000 | 2021-12-29
+(4 rows)
+
+
+***Insert data from another table
+
+beryl=# insert into b1 select * from berylsystem where id=2; 
+INSERT 0 1
+beryl=# select * from b1;
+ id | employee_name | salary | updation 
+----+---------------+--------+----------
+  2 | mohit         |  20000 | 
+(1 row)
+
+***update in table :-
+
+eryl=# update berylsystem set salary=30000 where salary >=50000;
+UPDATE 2
+beryl=# select * from berylsystem;
+ id | employee_name | salary |  updation  
+----+---------------+--------+------------
+  1 | krishan       |        | 
+  2 | mohit         |  20000 | 
+  3 | mohit         |  30000 | 2000-07-26
+  4 | mohit         |  30000 | 2021-12-29
+(4 rows)
+
+***Subquery
+
+A subquery is a command used within another query. In contrast, the INNER SELECT or the INNER statement is called a SUBQUERY, and OUTER SELECT or the OUTER statement is called the MAIN command
+
+Example of PostgreSQL Subquery with SELECT clause
+
+
+
+***clauses 
+
+*order by:-
+
+beryl=# select employee_name from berylsystem order by employee_name asc;
+ employee_name 
+---------------
+ krishan
+ mohit
+ mohit
+(3 rows)
+
+beryl=# select employee_name from berylsystem order by employee_name desc;
+ employee_name 
+---------------
+ mohit
+ mohit
+ krishan
+(3 rows)
+
+****GROUP BY clause
+beryl=# select age from employee group by age;
+ age 
+-----
+  22
+  21
+  20
+
+beryl=# select age,sum(age) from employee group by age;
+ age | sum 
+-----+-----
+  22 |  22
+  21 |  63
+  20 |  20
+(3 rows)
+
+****Limit by clause:-
+
+beryl=# select * from employee order by emp_id limit 4;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      1 | krishan    | sorout    |  21 | hodal     |   ₹1,000.00
+      2 | mohit      | dagar     |  22 | palwal    |  ₹10,000.00
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+
+***limit and offset:-
+
+                                                      ^
+beryl=# select * from employee order by emp_id limit 4 offset 2;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+      5 | anshul     | dharamani |  21 | faridabad |  ₹30,000.00
+(3 rows)
+
+beryl=# select * from employee order by emp_id limit 4 offset 3;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+      5 | anshul     | dharamani |  21 | faridabad |  ₹30,000.00
+(2 rows)
+
+
+****Fetch clause:-
+
+beryl=# select * from employee fetch first row only;
+ emp_id | first_name | last_name | age | addres |  salary   
+--------+------------+-----------+-----+--------+-----------
+      1 | krishan    | sorout    |  21 | hodal  | ₹1,000.00
+(1 row)
+
+beryl=# select * from employee fetch first 1 row only;
+ emp_id | first_name | last_name | age | addres |  salary   
+--------+------------+-----------+-----+--------+-----------
+      1 | krishan    | sorout    |  21 | hodal  | ₹1,000.00
+(1 row)
+
+**fetch and offset:-
+beryl=# select * from employee offset 1 fetch first 3 row only;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      2 | mohit      | dagar     |  22 | palwal    |  ₹10,000.00
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+(3 rows)
+
+
+***Distinct clause :
+it only shows one copy of a same word or line etc. 
+                                             ^
+beryl=# select distinct addres from employee order by addres;
+  addres   
+-----------
+ faridabad
+ hodal
+ kosi
+ palwal
+(4 rows)
+
+
+***having clause:-
+
+beryl=# select emp_id,first_name,sum(age) from employee group by first_name,emp_id having sum(age)>20 order by first_name;
+ emp_id | first_name | sum 
+--------+------------+-----
+      3 | Ajay       |  21
+      5 | anshul     |  21
+      1 | krishan    |  21
+      2 | mohit      |  22
+(4 rows)
+
+beryl=# select emp_id,first_name,sum(age) from employee group by first_name,emp_id having sum(age)>21 order by first_name;
+ emp_id | first_name | sum 
+--------+------------+-----
+      2 | mohit      |  22
+(1 row)
+
+
+***like operator:-
+it is case sensitive anshul or Anshul both are two different words for it 'ansh%';
+
+beryl=# select first_name,last_name from employee where first_name like 'a%';
+ first_name | last_name 
+------------+-----------
+ anshul     | dharamani
+(1 row)
+
+beryl=# select first_name,last_name from employee where first_name like 'A%';
+ first_name | last_name 
+------------+-----------
+ Ajay       | Agarwal
+ Akshay     | sharma
+(2 rows)
+
+
+beryl=# select first_name,last_name from employee where first_name like '%an';
+ first_name | last_name 
+------------+-----------
+ krishan    | sorout
+(1 row)
+
+
+beryl=# select first_name,last_name from employee where first_name like '%ha_';
+ first_name | last_name 
+------------+-----------
+ krishan    | sorout
+ Akshay     | sharma
+(2 rows)
+
+
+***PostgreSQL IN Condition
+
+
+beryl=# select * from employee where first_name in ('krishan','mohit');
+ emp_id | first_name | last_name | age | addres |   salary   
+--------+------------+-----------+-----+--------+------------
+      1 | krishan    | sorout    |  21 | hodal  |  ₹1,000.00
+      2 | mohit      | dagar     |  22 | palwal | ₹10,000.00
+(2 rows)
+
+*** not in condition:-
+
+beryl=# select * from employee where first_name not in ('krishan','mohit');
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+      5 | anshul     | dharamani |  21 | faridabad |  ₹30,000.00
+(3 rows)
+
+
+****Between condition:-
+beryl=# select * from employee where age between 20 and 25;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      1 | krishan    | sorout    |  21 | hodal     |   ₹1,000.00
+      2 | mohit      | dagar     |  22 | palwal    |  ₹10,000.00
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+      5 | anshul     | dharamani |  21 | faridabad |  ₹30,000.00
+(5 rows)
+
+beryl=# select * from employee where age between 20 and 21;
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      1 | krishan    | sorout    |  21 | hodal     |   ₹1,000.00
+      3 | Ajay       | Agarwal   |  21 | kosi      |  ₹50,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+      5 | anshul     | dharamani |  21 | faridabad |  ₹30,000.00
+(4 rows)
+
+
+*** exists condition:-
+
+beryl=# select * from employee where exists (select new_id from new where employee.emp_id=new.emp_id);
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      1 | krishan    | sorout    |  21 | hodal     |   ₹1,000.00
+      2 | mohit      | dagar     |  22 | palwal    |  ₹10,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+(3 rows)
+
+
+****in also do upper work:--
+
+beryl=# select * from employee where emp_id in (select emp_id from new);
+ emp_id | first_name | last_name | age |  addres   |   salary    
+--------+------------+-----------+-----+-----------+-------------
+      1 | krishan    | sorout    |  21 | hodal     |   ₹1,000.00
+      2 | mohit      | dagar     |  22 | palwal    |  ₹10,000.00
+      4 | Akshay     | sharma    |  20 | faridabad | ₹100,020.00
+(3 rows)
+
+
+
+*****PostgreSQL Inner join:-
+
+beryl=# select emp_id,first_name,id,name from employee inner join joins on first_name=name;
+ emp_id | first_name | id |  name   
+--------+------------+----+---------
+      1 | krishan    |  1 | krishan
+      2 | mohit      |  3 | mohit
+(2 rows)
+
+
+****left join:-
+
+beryl=# select emp_id,first_name,id,name from employee left join joins on first_name=name;
+ emp_id | first_name | id |  name   
+--------+------------+----+---------
+      1 | krishan    |  1 | krishan
+      2 | mohit      |  3 | mohit
+      3 | Ajay       |    | 
+      4 | Akshay     |    | 
+      5 | anshul     |    | 
+(5 rows)
+
+***PostgreSQL left Join with Where clause:-
+beryl=# select emp_id,first_name,id,name from employee left join joins on first_name=name where id is null;
+ emp_id | first_name | id | name 
+--------+------------+----+------
+      3 | Ajay       |    | 
+      4 | Akshay     |    | 
+      5 | anshul     |    | 
+(3 rows)
+
+
+
+****right join :-
+
+beryl=# select emp_id,first_name,id,name from employee right join joins on first_name=name;
+ emp_id | first_name | id |  name   
+--------+------------+----+---------
+      1 | krishan    |  1 | krishan
+        |            |  2 | jai
+      2 | mohit      |  3 | mohit
+        |            |  4 | rohit
+        |            |  5 | neeraj
+(5 rows)
+
+
+***PostgreSQL Right Join with Where clause:-
+
+beryl=# select emp_id,first_name,id,name from employee right join joins on first_name=name where emp_id is null;
+ emp_id | first_name | id |  name  
+--------+------------+----+--------
+        |            |  2 | jai
+        |            |  4 | rohit
+        |            |  5 | neeraj
+(3 rows)
+
+
+***PostgreSQL Full Outer Join:-
+
+
+beryl=# select emp_id,first_name,id,name from employee full outer join joins on first_name=name;
+ emp_id | first_name | id |  name   
+--------+------------+----+---------
+      1 | krishan    |  1 | krishan
+        |            |  2 | jai
+      2 | mohit      |  3 | mohit
+        |            |  4 | rohit
+        |            |  5 | neeraj
+      3 | Ajay       |    | 
+      4 | Akshay     |    | 
+      5 | anshul     |    | 
+(8 rows)
+
+beryl=# 
+
+
+*** full outer join with a WHERE clause :-
+it shows only non common rows from both;
+
+beryl=# select emp_id,first_name,id,name from employee full outer join joins on first_name=name where emp_id is null or id is null;
+ emp_id | first_name | id |  name  
+--------+------------+----+--------
+        |            |  2 | jai
+        |            |  4 | rohit
+        |            |  5 | neeraj
+      3 | Ajay       |    | 
+      4 | Akshay     |    | 
+      5 | anshul     |    | 
+(6 rows)
+
+
+
+***cross join :--
+
+beryl=# select first_name,name from employee cross join joins;
+ first_name |  name   
+------------+---------
+ krishan    | krishan
+ mohit      | krishan
+ Ajay       | krishan
+ Akshay     | krishan
+ anshul     | krishan
+ krishan    | jai
+ mohit      | jai
+ Ajay       | jai
+ Akshay     | jai
+ anshul     | jai
+ krishan    | mohit
+ mohit      | mohit
+ Ajay       | mohit
+ Akshay     | mohit
+ anshul     | mohit
+ krishan    | rohit
+ mohit      | rohit
+ Ajay       | rohit
+ Akshay     | rohit
+ anshul     | rohit
+ krishan    | neeraj
+ mohit      | neeraj
+ Ajay       | neeraj
+ Akshay     | neeraj
+ anshul     | neeraj
+(25 rows)
+
+
+****self join :-
+
+
+beryl=# select emp.emp_id,emp.first_name,e2.emp_id,e2.first_name from employee emp left join employee e2 on emp.first_name=e2.first_name;
+ emp_id | first_name | emp_id | first_name 
+--------+------------+--------+------------
+      2 | mohit      |      2 | mohit
+      3 | ajay       |      3 | ajay
+      8 | krishan    |      8 | krishan
+(3 rows)
+
+
+****natural join:-
+beryl=# select * from employee natural join joins ;
+ emp_id | first_name | last_name | age | addres |   salary    | id |  name   
+--------+------------+-----------+-----+--------+-------------+----+---------
+      2 | mohit      | dagar     |  22 | palwal | ₹190,000.00 |  1 | krishan
+      3 | ajay       | agarwal   |  23 | kosi   |  ₹90,000.00 |  1 | krishan
+      8 | krishan    | sorout    |  21 | hodal  |  ₹10,000.00 |  1 | krishan
+      2 | mohit      | dagar     |  22 | palwal | ₹190,000.00 |  2 | jai
+      3 | ajay       | agarwal   |  23 | kosi   |  ₹90,000.00 |  2 | jai
+      8 | krishan    | sorout    |  21 | hodal  |  ₹10,000.00 |  2 | jai
+      2 | mohit      | dagar     |  22 | palwal | ₹190,000.00 |  3 | mohit
+      3 | ajay       | agarwal   |  23 | kosi   |  ₹90,000.00 |  3 | mohit
+      8 | krishan    | sorout    |  21 | hodal  |  ₹10,000.00 |  3 | mohit
+      2 | mohit      | dagar     |  22 | palwal | ₹190,000.00 |  4 | rohit
+      3 | ajay       | agarwal   |  23 | kosi   |  ₹90,000.00 |  4 | rohit
+      8 | krishan    | sorout    |  21 | hodal  |  ₹10,000.00 |  4 | rohit
+      2 | mohit      | dagar     |  22 | palwal | ₹190,000.00 |  5 | neeraj
+      3 | ajay       | agarwal   |  23 | kosi   |  ₹90,000.00 |  5 | neeraj
+      8 | krishan    | sorout    |  21 | hodal  |  ₹10,000.00 |  5 | neeraj
+(15 rows)
+
+
+
+
