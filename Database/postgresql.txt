@@ -700,5 +700,49 @@ beryl=# select * from employee natural join joins ;
 (15 rows)
 
 
+***json data type:-
+
+beryl=# insert into jsondata(data) values('{ "name":"ajay","age":21,"descrition":{"job":"intern","salary":1000}}');
+INSERT 0 1
+beryl=# select * from jsondata;
+ id |                                   data                                   
+----+--------------------------------------------------------------------------
+  1 | { "name":"krishan","age":21,"descrition":{"job":"intern","salary":1000}}
+  2 | { "name":"mohit","age":21,"descrition":{"job":"intern","salary":1000}}
+  3 | { "name":"ajay","age":21,"descrition":{"job":"intern","salary":1000}}
+(3 rows)
+
+beryl=# select data from jsondata;
+                                   data                                   
+--------------------------------------------------------------------------
+ { "name":"krishan","age":21,"descrition":{"job":"intern","salary":1000}}
+ { "name":"mohit","age":21,"descrition":{"job":"intern","salary":1000}}
+ { "name":"ajay","age":21,"descrition":{"job":"intern","salary":1000}}
+(3 rows)
+
+beryl=# select data ->'name' from jsondata;
+ ?column?  
+-----------
+ "krishan"
+ "mohit"
+ "ajay"
+(3 rows)
+
+beryl=# select data ->'name' as names from jsondata;
+   names   
+-----------
+ "krishan"
+ "mohit"
+ "ajay"
+(3 rows)
+
+beryl=# select data ->>'name' as names from jsondata;
+  names  
+---------
+ krishan
+ mohit
+ ajay
+(3 rows)
+
 
 
