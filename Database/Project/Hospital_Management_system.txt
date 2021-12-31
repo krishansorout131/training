@@ -9,3 +9,22 @@
   4.=> All patients records with their complete details containg diseases.
   
     
+1. Owners Table:-
+
+s_no | first_name | last_name | gender | age 
+----- +------------+-----------+--------+-----
+    1 | Jai        | Singh     | male   |  24
+    2 | Rahul      | Sorout    | male   |  25
+
+
+2. Doctors Table:-
+
+ id |     name      | gender |    specialiation    | dr_fees | salary 
+----+---------------+--------+---------------------+---------+--------
+  1 | Harkesh singh | male   | Physician           |     500 |  50000
+  2 | Nikunj Goyal  | male   | Medicine Specialist |     800 | 100000
+  3 | Neeraj Sorout | male   | Hematologist        |     600 |  90000
+  4 | Shahed khan   | male   | Allergists          |    1000 | 150000
+  5 | Monika dagar  | female | Medicine Specialist |     200 |  35000
+(5 rows)
+
