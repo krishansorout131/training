@@ -28,3 +28,17 @@ s_no | first_name | last_name | gender | age
   5 | Monika dagar  | female | Medicine Specialist |     200 |  35000
 (5 rows)
 
+
+3. staff table:-
+
+
+ st_id |      name       | gender | age |          post          | salary 
+-------+-----------------+--------+-----+------------------------+--------
+     1 | Rohan           | male   |  30 | pharmacist             |  25000
+     2 | Rajiv           | male   |  20 | Medical records clerk  |  20000
+     3 | Anju singh      | female |  22 | nurse                  |  10000
+     4 | sheetal tewatia | female |  26 | senior nurse           |  30000
+     5 | Ravita devi     | female |  30 | physician’s assistant  |  35000
+(5 rows)
+
+
