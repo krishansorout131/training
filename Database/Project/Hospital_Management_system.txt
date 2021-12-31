@@ -1,0 +1,11 @@
+                            ========================> Hospital Managment System Database  <=========================
+                            
+ Introduction :-- This Hospital Management System Database contains all Tables relatd with hospital management system.
+ 
+ Tables :-
+  1.=> All Details about owner or the organization that take care of hospital.
+  2.=> All Doctors list with their fees and specifications.
+  3.=> Other staff of hospital.
+  4.=> All patients records with their complete details containg diseases.
+  
+    
