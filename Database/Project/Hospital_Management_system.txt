@@ -55,7 +55,7 @@ s_no | first_name | last_name | gender | age
 
 
 
-==> Some query related previous tables:--
+==> Some queries related with previous tables of database:--
 
 1. Assigning a Dr. to a patient by patient disease:--
 
@@ -73,3 +73,33 @@ Result:--
     5 | PREM SINGH  | male   | blood pressure   | hodal   |  3 | Neeraj Sorout | male   | Hematologist        |     600
 (5 rows)
 
+
+
+2. check the age of all patients for medicine dose level  :-
+query:-
+hospital_management_system=# select name,age(dob) from patients;
+
+Result:-
+
+    name     |           age            
+-------------+--------------------------
+ RAM KUMAR   | 22 years
+ SHYAM KUMAR | 33 years 10 mons 18 days
+ SEEMA DEVI  | 29 years 10 days
+ RAVITA DEVI | 23 years 11 mons 12 days
+ PREM SINGH  | 27 years 9 mons 22 days
+(5 rows)
+ 
+ 
+ 3. Get complete details of a patient included round number of age of patient:-
+ 
+Query:-
+ select *,extract(year from age(dob)) age from patients where p_id=3;
+ 
+ p_id |    name    | gender |     disease      | address | dr_code |    dob     | age 
+------+------------+--------+------------------+---------+---------+------------+-----
+    3 | SEEMA DEVI | female | fungel infection | bahin   |       4 | 1992-12-22 |  29
+(1 row)
+
+ 
+ 
