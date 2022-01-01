@@ -54,3 +54,22 @@ s_no | first_name | last_name | gender | age
 (5 rows)
 
 
+
+==> Some query related previous tables:--
+
+1. Assigning a Dr. to a patient by patient disease:--
+
+query:-
+
+select p.p_id,p.name,p.gender,p.disease,p.address,d.id,d.name,d.gender,d.specialization,d.dr_fees from doctors d inner join patients p on d.id=p.dr_code;
+
+Result:--
+ p_id |    name     | gender |     disease      | address | id |     name      | gender |   specialization    | dr_fees 
+------+-------------+--------+------------------+---------+----+---------------+--------+---------------------+---------
+    1 | RAM KUMAR   | male   | fracture         | hodal   |  1 | Harkesh singh | male   | Physician           |     500
+    2 | SHYAM KUMAR | male   | fever            | bahin   |  2 | Nikunj Goyal  | male   | Medicine Specialist |     800
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |  4 | Shahed khan   | male   | Allergists          |    1000
+    4 | RAVITA DEVI | female | fungel infection | nangar  |  4 | Shahed khan   | male   | Allergists          |    1000
+    5 | PREM SINGH  | male   | blood pressure   | hodal   |  3 | Neeraj Sorout | male   | Hematologist        |     600
+(5 rows)
+
