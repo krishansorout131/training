@@ -42,3 +42,15 @@ s_no | first_name | last_name | gender | age
 (5 rows)
 
 
+4.patients table:-
+
+ p_id |    name     | gender |     disease      | address 
+------+-------------+--------+------------------+---------
+    1 | RAM KUMAR   | male   | fracture         | hodal
+    2 | SHYAM KUMAR | male   | fever            | bahin
+    3 | SEEMA DEVI  | female | fungel infection | bahin
+    4 | RAVITA DEVI | female | fungel infection | nangar
+    5 | PREM SINGH  | male   | blood pressure   | hodal
+(5 rows)
+
+
