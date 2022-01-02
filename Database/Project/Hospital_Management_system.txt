@@ -152,4 +152,27 @@ Result:-
      6 | kapil | male   |  22 | Medical records clerk |  20000
 (2 rows)
 
+7. updating dr_code column of patient table by adding foreign key:-
+query:-
+                                                             ^
+hospital_management_system=# alter table patients add constraint fk foreign key(dr_code) references doctors(id); 
+ALTER TABLE
+
+result:-
+hospital_management_system=# \d patients
+                   Table "public.patients"
+ Column  |       Type        | Collation | Nullable | Default 
+---------+-------------------+-----------+----------+---------
+ p_id    | integer           |           | not null | 
+ name    | character varying |           |          | 
+ gender  | character varying |           |          | 
+ disease | text              |           |          | 
+ address | text              |           |          | 
+ dr_code | integer           |           |          | 
+ dob     | date              |           |          | 
+Indexes:
+    "patients_pkey" PRIMARY KEY, btree (p_id)
+Foreign-key constraints:
+    "fk" FOREIGN KEY (dr_code) REFERENCES doctors(id)
+
  
