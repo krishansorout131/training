@@ -139,4 +139,17 @@ Query:-
     4 | RAVITA DEVI | female | fungel infection | nangar  |       4 | 1998-01-20
 (2 rows)
 
+
+6. Filter staff by their post:-
+
+query:-
+hospital_management_system=# select * from staff where post='Medical records clerk';
+Result:-
+
+ st_id | name  | gender | age |         post          | salary 
+-------+-------+--------+-----+-----------------------+--------
+     2 | Rajiv | male   |  20 | Medical records clerk |  20000
+     6 | kapil | male   |  22 | Medical records clerk |  20000
+(2 rows)
+
  
