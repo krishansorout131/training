@@ -113,4 +113,30 @@ Query:-
 (1 row)
 
  
+ 4. Get all doctors with Same specialization before assigning to patient for confirming doctor fees by patient is it affordable or not.
+ 
+ query:-
+ hospital_management_system=# select id,name,specialization,dr_fees from doctors where specialization='Medicine Specialist';
+ 
+ Result:-
+ 
+ id |     name     |   specialization    | dr_fees 
+----+--------------+---------------------+---------
+  2 | Nikunj Goyal | Medicine Specialist |     800
+  5 | Monika dagar | Medicine Specialist |     200
+(2 rows)
+
+ 
+ 5. get all patients of a particular disease:--
+ query:-
+ hospital_management_system=# select * from patients where disease='fungel infection';
+ 
+ Result:-
+ 
+ p_id |    name     | gender |     disease      | address | dr_code |    dob     
+------+-------------+--------+------------------+---------+---------+------------
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |       4 | 1992-12-22
+    4 | RAVITA DEVI | female | fungel infection | nangar  |       4 | 1998-01-20
+(2 rows)
+
  
