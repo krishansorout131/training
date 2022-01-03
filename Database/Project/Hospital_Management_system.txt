@@ -201,3 +201,33 @@ result:--
     6 | jiyan       | male   | fever            | kosi    |       2 | 1999-06-09
 (6 rows)
  
+ 
+ 10. Filter patients who have dr_codes assigned;_
+ query:-
+ hospital_management_system=# select * from patients where dr_code in (select id from doctors);
+ result:-
+ 
+ p_id |    name     | gender |     disease      | address | dr_code |    dob     
+------+-------------+--------+------------------+---------+---------+------------
+    1 | RAM KUMAR   | male   | fracture         | hodal   |       1 | 2000-01-01
+    2 | SHYAM KUMAR | male   | fever            | bahin   |       2 | 1988-02-12
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |       4 | 1992-12-22
+    4 | RAVITA DEVI | female | fungel infection | nangar  |       4 | 1998-01-20
+    5 | PREM SINGH  | male   | blood pressure   | hodal   |       3 | 1994-03-10
+    6 | jiyan       | male   | fever            | kosi    |       2 | 1999-06-09
+(6 rows)
+
+
+select * from patients;
+
+ p_id |    name     | gender |     disease      | address | dr_code |    dob     
+------+-------------+--------+------------------+---------+---------+------------
+    1 | RAM KUMAR   | male   | fracture         | hodal   |       1 | 2000-01-01
+    2 | SHYAM KUMAR | male   | fever            | bahin   |       2 | 1988-02-12
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |       4 | 1992-12-22
+    4 | RAVITA DEVI | female | fungel infection | nangar  |       4 | 1998-01-20
+    5 | PREM SINGH  | male   | blood pressure   | hodal   |       3 | 1994-03-10
+    6 | jiyan       | male   | fever            | kosi    |       2 | 1999-06-09
+    7 | shyamveer   | male   | fever            | palwal  |         | 2000-01-23
+(7 rows)
+
