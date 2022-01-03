@@ -231,3 +231,16 @@ select * from patients;
     7 | shyamveer   | male   | fever            | palwal  |         | 2000-01-23
 (7 rows)
 
+
+11. Filter all patients who don't have dr_code
+query:-
+
+hospital_management_system=# select * from patients where dr_code is null;
+result:-
+
+ p_id |   name    | gender | disease | address | dr_code |    dob     
+------+-----------+--------+---------+---------+---------+------------
+    7 | shyamveer | male   | fever   | palwal  |         | 2000-01-23
+(1 row)
+
+
