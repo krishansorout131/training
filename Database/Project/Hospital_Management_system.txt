@@ -244,3 +244,22 @@ result:-
 (1 row)
 
 
+
+12 Assigning a nurse to all patient with their specific doctor :-
+
+query:-
+hospital_management_system=# select p.p_id,p.name,p.gender,p.disease,p.address,d.id,d.name,d.gender,d.specialization,d.dr_fees,s.name nurse from doctors d inner join patients p on d.id=p.dr_code left join staff s on st_id=3;
+ 
+ result:-
+ 
+ p_id |    name     | gender |     disease      | address | id |     name      | gender |   specialization    | dr_fees |   nurse    
+------+-------------+--------+------------------+---------+----+---------------+--------+---------------------+---------+------------
+    1 | RAM KUMAR   | male   | fracture         | hodal   |  1 | Harkesh singh | male   | Physician           |     500 | Anju singh
+    2 | SHYAM KUMAR | male   | fever            | bahin   |  2 | Nikunj Goyal  | male   | Medicine Specialist |     800 | Anju singh
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |  4 | Shahed khan   | male   | Allergists          |    1000 | Anju singh
+    4 | RAVITA DEVI | female | fungel infection | nangar  |  4 | Shahed khan   | male   | Allergists          |    1000 | Anju singh
+    5 | PREM SINGH  | male   | blood pressure   | hodal   |  3 | Neeraj Sorout | male   | Hematologist        |     600 | Anju singh
+    6 | jiyan       | male   | fever            | kosi    |  2 | Nikunj Goyal  | male   | Medicine Specialist |     800 | Anju singh
+(6 rows)
+
+
