@@ -176,3 +176,28 @@ Foreign-key constraints:
     "fk" FOREIGN KEY (dr_code) REFERENCES doctors(id)
 
  
+ 8.when trying to add a value which is not present in primary key of doctors table in foreign key of patients table:-
+Error:-- 
+ 
+hospital_management_system=# insert into patients values(6,'jiyan','male','fever','kosi',8,'1999-06-09');
+ERROR:  insert or update on table "patients" violates foreign key constraint "fk"
+DETAIL:  Key (dr_code)=(8) is not present in table "doctors".
+
+
+9. Inserting a foreign key value in patients table:--
+query:--
+hospital_management_system=# insert into patients values(6,'jiyan','male','fever','kosi',2,'1999-06-09');
+INSERT 0 1
+
+result:--
+
+ p_id |    name     | gender |     disease      | address | dr_code |    dob     
+------+-------------+--------+------------------+---------+---------+------------
+    1 | RAM KUMAR   | male   | fracture         | hodal   |       1 | 2000-01-01
+    2 | SHYAM KUMAR | male   | fever            | bahin   |       2 | 1988-02-12
+    3 | SEEMA DEVI  | female | fungel infection | bahin   |       4 | 1992-12-22
+    4 | RAVITA DEVI | female | fungel infection | nangar  |       4 | 1998-01-20
+    5 | PREM SINGH  | male   | blood pressure   | hodal   |       3 | 1994-03-10
+    6 | jiyan       | male   | fever            | kosi    |       2 | 1999-06-09
+(6 rows)
+ 
