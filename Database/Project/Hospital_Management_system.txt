@@ -344,4 +344,24 @@ hospital_management_system=# select * from employees;
 (9 rows)
 
 
+16. get opd details that which patient is treated by which doctor:-
+query:-
 
+hospital_management_system=# select p_id,p_name,emp_id,emp_name from (select p.p_id,p.name as p_name,d.emp_id,d.name as emp_name from opd_details o inner join patients p on p.p_id=o.p_id inner join employees d on o.emp_id=d.emp_id) as opd_details where p_id=2;
+
+result:--
+ p_id |   p_name    | emp_id |  emp_name   
+------+-------------+--------+-------------
+    2 | SHYAM KUMAR |      4 | Shahed khan
+(1 row)
+
+hospital_management_system=# select p_id,p_name,emp_id,emp_name from (select p.p_id,p.name as p_name,d.emp_id,d.name as emp_name from opd_details o inner join patients p on p.p_id=o.p_id inner join employees d on o.emp_id=d.emp_id) as opd_details where p_id=1;
+
+
+ p_id |  p_name   | emp_id |   emp_name    
+------+-----------+--------+---------------
+    1 | RAM KUMAR |      2 | Nikunj Goyal
+    1 | RAM KUMAR |      3 | Neeraj Sorout
+(2 rows)
+
+17.
