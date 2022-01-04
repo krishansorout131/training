@@ -289,3 +289,20 @@ hospital_management_system=# select * from departments;
 (5 rows)
 
 
+
+14. create new table opd_details:-
+
+
+hospital_management_system=# \d opd_details
+            Table "public.opd_details"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ s_no   | integer |           | not null | 
+ p_id   | integer |           |          | 
+ emp_id | integer |           |          | 
+Indexes:
+    "opd_pkey" PRIMARY KEY, btree (s_no)
+Foreign-key constraints:
+    "f_k" FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+    "fk" FOREIGN KEY (p_id) REFERENCES patients(p_id)
+
