@@ -387,3 +387,15 @@ hospital_management_system=# select * from employees order by salary desc;
       9 | Kapil         | male   | radiologist               |  15000 | 1996-03-23 |   104
 (9 rows)
 
+
+18. get minimum age from employees:-
+query:-
+
+hospital_management_system=# select name,extract(year from age(dob)) from employees where dob=(select max(dob) from employees);
+
+ name  | extract 
+-------+---------
+ Rohan |      22
+(1 row)
+
+
