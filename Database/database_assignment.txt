@@ -104,3 +104,28 @@ airline_information=# select * from certified;
    4 | 10008
 
 
+
+
+Assignment queries:--
+
+a.Find the names of aircraft such that all pilots certified to operate them earn
+more than $80,000.
+
+answer:-
+
+airline_information=# select aname from aircraft inner join certified on certified.aid=aircraft.aid inner join employees on certified.eid=employees.eid and employees.salary > 80000;
+       aname        
+--------------------
+ citation m2 gen2
+ cessna caraven
+ citation cj4
+ citation latitude
+ citation longitude
+ cj4 gen2
+ cessna skycourier
+ citation longitude
+ citation m2 gen2
+(9 rows)
+
+
+
