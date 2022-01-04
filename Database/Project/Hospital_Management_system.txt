@@ -263,3 +263,29 @@ hospital_management_system=# select p.p_id,p.name,p.gender,p.disease,p.address,d
 (6 rows)
 
 
+
+13.create new table departments:-
+
+hospital_management_system=# \d departments
+                  Table "public.departments"
+ Column  |       Type        | Collation | Nullable | Default 
+---------+-------------------+-----------+----------+---------
+ dp_id   | integer           |           | not null | 
+ dp_name | character varying |           |          | 
+Indexes:
+    "departments_pkey" PRIMARY KEY, btree (dp_id)
+Referenced by:
+    TABLE "employees" CONSTRAINT "fk" FOREIGN KEY (dp_id) REFERENCES departments(dp_id)
+
+query:--
+hospital_management_system=# select * from departments;
+ dp_id |          dp_name          
+-------+---------------------------
+   101 | medical department
+   102 | pharmacy department
+   103 | nursing department
+   104 | radiology department
+   105 | medical record department
+(5 rows)
+
+
