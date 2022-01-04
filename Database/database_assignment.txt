@@ -90,5 +90,17 @@ airline_information=# select * from employees;
 (10 rows)
 
 
+4. inserting in certified table:-
+
+airline_information=# select * from certified;
+
+ eid |  aid  
+-----+-------
+   1 | 10007
+   1 | 10005
+   2 | 10001
+   3 | 10002
+   4 | 10003
+   4 | 10008
 
 
