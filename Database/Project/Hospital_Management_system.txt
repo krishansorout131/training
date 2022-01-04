@@ -364,4 +364,26 @@ hospital_management_system=# select p_id,p_name,emp_id,emp_name from (select p.p
     1 | RAM KUMAR |      3 | Neeraj Sorout
 (2 rows)
 
-17.
+17.get second highest salary:-
+
+hospital_management_system=# select * from employees order by salary desc offset 1 limit 1;
+
+ emp_id |     name     | gender |   specialization    | salary |    dob     | dp_id 
+--------+--------------+--------+---------------------+--------+------------+-------
+      2 | Nikunj Goyal | male   | Medicine Specialist | 100000 | 1983-07-09 |   101
+(1 row)
+
+hospital_management_system=# select * from employees order by salary desc;
+ emp_id |     name      | gender |      specialization       | salary |    dob     | dp_id 
+--------+---------------+--------+---------------------------+--------+------------+-------
+      4 | Shahed khan   | male   | Allergists                | 150000 | 1984-06-01 |   101
+      2 | Nikunj Goyal  | male   | Medicine Specialist       | 100000 | 1983-07-09 |   101
+      3 | Neeraj Sorout | male   | Hematologist              |  90000 | 1985-06-02 |   101
+      1 | Harkesh singh | male   | Physician                 |  50000 | 1980-08-09 |   101
+      5 | Monika dagar  | female | Medicine Specialist       |  35000 | 1990-02-22 |   101
+      6 | Rohan         | male   | pharmacist                |  25000 | 1999-02-07 |   102
+      7 | Rajiv         | male   | medical record department |  23000 | 1996-02-17 |   105
+      8 | Anju singh    | female | nurse                     |  20000 | 1994-03-07 |   103
+      9 | Kapil         | male   | radiologist               |  15000 | 1996-03-23 |   104
+(9 rows)
+
