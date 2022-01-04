@@ -19,3 +19,21 @@ CREATE TABLE
 
 airline_information=# create table Employees(eid integer primary key,ename varchar not null,salary integer not null);
 CREATE TABLE
+
+
+4. certified table:--
+
+airline_information=# create table Certified(eid integer,aid integer,constraint fk foreign key(eid) references Employees(eid),constraint fks foreign key(aid) references Aircraft(aid));
+CREATE TABLE
+
+airline_information=# \d certified
+             Table "public.certified"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ eid    | integer |           |          | 
+ aid    | integer |           |          | 
+Foreign-key constraints:
+    "fk" FOREIGN KEY (eid) REFERENCES employees(eid)
+    "fks" FOREIGN KEY (aid) REFERENCES aircraft(aid)
+
+
