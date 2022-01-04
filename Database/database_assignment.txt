@@ -72,5 +72,23 @@ airline_information=# select * from aircraft;
 (8 rows)
 
 
+3. insertion in employees:-
+
+airline_information=# select * from employees;
+ eid |      ename      | salary  
+-----+-----------------+---------
+   1 | mohit dagar     |  100000
+   2 | Deepak          |  200000
+   3 | Ajay agarwal    |  300000
+   4 | Akshay sharma   | 1000000
+   5 | Anshul dharmani |  800000
+   6 | jai singh       |  700000
+   7 | Rahul           | 1700000
+   8 | vikram          |   50000
+   9 | kavir           |   70000
+  10 | rajvir          |   90000
+(10 rows)
+
+
 
 
