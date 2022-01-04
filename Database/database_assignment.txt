@@ -8,5 +8,10 @@
   
 airline_information=# create table Flights(flno integer primary key,"from" varchar not null,"to" varchar not null,distance integer not null,departs time not null,arrives time not null,price integer not null);
 CREATE TABLE
+
+2. Aircraft table :-
+
+airline_information=# create table Aircraft(aid integer primary key,aname varchar not null,cruisingrange integer not null);
+CREATE TABLE
                                              
                                                                
