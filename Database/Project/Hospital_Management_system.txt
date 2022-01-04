@@ -398,4 +398,13 @@ hospital_management_system=# select name,extract(year from age(dob)) from employ
  Rohan |      22
 (1 row)
 
+19. get all values from employees where specialization contain '%nur%' 
+
+hospital_management_system=# select * from employees where specialization like '%nur%';
+
+ emp_id |    name    | gender | specialization | salary |    dob     | dp_id 
+--------+------------+--------+----------------+--------+------------+-------
+      8 | Anju singh | female | nurse          |  20000 | 1994-03-07 |   103
+     10 | Kavita     | female | senior nurse   |  30000 | 1990-06-01 |   103
+(2 rows)
 
