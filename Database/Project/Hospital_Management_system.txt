@@ -306,3 +306,42 @@ Foreign-key constraints:
     "f_k" FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
     "fk" FOREIGN KEY (p_id) REFERENCES patients(p_id)
 
+
+15.upadte doctors table to employees and add foreign key;-
+
+hospital_management_system=# \d employees
+                        Table "public.employees"
+     Column     |         Type          | Collation | Nullable | Default 
+----------------+-----------------------+-----------+----------+---------
+ emp_id         | integer               |           | not null | 
+ name           | character varying(50) |           | not null | 
+ gender         | character varying(10) |           |          | 
+ specialization | text                  |           |          | 
+ salary         | integer               |           |          | 
+ dob            | date                  |           |          | 
+ dp_id          | integer               |           |          | 
+Indexes:
+    "doctors_pkey" PRIMARY KEY, btree (emp_id)
+Foreign-key constraints:
+    "fk" FOREIGN KEY (dp_id) REFERENCES departments(dp_id)
+Referenced by:
+    TABLE "opd_details" CONSTRAINT "f_k" FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+
+
+
+hospital_management_system=# select * from employees;
+ emp_id |     name      | gender |      specialization       | salary |    dob     | dp_id 
+--------+---------------+--------+---------------------------+--------+------------+-------
+      1 | Harkesh singh | male   | Physician                 |  50000 | 1980-08-09 |   101
+      2 | Nikunj Goyal  | male   | Medicine Specialist       | 100000 | 1983-07-09 |   101
+      3 | Neeraj Sorout | male   | Hematologist              |  90000 | 1985-06-02 |   101
+      4 | Shahed khan   | male   | Allergists                | 150000 | 1984-06-01 |   101
+      5 | Monika dagar  | female | Medicine Specialist       |  35000 | 1990-02-22 |   101
+      6 | Rohan         | male   | pharmacist                |  25000 | 1999-02-07 |   102
+      7 | Rajiv         | male   | medical record department |  23000 | 1996-02-17 |   105
+      8 | Anju singh    | female | nurse                     |  20000 | 1994-03-07 |   103
+      9 | Kapil         | male   | radiologist               |  15000 | 1996-03-23 |   104
+(9 rows)
+
+
+
