@@ -2,5 +2,11 @@
                                                                Database Assignment
                                                                
                                                                
-                                                               
+  *** Airline information database:--
+  
+1.Flights table:-
+  
+airline_information=# create table Flights(flno integer primary key,"from" varchar not null,"to" varchar not null,distance integer not null,departs time not null,arrives time not null,price integer not null);
+CREATE TABLE
+                                             
                                                                
