@@ -14,4 +14,8 @@ CREATE TABLE
 airline_information=# create table Aircraft(aid integer primary key,aname varchar not null,cruisingrange integer not null);
 CREATE TABLE
                                              
-                                                               
+
+3. Employees table:-
+
+airline_information=# create table Employees(eid integer primary key,ename varchar not null,salary integer not null);
+CREATE TABLE
