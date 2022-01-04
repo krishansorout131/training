@@ -37,3 +37,20 @@ Foreign-key constraints:
     "fks" FOREIGN KEY (aid) REFERENCES aircraft(aid)
 
 
+
+1.insertion into flights table:-
+
+airline_information=# insert into flights values(1005,'dabolim india','ahmedabad india',1117,'12:00:00','14:00:00',2200);
+INSERT 0 1
+airline_information=# select * from flights;
+ flno |     from      |       to        | distance | departs  | arrives  | price 
+------+---------------+-----------------+----------+----------+----------+-------
+ 1001 | pune india    | delhi india     |     1472 | 05:00:00 | 08:00:00 |  3000
+ 1002 | pune india    | gurgaon india   |     1428 | 04:00:00 | 07:00:00 |  2800
+ 1003 | pune india    | jaipur india    |     1199 | 07:00:00 | 09:00:00 |  2000
+ 1004 | jaipur india  | gurgaon india   |      241 | 02:00:00 | 03:00:00 |  1500
+ 1005 | dabolim india | ahmedabad india |     1117 | 12:00:00 | 14:00:00 |  2200
+(5 rows)
+
+
+
