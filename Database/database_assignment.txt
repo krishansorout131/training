@@ -53,4 +53,24 @@ airline_information=# select * from flights;
 (5 rows)
 
 
+2. insertion into Aircrafts:--
+
+airline_information=# insert into aircraft values(10008,'cj4 gen2',2160);
+INSERT 0 1
+
+airline_information=# select * from aircraft;
+  aid  |       aname        | cruisingrange 
+-------+--------------------+---------------
+ 10001 | citation cj4       |          2165
+ 10002 | citation latitude  |          2700
+ 10003 | citation longitude |          3000
+ 10004 | caraven ex         |           964
+ 10005 | cessna caraven     |          1070
+ 10006 | cessna skycourier  |           900
+ 10007 | citation m2 gen2   |          1550
+ 10008 | cj4 gen2           |          2160
+(8 rows)
+
+
+
 
