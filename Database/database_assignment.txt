@@ -104,6 +104,10 @@ airline_information=# select * from certified;
    4 | 10008
 
 
+* inserting new row in table certified:-
+
+airline_information=# insert into certified values(4,10007);
+INSERT 0 1
 
 
 Assignment queries:--
