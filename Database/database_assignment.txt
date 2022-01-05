@@ -140,4 +140,13 @@ airline_information=# select eid,max(a.cruisingrange) from certified c inner joi
    1 | 1550
 (2 rows)
 
+c.Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
+
+airline_information=# select ename from employees where salary<(select min(price) from flights where "from" like 'Angeles' and "to" like 'Honolulu');
+ ename  
+--------
+ vikram
+ kavir
+(2 rows)
+
 
