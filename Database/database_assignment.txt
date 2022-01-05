@@ -149,4 +149,31 @@ airline_information=# select ename from employees where salary<(select min(price
  kavir
 (2 rows)
 
+d.For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+
+                                                             ^
+airline_information=# select aname,avg(emp.salary) from aircraft a inner join certified cd on a.aid=cd.aid and cruisingrange >1000 inner join employees emp on emp.eid=cd.eid group by aname;
+ 
+       aname        |         avg          
+--------------------+----------------------
+ cessna caraven     |  100000.000000000000
+ citation latitude  |  300000.000000000000
+ citation longitude | 1350000.000000000000
+ cj4 gen2           | 1000000.000000000000
+ Boeing             |  750000.000000000000
+ citation cj4       |  200000.000000000000
+ citation m2 gen2   |  633333.333333333333
+(7 rows)
+
+
+e. Find the names of pilots certified for some Boeing aircraft.
+
+airline_information=# select ename from Employees emp inner join Certified cd on emp.eid=cd.eid  inner join aircraft a on a.aid=cd.aid and a.aname like 'Boeing';
+     
+      ename      
+-----------------
+ Anshul dharmani
+ jai singh
+(2 rows)
+
 
