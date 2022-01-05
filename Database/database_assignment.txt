@@ -206,6 +206,24 @@ airline_information=# select ename from employees where eid=(select eid from cer
 
 
 
+I.
+
+
+
+
+J.Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+
+
+airline_information=# select (pem.average-emp.average)as difference from (select avg(salary) as average from Employees e where e.eid in (select eid from Certified) ) as pem ,(select avg(salary) as average from Employees) as emp;
+ 
+ 
+     difference     
+--------------------
+ 45666.666666666667
+(1 row)
+
+
+
 
 
 
