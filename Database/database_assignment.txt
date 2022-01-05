@@ -177,3 +177,14 @@ airline_information=# select ename from Employees emp inner join Certified cd on
 (2 rows)
 
 
+f.Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
+
+airline_information=# select aid from aircraft where cruisingrange >=(select distance from flights where "from" like 'los angeles' and "to" like 'chicago');
+  aid  
+-------
+ 10002
+ 10003
+(2 rows)
+
+
+
