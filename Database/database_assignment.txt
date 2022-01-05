@@ -131,5 +131,13 @@ airline_information=# select aname from aircraft inner join certified on certifi
  citation m2 gen2
 (9 rows)
 
+b.For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
+
+airline_information=# select eid,max(a.cruisingrange) from certified c inner join aircraft a on c.aid=a.aid group by eid having count(c.aid)>=3;
+ eid | max  
+-----+------
+   4 | 3000
+   1 | 1550
+(2 rows)
 
 
