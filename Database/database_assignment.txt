@@ -223,7 +223,39 @@ airline_information=# select (pem.average-emp.average)as difference from (select
 (1 row)
 
 
+k.Print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
 
+
+airline_information=# select emp.ename,emp.salary from Employees emp where emp.eid not in (select eid from Certified ) and emp.salary > (select avg(pem.salary) from Employees pem where pem.eid in (select eid from Certified));
+ ename | salary 
+-------+--------
+(0 rows)
+
+* There is no any record because anyone from non-piolet employees have salary not greater then average salary acoording to my current database values;
+
+* select avg(e1.salary) from Employees e1 where e1.eid in (select eid from Certified);
+  
+         avg         
+---------------------
+ 546666.666666666667
+(1 row)
+
+Here eid=10, rajvir is the only non-piolet employee.
+
+select * from employees;
+ eid |      ename      | salary  
+-----+-----------------+---------
+   1 | mohit dagar     |  100000
+   2 | Deepak          |  200000
+   3 | Ajay agarwal    |  300000
+   4 | Akshay sharma   | 1000000
+   5 | Anshul dharmani |  800000
+   6 | jai singh       |  700000
+   7 | Rahul           | 1700000
+   8 | vikram          |   50000
+   9 | kavir           |   70000
+  10 | rajvir          |   90000
+(10 rows)
 
 
 
