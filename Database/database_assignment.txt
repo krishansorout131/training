@@ -259,5 +259,17 @@ select * from employees;
 
 
 
+L.Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
+airline_information=# select ename from employees e inner join certified c on e.eid=c.eid inner join aircraft a on a.aid=c.aid group by ename having min(a.cruisingrange) >1000;
+  
+      ename      
+-----------------
+ Rahul
+ Akshay sharma
+ Deepak
+ Ajay agarwal
+ jai singh
+ Anshul dharmani
+(6 rows)
 
