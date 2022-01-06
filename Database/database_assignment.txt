@@ -189,8 +189,17 @@ airline_information=# select aid from aircraft where cruisingrange >=(select dis
 (3 rows)
 
 
-G.
+G.Identify the routes that can be piloted by every pilot who makes more than $100,000.
 
+airline_information=# select "from","to" from flights where distance < (select min(cruisingrange) from aircraft where aid in(select distinct aid from certified c where c.eid in (select eid from employees where salary >100000)));
+     from      |       to        
+---------------+-----------------
+ pune india    | delhi india
+ pune india    | gurgaon india
+ pune india    | jaipur india
+ jaipur india  | gurgaon india
+ dabolim india | ahmedabad india
+(5 rows)
 
 
 
@@ -285,6 +294,7 @@ airline_information=# select ename from employees e inner join certified c on e.
  Akshay sharma
  Anshul dharmani
 (2 rows)
+
 
 n. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft.
 
