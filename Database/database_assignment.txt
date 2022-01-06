@@ -273,3 +273,16 @@ airline_information=# select ename from employees e inner join certified c on e.
  Anshul dharmani
 (6 rows)
 
+
+M. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.
+
+
+airline_information=# select ename from employees e inner join certified c on e.eid=c.eid inner join aircraft a on a.aid=c.aid group by ename having min(a.cruisingrange) >1000 and count(a.cruisingrange)>1;
+  
+      ename      
+-----------------
+ Akshay sharma
+ Anshul dharmani
+(2 rows)
+
+
