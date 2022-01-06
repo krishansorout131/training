@@ -197,11 +197,12 @@ G.
 
 H. Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
 
-airline_information=# select ename from employees where eid=(select eid from certified where aid=(select aid from aircraft where cruisingrange >3000 and aname not like 'Boeing%'));
+airline_information=# select ename from employees where eid in (select eid from certified where aid in (select aid from aircraft where cruisingrange >3000 and aname not like 'Boeing%'));
     ename    
 -------------
  mohit dagar
 (1 row)
+
 
 
 
