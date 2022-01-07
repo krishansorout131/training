@@ -150,4 +150,13 @@ foo
 	I said bar.
 bar
 
+** Ruby BEGIN Statement
+Syntax:-
+puts "This line is not printed first"
+BEGIN {
+puts "this line always print first"
+}
 
+output:-- beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+this line always print first
+This line is not printed first
