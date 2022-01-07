@@ -349,4 +349,23 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
  my id is 1 and name is krishan
  
- 
+ *Ruby Constants
+
+Constants begin with an uppercase letter. Constants defined within a class or module can be accessed from within that class or module, and those defined outside a class or module can be accessed globally.
+
+class Test
+    Age=21
+    def check()
+        id=1
+        name="krishan"
+        puts " my id is #{id} and name is #{name} and my age is #{Age}"
+    end
+end
+a1=Test.new
+
+a1.check()
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+ my id is 1 and name is krishan and my age is 21
