@@ -176,3 +176,23 @@ output:--
 this line always print first
 This line is not printed first
 this line always printed in last
+
+* Ruby Comments
+-> multiple line comments
+
+=begin
+ this is a comment
+ hii this is another way
+ of multiple line comments
+=end
+-> single line comment in statement
+
+puts "This line is not printed first"
+BEGIN {
+puts "this line always print first" # this is a comment
+}
+-> Another way of multiple line comment:-
+# this is a comment
+# this is a comment
+
+
