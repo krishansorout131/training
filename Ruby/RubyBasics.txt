@@ -160,3 +160,19 @@ puts "this line always print first"
 output:-- beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 this line always print first
 This line is not printed first
+
+** Ruby end statement:- 
+
+END {
+    puts "this line always printed in last"
+}
+
+puts "This line is not printed first"
+BEGIN {
+puts "this line always print first"
+}
+
+output:--
+this line always print first
+This line is not printed first
+this line always printed in last
