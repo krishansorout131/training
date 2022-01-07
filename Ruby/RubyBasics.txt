@@ -85,3 +85,14 @@ ruby installation
       wrapper                 # creates wrapper executables for a given ruby & gemset
 
 
+                                                      =====> Ruby Basics <====
+
+
+-> Ruby is a dynamic, open source, object oriented and reflective programming language. Ruby is considered similar to Perl and Smalltalk programming languages. It runs on all types of platforms like Windows, Mac OS and all versions of UNIX.
+
+-> It is fully object oriented programming language. Everything is an object in Ruby. Each and every code has their properties and actions. Here properties refer to variables and actions refer to methods.
+
+-> Ruby is considered to follow the principle of POLA (principle of least astonishment). It means that the language behaves in such a way to minimize the confusion for experienced users.
+
+
+
