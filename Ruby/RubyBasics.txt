@@ -228,4 +228,33 @@ end
 cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
 cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
 
+** variables:- 
+
+* Global variable :-
+Global variables begin with $. Uninitialized global variables have the value nil and produce warnings with the -w option.
+
+$globalvar=10
+$var2=100
+class Test 
+    def check
+        puts "global variable in class 1 is #$globalvar"
+    end
+end
+obj1=Test.new
+obj1.check        
+class Test1
+    def check1
+        puts "this is second claas and global variable is #$var2"
+    end
+end
+obj2=Test1.new
+obj2.check1        
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+global variable in class 1 is 10
+this is second claas and global variable is 100
+
+
+
 
