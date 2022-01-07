@@ -196,3 +196,22 @@ puts "this line always print first" # this is a comment
 # this is a comment
 
 
+**** Ruby - Classes and Objects:--
+
+An object-oriented program involves classes and objects. A class is the blueprint from which individual objects are created. In object-oriented terms, we say that your bicycle is an instance of the class of objects known as bicycles.
+
+** Defining a Class in Ruby:-
+
+A class in Ruby always starts with the keyword class followed by the name of the class. The name should always be in initial capitals. The class Customer can be displayed as −
+
+class Customer
+end
+
+You terminate a class by using the keyword end. All the data members in the class are between the class definition and the end keyword.
+
+** Creating Objects in Ruby using new Method:-
+
+cust1 = Customer. new
+cust2 = Customer. new
+
+
