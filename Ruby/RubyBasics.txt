@@ -214,4 +214,18 @@ You terminate a class by using the keyword end. All the data members in the clas
 cust1 = Customer. new
 cust2 = Customer. new
 
+**Custom Method to Create Ruby Objects:--
+
+class Customer
+   @@no_of_customers = 0
+   def initialize(id, name, addr)
+      @cust_id = id
+      @cust_name = name
+      @cust_addr = addr
+   end
+end
+
+cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
+
 
