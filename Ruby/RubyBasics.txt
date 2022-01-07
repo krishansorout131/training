@@ -255,6 +255,35 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 global variable in class 1 is 10
 this is second claas and global variable is 100
 
+* Ruby Instance Variables:-
+Instance variables begin with @. Uninitialized instance variables have the value nil and produce warnings with the -w option.
 
+class Test 
+    def initialize(id,name,addr)
+        @id=id
+        @name=name
+        @addr=addr
+
+    end 
+    def details()
+        puts "The id is #@id"
+        puts "Name is #@name"
+        puts "And the address is #@addr" 
+    end
+end
+
+obj1=Test.new("1","krishan","hodal")
+obj2=Test.new("2","mohit","palwal")
+obj1.details()
+obj2.details()
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+The id is 1
+Name is krishan
+And the address is hodal
+The id is 2
+Name is mohit
+And the address is palwal
 
 
