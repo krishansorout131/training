@@ -29,3 +29,12 @@ rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://
 # =* - current && default
 #  * - default
 
+
+** rvm use command :-
+
+beryl@beryl-HP-ProBook-6460b:~$ rvm use 3.0
+Using /home/beryl/.rvm/gems/ruby-3.0.0
+
+beryl@beryl-HP-ProBook-6460b:~$ rvm use 2.7.2
+Using /home/beryl/.rvm/gems/ruby-2.7.2
+
