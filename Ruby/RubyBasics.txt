@@ -95,4 +95,11 @@ ruby installation
 -> Ruby is considered to follow the principle of POLA (principle of least astonishment). It means that the language behaves in such a way to minimize the confusion for experienced users.
 
 
+* Let us write a simple program in ruby. All ruby files will have extension .rb So, put the following source code in a test.rb file.
 
+  puts "Hello Rubby i am krishan sorout"
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+Hello ruby i am krishan sorout 
+
+  
