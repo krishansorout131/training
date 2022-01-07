@@ -318,4 +318,35 @@ obj1.classvar1()
 obj2.details()
 obj2.classvar1()
 
+output:--
+outside all functions 0
+The id is 1
+Name is krishan
+And the address is hodal
+no of values 1
+The id is 2
+Name is mohit
+And the address is palwal
+no of values 2
 
+* Ruby Local Variables
+
+Local variables begin with a lowercase letter or _. The scope of a local variable ranges from class, module, def, or do to the corresponding end or from a block's opening brace to its close brace {}.
+
+class Test
+    def check()
+        id=1
+        name="krishan"
+        puts " my id is #{id} and name is #{name}"
+    end
+end
+a1=Test.new
+
+a1.check()
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+ my id is 1 and name is krishan
+ 
+ 
