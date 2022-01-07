@@ -49,4 +49,39 @@ beryl@beryl-HP-ProBook-6460b:~$ rvm list
    ruby-3.0.0 [ x86_64 ]
 
 
- 
+ ** rvm help command
+ beryl@beryl-HP-ProBook-6460b:~$ rvm help
+
+  for example:
+
+    rvm list                # list installed interpreters 
+    rvm list known          # list available interpreters
+    rvm install <version>   # install ruby interpreter
+    rvm use <version>       # switch to specified ruby interpreter
+    rvm remove <version>    # remove ruby interpreter (alias: delete)
+    rvm get <version>       # upgrade rvm: stable, master
+
+ruby installation
+      fetch                   # download binary or sources for selected ruby version
+      install                 # install ruby interpreter
+      list                    # show currently installed ruby interpreters
+      list known              # list available interpreters
+      mount                   # install ruby from external locations
+      patchset                # tools related to managing ruby patchsets
+      pkg                     # install a dependency package
+      reinstall               # reinstall ruby and run gem pristine on all gems
+      remove                  # remove ruby and downloaded sources (alias: delete)
+      requirements            # installs dependencies for building ruby
+      uninstall               # uninstall ruby, keeping it's sources
+      upgrade                 # upgrade to another ruby version, migrating gems
+
+  running different ruby versions
+      current                 # print current ruby version and name of used gemsets
+      do                      # runs a command against specified and/or all rubies
+      gemdir                  # display path to current gem directory ($GEM_HOME)
+      use <version>           # switch to given (and already installed) ruby version
+      use default             # switch to default ruby, or system if none is set
+      use system              # switch to system ruby
+      wrapper                 # creates wrapper executables for a given ruby & gemset
+
+
