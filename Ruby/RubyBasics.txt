@@ -102,4 +102,52 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 Hello ruby i am krishan sorout 
 
+* Whitespace in Ruby Program
+
+Whitespace characters such as spaces and tabs are generally ignored in Ruby code, except when they appear in strings. Sometimes, however, they are used to interpret ambiguous statements. Interpretations of this sort produce warnings when the -w option is enabled.
+Example:-
+
+a + b is interpreted as a+b ( Here a is a local variable)
+a  +b is interpreted as a(+b) ( Here a is a method call)
   
+ ** Line Endings in Ruby Program
+
+Ruby interprets semicolons and newline characters as the ending of a statement. However, if Ruby encounters operators, such as +, −, or backslash at the end of a line, they indicate the continuation of a statement.
+
+** Ruby Identifiers
+
+Identifiers are names of variables, constants, and methods. Ruby identifiers are case sensitive. It means Ram and RAM are two different identifiers in Ruby.
+
+Ruby identifier names may consist of alphanumeric characters and the underscore character ( _ ).
+
+** Here Document in Ruby
+
+"Here Document" refers to build strings from multiple lines. Following a << you can specify a string or an identifier to terminate the string literal, and all lines following the current line up to the terminator are the value of the string.
+
+If the terminator is quoted, the type of quotes determines the type of the line-oriented string literal. Notice there must be no space between << and the terminator.
+
+Here are different examples −
+
+
+print <<EOF
+   This is the first way of creating
+   here document ie. multiple line string.
+EOF
+
+print <<"EOF";                # same as above
+   This is the second way of creating
+   here document ie. multiple line string.
+EOF
+
+print <<`EOC`                 # execute commands
+	echo hi there
+	echo lo there
+EOC
+
+print <<"foo", <<"bar"  # you can stack them
+	I said foo.
+foo
+	I said bar.
+bar
+
+
