@@ -3,7 +3,7 @@
 
 RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems.
 
-Installing Rvm:-
+* Installing Rvm:-
 
 steps:-
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
@@ -14,4 +14,18 @@ rvm --version
 beryl@beryl-HP-ProBook-6460b:~$ rvm --version
 rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
 
+
+* installing Ruby latest version:-
+
+--> rvm install ruby
+--> rvm install 2.7
+
+-->beryl@beryl-HP-ProBook-6460b:~$ rvm list
+=> ruby-2.6.6 [ x86_64 ]
+   ruby-2.7.2 [ x86_64 ]
+ * ruby-3.0.0 [ x86_64 ]
+
+# => - current
+# =* - current && default
+#  * - default
 
