@@ -287,3 +287,35 @@ Name is mohit
 And the address is palwal
 
 
+*Ruby Class Variables
+
+Class variables begin with @@ and must be initialized before they can be used in method definitions.
+
+class Test 
+    @@classvar=0
+    def initialize(id,name,addr)
+        @id=id
+        @name=name
+        @addr=addr
+
+    end 
+    def details()
+        puts "The id is #@id"
+        puts "Name is #@name"
+        puts "And the address is #@addr" 
+    end
+    def classvar1()
+        @@classvar +=1
+        puts "no of values #@@classvar"
+    end    
+    puts "outside all functions #@@classvar"
+end
+
+obj1=Test.new("1","krishan","hodal")
+obj2=Test.new("2","mohit","palwal")
+obj1.details()
+obj1.classvar1()
+obj2.details()
+obj2.classvar1()
+
+
