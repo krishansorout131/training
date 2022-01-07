@@ -38,3 +38,15 @@ Using /home/beryl/.rvm/gems/ruby-3.0.0
 beryl@beryl-HP-ProBook-6460b:~$ rvm use 2.7.2
 Using /home/beryl/.rvm/gems/ruby-2.7.2
 
+
+* set any version of ruby as default version :-
+
+beryl@beryl-HP-ProBook-6460b:~$ rvm use 2.7.2 --default
+Using /home/beryl/.rvm/gems/ruby-2.7.2
+beryl@beryl-HP-ProBook-6460b:~$ rvm list
+   ruby-2.6.6 [ x86_64 ]
+=* ruby-2.7.2 [ x86_64 ]
+   ruby-3.0.0 [ x86_64 ]
+
+
+ 
