@@ -933,3 +933,42 @@ BEGIN code block
 MAIN code block
 END code block
 
+** Modules in ruby:--
+
+Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
+
+    Modules provide a namespace and prevent name clashes.
+
+    Modules implement the mixin facility.
+
+Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants.
+Syntax
+
+module Identifier
+   statement1
+   statement2
+   ...........
+end
+
+file name = test.rb
+
+module Testmodule
+    Good="very good"
+    def Testmodule.func(x)
+       puts "hii my name is #{x} and i am #{Good} in ruby ."
+    end
+end   
+
+now try to access the module in new file 
+check.rb:-
+
+require './test'
+
+Testmodule.func("krishan")
+
+0utput:-
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby check.rb
+hii my name is krishan and i am very good in ruby .
+
+
