@@ -440,3 +440,32 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 1 -- Value is set
 3 -- Value is set
+
+** Ruby case Statement
+Syntax
+
+case expression
+[when expression [, expression ...] [then]
+   code ]...
+[else
+   code ]
+end
+
+$today=8
+case $today
+when 0 .. 2
+    puts "baby"
+when 3 .. 6
+    puts "little child" 
+when 7..9
+    puts"child"
+else 
+    puts "adult"
+end    
+    
+    output:--
+    beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+child
+
+
+
