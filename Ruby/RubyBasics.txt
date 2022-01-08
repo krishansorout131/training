@@ -596,3 +596,25 @@ here i is 2
 here i is 3
 here i is 4
 here i is 5
+
+*Ruby break Statement
+Syntax
+
+break
+
+Terminates the most internal loop. Terminates a method with an associated block if called within the block (with the method returning nil).
+Example:-
+
+for i in (0..5)
+    if i>=2
+        break
+    end
+    puts "here i is #{i}"
+end        
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+here i is 0
+here i is 1
+
+
