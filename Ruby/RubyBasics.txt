@@ -655,4 +655,33 @@ here i is 0
 -----------
 
 
+*Ruby retry Statement
+Syntax
+
+retry
+
+If retry appears in rescue clause of begin expression, restart from the beginning of the begin body.
+
+begin
+   do_something # exception raised
+rescue
+   # handles error
+   retry  # restart from beginning
+end
+example:--
+
+for i in 0..5
+   retry if i > 2
+puts "Value of local variable is #{i}"
+end
+
+This will produce the following result and will go in an infinite loop −
+output:--
+Value of local variable is 1
+Value of local variable is 2
+Value of local variable is 1
+Value of local variable is 2
+Value of local variable is 1
+Value of local variable is 2
+............................
 
