@@ -410,4 +410,33 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 hello
 
+* uless statement and modifier:--
 
+Ruby provides a special statement which is referred as unless statement. This statement is executed when the given condition is false. It is opposite of if statement. In if statement, the block executes once the given condition is true, however in unless statement, the block of code executes once the given condition is false.
+
+x=10
+unless x>=15
+    puts" x is less then 15"
+else 
+    puts "x is greater then 15"    
+end    
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+ x is less then 15
+ 
+ unless modifier:-- unless works when condition is false .
+ 
+ $var =  1
+print "1 -- Value is set\n" if $var
+print "2 -- Value is set\n" unless $var
+
+$var = false
+print "3 -- Value is set\n" unless $var
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+1 -- Value is set
+3 -- Value is set
