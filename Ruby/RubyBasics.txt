@@ -685,3 +685,112 @@ Value of local variable is 1
 Value of local variable is 2
 ............................
 
+
+                                                  ----------> Methods <-----------
+                                                  
+Ruby methods are very similar to functions in any other programming language. Ruby methods are used to bundle one or more repeatable statements into a single unit.
+
+Method names should begin with a lowercase letter. If you begin a method name with an uppercase letter, Ruby might think that it is a constant and hence can parse the call incorrectly.
+
+Methods should be defined before calling them, otherwise Ruby will raise an exception for undefined method invoking.
+Syntax
+
+
+So, you can define a simple method as follows −
+
+def method_name 
+   expr..
+end
+ 
+You can represent a method that accepts parameters like this −
+
+def method_name (var1, var2)
+   expr..
+end
+
+You can set default values for the parameters, which will be used if method is called without passing the required parameters −
+
+def method_name (var1 = value1, var2 = value2)
+   expr..
+end
+
+Whenever you call the simple method, you write only the method name as follows −
+
+method_name
+
+
+
+However, when you call a method with parameters, you write the method name along with the parameters, such as −
+
+method_name 25, 30
+
+Examples:---
+1.
+def krishan
+    puts "hi everyone my name is krishan"
+end    
+krishan
+
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hi everyone my name is krishan
+
+ 2.
+ def krishan(surname)
+    puts "hi everyone my name is krishan #{surname}"
+end    
+krishan("sorout")   
+
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hi everyone my name is krishan sorout
+
+3.
+def krishan(surname="singh")
+    puts "hi everyone my name is krishan #{surname}"
+end    
+krishan()
+krishan("sorout")
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hi everyone my name is krishan singh
+hi everyone my name is krishan sorout
+
+3.with return statement:-
+
+def test
+    i = 100
+    j = 200
+    k = 300
+    return i, j, k
+end
+var = test
+puts var
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+100
+200
+300
+
+4.Variable Number of Parameters
+
+Suppose you declare a method that takes two parameters, whenever you call this method, you need to pass two parameters along with it.
+
+However, Ruby allows you to declare methods that work with a variable number of parameters. Let us examine a sample of this −
+                                              
+def krishan(*test)
+    puts "number of parameters available is #{test.length}"
+    for i in (0..test.length-1)
+        puts "parameters is #{test[i]}"
+    end    
+end
+krishan("krishan","mohit","ajay")    
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+number of parameters available is 3
+parameters is krishan
+parameters is mohit
+parameters is ajay
+                                              
