@@ -468,4 +468,43 @@ end
 child
 
 
+**Ruby while Statement
+Syntax
 
+while conditional [do]
+   code
+end
+
+Executes code while conditional is true. A while loop's conditional is separated from code by the reserved word do, a newline, backslash \, or a semicolon ;.
+Example:-
+$i=0
+$check=5
+while $i <= $check do
+    puts "Inside loop value of i is =#$i"
+    $i +=1
+end
+
+output:--
+Inside loop value of i is =0
+Inside loop value of i is =1
+Inside loop value of i is =2
+Inside loop value of i is =3
+Inside loop value of i is =4
+Inside loop value of i is =5
+
+** ruby while modifier:--
+
+$i=0
+$check=5
+begin
+    puts "Inside loop value of i is =#$i"
+    $i +=1
+end while $i<$check
+
+output:-
+
+Inside loop value of i is =0
+Inside loop value of i is =1
+Inside loop value of i is =2
+Inside loop value of i is =3
+Inside loop value of i is =4
