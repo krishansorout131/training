@@ -508,3 +508,59 @@ Inside loop value of i is =1
 Inside loop value of i is =2
 Inside loop value of i is =3
 Inside loop value of i is =4
+
+*Ruby until Statement
+
+until conditional [do]
+   code
+end
+
+Executes code while conditional is false. An until statement's conditional is separated from code by the reserved word do, a newline, or a semicolon.
+
+$i=0
+$check=5
+until $i >= $check do
+    puts "Inside loop value of i is =#$i"
+    $i +=1
+end
+
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+Inside loop value of i is =0
+Inside loop value of i is =1
+Inside loop value of i is =2
+Inside loop value of i is =3
+Inside loop value of i is =4
+
+*Ruby until modifier
+Syntax
+
+code until conditional
+
+OR
+
+begin
+   code
+end until conditional
+
+Executes code while conditional is false.
+
+If an until modifier follows a begin statement with no rescue or ensure clauses, code is executed once before conditional is evaluated.
+Example:-
+
+$i=0
+$check=5
+begin
+    puts "Inside loop value of i is =#$i"
+    $i +=1
+end until $i >  $check
+
+outpit:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+Inside loop value of i is =0
+Inside loop value of i is =1
+Inside loop value of i is =2
+Inside loop value of i is =3
+Inside loop value of i is =4
+Inside loop value of i is =5
+
