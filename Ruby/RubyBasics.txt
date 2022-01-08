@@ -387,3 +387,27 @@ They are special variables that have the appearance of local variables but behav
 
     __LINE__ − The current line number in the source file.
 
+**Ruby if...else Statement
+
+x=1
+if x>2
+    puts "X is greater then 2"
+elsif x<=1 and x!=0
+    puts "x is 1"   
+else 
+    puts "can't find the number"
+end        
+
+*Ruby if modifier
+Syntax
+
+code if condition
+
+$a=10
+print "hello\n" if $a
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hello
+
+
