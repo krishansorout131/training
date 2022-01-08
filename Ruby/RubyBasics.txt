@@ -793,4 +793,39 @@ number of parameters available is 3
 parameters is krishan
 parameters is mohit
 parameters is ajay
-                                              
+                      
+** Class Methods
+
+When a method is defined outside of the class definition, the method is marked as private by default. On the other hand, the methods defined in the class definition are marked as public by default. The default visibility and the private mark of the methods can be changed by public or private of the Module.
+
+Whenever you want to access a method of a class, you first need to instantiate the class. Then, using the object, you can access any member of the class.
+
+Ruby gives you a way to access a method without instantiating a class. Let us see how a class method is declared and accessed −
+
+class Accounts
+   def reading_charge
+   end
+   def Accounts.return_date
+   end
+end
+
+See how the method return_date is declared. It is declared with the class name followed by a period, which is followed by the name of the method. You can access this class method directly as follows −
+
+=> Accounts.return_date
+
+To access this method, you need not create objects of the class Accounts.
+                        
+                        example:--
+class Krishan
+    def Krishan.func
+        puts "we don't need object for calling this function"
+    end    
+  
+end    
+Krishan.func
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+we don't need object for calling this function
+
+
