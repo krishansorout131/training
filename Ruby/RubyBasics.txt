@@ -369,3 +369,21 @@ output:--
 
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
  my id is 1 and name is krishan and my age is 21
+ 
+ 
+ *Ruby Pseudo-Variables
+
+They are special variables that have the appearance of local variables but behave like constants. You cannot assign any value to these variables.
+
+    self − The receiver object of the current method.
+
+    true − Value representing true.
+
+    false − Value representing false.
+
+    nil − Value representing undefined.
+
+    __FILE__ − The name of the current source file.
+
+    __LINE__ − The current line number in the source file.
+
