@@ -828,4 +828,72 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 we don't need object for calling this function
 
+*** blocks in ruby:-
 
+
+    A block consists of chunks of code.
+
+    You assign a name to a block.
+
+    The code in the block is always enclosed within braces ({}).
+
+A block is always invoked from a function with the same name as that of the block. This means that if you have a block with the name test,    then you use the function test to invoke this block.
+
+You invoke a block by using the yield statement.
+
+
+*The yield Statement
+
+Let's look at an example of the yield statement −
+without parameters:-
+def test
+    puts "hii this is method test"
+    yield 
+    puts "this is again method"
+    yield
+end 
+test {puts "this is block it print 2 times"}    
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hii this is method test
+this is block it print 2 times
+this is again method
+this is block it print 2 times
+
+with parameters:-
+
+def test
+    puts "hii this is method test"
+    yield 1
+    puts "this is again method"
+    yield 2
+    yield 3
+    yield 4
+end 
+test {|i| puts "this is block it print #{i} time"}    
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+hii this is method test
+this is block it print 1 time
+this is again method
+this is block it print 2 time
+this is block it print 3 time
+this is block it print 4 time
+
+with multiple parameters :-
+def test
+    puts "hii this is method test"
+    yield 1,2
+    puts "this is again method"
+    
+end 
+test {|a,b| puts "this is #{a+b}"}    
+output:-
+def test
+    puts "hii this is method test"
+    yield 1,2
+    puts "this is again method"
+    
+end 
+test {|a,b| puts "this is #{a+b}"}    
