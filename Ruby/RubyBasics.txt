@@ -972,3 +972,37 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby check.rb
 hii my name is krishan and i am very good in ruby .
 
 
+
+
+
+
+*** string in ruby:--
+
+A String object in Ruby holds and manipulates an arbitrary sequence of one or more bytes, typically representing characters that represent human language.
+
+The simplest string literals are enclosed in single quotes (the apostrophe character). The text within the quote marks is the value of the string −
+
+'This is a simple Ruby string literal'
+
+If you need to place an apostrophe within a single-quoted string literal, precede it with a backslash, so that the Ruby interpreter does not think that it terminates the string −
+
+'Won\'t you read O\'Reilly\'s book?'
+
+The backslash also works to escape another backslash, so that the second backslash is not itself interpreted as an escape character.
+
+*Expression Substitution
+
+Expression substitution is a means of embedding the value of any Ruby expression into a string using #{ and } −
+
+x, y, z = 12, 36, 72
+puts "The value of x is #{ x }."
+puts "The sum of x and y is #{ x + y }."
+puts "The average was #{ (x + y + z)/3 }."
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+The value of x is 12.
+The sum of x and y is 48.
+The average was 40.
+
+
