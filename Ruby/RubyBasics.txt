@@ -606,7 +606,7 @@ Terminates the most internal loop. Terminates a method with an associated block 
 Example:-
 
 for i in (0..5)
-    if i>=2
+    if i>=2 then
         break
     end
     puts "here i is #{i}"
@@ -626,7 +626,7 @@ Jumps to the next iteration of the most internal loop. Terminates execution of a
 Example:-
 
 for i in (0..5)
-    if i<2
+    if i<2 then
         next
     end
     puts "here i is #{i}"
@@ -638,4 +638,21 @@ here i is 2
 here i is 3
 here i is 4
 here i is 5
+
+* redo statement
+for i in (0..5)
+    if i<=2 then
+        puts "here i is #{i}"
+        redo
+    end
+    
+end        
+output:--
+here i is 0
+here i is 0
+here i is 0
+here i is 0
+-----------
+
+
 
