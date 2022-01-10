@@ -1554,3 +1554,16 @@ Examples:
 3.0.0 :168 > 'foo'.casecmp(1)
  => nil 
 
+23.  casecmp?(other_string) → true, false, or nil 
+
+Returns true if self and other_string are equal after Unicode case folding, otherwise false
+
+examples:-
+
+3.0.0 :170 > 'foo'.casecmp?('foo')
+ => true 
+3.0.0 :171 > 'foo'.casecmp?('food')
+ => false 
+3.0.0 :172 > 'foo'.casecmp?(1)
+ => nil 
+
