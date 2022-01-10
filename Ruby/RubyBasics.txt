@@ -1261,4 +1261,44 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 h*o
 h*o
 
+8. new string:-- 
+  With no arguments, returns the empty string with the Encoding ASCII-8BIT:
 
+3.0.0 :052 > s=String.new
+ => "" 
+3.0.0 :053 > s.encoding
+ => #<Encoding:ASCII-8BIT>
+ 
+ With the single String argument string, returns a copy of string with the same encoding as string:
+  
+3.0.0 :054 > s=String.new("krishan")
+ => "krishan" 
+3.0.0 :055 > s.encoding
+ => #<Encoding:UTF-8> 
+
+With keyword encoding, returns a copy of str with the specified encoding:
+
+3.0.0 :061 > a=String.new(encoding: 'ASCII')
+ => "" 
+3.0.0 :062 > a.encoding
+ => #<Encoding:US-ASCII> 
+
+3.0.0 :063 > a=String.new('krishan',encoding:'ASCII')
+ => "krishan" 
+3.0.0 :064 > a.encoding
+ => #<Encoding:US-ASCII> 
+
+
+With keyword capacity, returns a copy of str; the given capacity may set the size of the internal buffer, which may affect performance:
+
+3.0.0 :071 > a=String.new(capacity:1)
+ => "" 
+3.0.0 :072 > a=String.new(capacity:4096)
+ => "" 
+3.0.0 :073 > 
+
+The string, encoding, and capacity arguments may all be used together:
+
+3.0.0 :073 > a=String.new('hello',encoding:'UTF-8',capacity:25)
+ => "hello" 
+3.0.0 :074 > 
