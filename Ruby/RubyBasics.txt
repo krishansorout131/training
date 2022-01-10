@@ -1392,3 +1392,19 @@ Examples:
 3.0.0 :114 > 
 
 
+15. string == object → true or false 
+
+Returns true if object has the same length and content; as self; false otherwise:
+
+example:--
+
+3.0.0 :114 > s="foo"
+ => "foo" 
+3.0.0 :115 > s == "foo"
+ => true 
+3.0.0 :116 > s == "fooe"
+ => false 
+3.0.0 :117 > s == 123
+ => false 
+
+
