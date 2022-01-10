@@ -1343,3 +1343,28 @@ example:-
  => "krishan sorout" 
 3.0.0 :094 > 
 
+12. +string → new_string or self 
+
+Returns self if self is not frozen.
+
+Otherwise. returns self.dup, which is not frozen.
+
+example:-
+3.0.0 :095 > + "krishan"
+ => "krishan" 
+
+13. -string → frozen_string
+
+Returns a frozen, possibly pre-existing copy of the string.
+
+The returned String will be deduplicated as long as it does not have any instance variables set on it.
+
+14.  string << object → string
+
+Concatenates object to self and returns self:
+example:--
+3.0.0 :104"> a="krishan "
+ => "krishan " 
+3.0.0 :105 > a << "sorout"
+ => "krishan sorout" 
+
