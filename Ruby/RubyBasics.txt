@@ -1831,3 +1831,29 @@ examples:-
 3.0.0 :297 > a
  => "hello " 
 
+35. downcase(*options) → string
+
+Returns a string containing the downcased characters in self:
+examples:-
+3.0.0 :298 > a="Hello"
+ => "Hello" 
+3.0.0 :299 > a.downcase
+ => "hello" 
+3.0.0 :300 > a
+ => "Hello" 
+3.0.0 :301 > a="HELLO"
+ => "HELLO" 
+3.0.0 :302 > a.downcase
+ => "hello" 
+
+** downcase! :- it makes changes in original string:
+
+examples:-
+
+3.0.0 :303 > a
+ => "HELLO" 
+3.0.0 :304 > a.downcase!
+ => "hello" 
+3.0.0 :305 > a
+ => "hello" 
+ 
