@@ -1567,3 +1567,22 @@ examples:-
 3.0.0 :172 > 'foo'.casecmp?(1)
  => nil 
 
+24. center(width, padstr=' ') → new_str 
+
+Centers str in width. If width is greater than the length of str, returns a new String of length width with str centered and padded with padstr; otherwise, returns str.
+
+examples:-
+3.0.0 :174 > "krishan".center(6)
+ => "krishan" 
+3.0.0 :175 > "krishan".center(8)
+ => "krishan " 
+3.0.0 :176 > "krishan".center(18)
+ => "     krishan      " 
+3.0.0 :177 > "krishan".center(10)
+ => " krishan  " 
+3.0.0 :178 > "krishan".center(11)
+ => "  krishan  " 
+3.0.0 :179 > "krishan".center(11,'123')
+ => "12krishan12" 
+3.0.0 :180 > "krishan".center(21,'123')
+ => "1231231krishan1231231" 
