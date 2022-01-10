@@ -1702,4 +1702,16 @@ example:--
 3.0.0 :240 > s
  => "" 
 
+30.  codepoints → an_array
+
+Returns an array of the Integer ordinals of the characters in str. This is a shorthand for str.each_codepoint.to_a.
+
+If a block is given, which is a deprecated form, works the same as each_codepoint
+
+examples:-
+
+3.0.0 :242 > a="hello"
+ => "hello" 
+3.0.0 :243 > a.codepoints
+ => [104, 101, 108, 108, 111] 
 
