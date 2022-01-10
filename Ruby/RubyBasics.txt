@@ -1313,4 +1313,16 @@ Returns nil if object does not respond to :to_str.
 
 Raises an exception unless object.to_str returns a String object.
 
+10.   string * integer → new_string 
+
+Returns a new String containing integer copies of self:
+
+example :-
+3.0.0 :080 > "krishan " * 3
+ => "krishan krishan krishan " 
+
+3.0.0 :083 > a="hello "
+ => "hello " 
+3.0.0 :084 > a * 3
+ => "hello hello hello " 
 
