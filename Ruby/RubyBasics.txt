@@ -1059,3 +1059,35 @@ abcshan
 abcshan
 
 ===> sub! makes changes in original string not in the copy of string.
+
+
+2. gsub and gsub! :--
+
+* gusb:--Returns a copy of self with all occurrences of the given pattern replaced.
+
+examples:--
+s='my name is krishan'
+puts s.gsub('a','*')
+
+puts s
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+my n*me is krish*n
+my name is krishan
+
+* gusb! :-Performs the specified substring replacement(s) on self; returns self if any replacement occurred, nil otherwise.it makes changes in original string not in copy of str.
+examples:--
+
+s='my name is krishan'
+puts s.gsub!('a','*')
+
+puts s
+
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+my n*me is krish*n
+my n*me is krish*n
+
+
+
