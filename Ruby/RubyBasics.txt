@@ -1689,4 +1689,17 @@ example:-
 3.0.0 :237 > s.chr
  => "k" 
 
+29.  clear → self
+
+Removes the contents of self:
+
+example:--
+
+3.0.0 :238 > s
+ => "krishan" 
+3.0.0 :239 > s.clear
+ => "" 
+3.0.0 :240 > s
+ => "" 
+
 
