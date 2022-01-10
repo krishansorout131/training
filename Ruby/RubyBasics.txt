@@ -1135,4 +1135,24 @@ example:--
  => "123abd" 
 3.0.0 :022 > 
 
+3. replace :--Replaces the contents of self with the contents of other_string:
+
+3.0.0 :026 > s
+ => "123abe" 
+3.0.0 :027 > s.replace('krishan')
+ => "krishan" 
+3.0.0 :028 > s
+ => "krishan" 
+3.0.0 :029 > 
+
+a="my name is krishan"
+puts a.replace('krishan')
+puts a
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+krishan
+krishan
+
 
