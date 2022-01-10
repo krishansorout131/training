@@ -1180,5 +1180,29 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 nahsirk
 nahsirk
 
+5. setbyte :-Sets the byte at zero-based index to integer; returns integer:
+
+a="abcde"
+puts a.setbyte(0,99)
+
+puts a
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+99
+cbcde
+
+
+a="abcde"
+puts a.setbyte(0,98)
+
+puts a
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+98
+bbcde
 
 
