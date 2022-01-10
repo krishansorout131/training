@@ -1504,3 +1504,32 @@ examples:--
 3.0.0 :160 > s.byteslice(2,50)
  => "3456789" 
 
+
+21.  capitalize(*options) → self or nil
+
+Returns a string containing the characters in self; the first character is upcased; the remaining characters are downcased:
+only make changes in a copy string not in original string.
+examples:--
+
+s="hello world"
+puts s.capitalize 
+puts s
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+Hello world
+hello world
+
+** capitalize! :-- makes changes in original string also:-
+
+s="hello world"
+puts s.capitalize! 
+puts s
+
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+Hello world
+Hello world
+
+
