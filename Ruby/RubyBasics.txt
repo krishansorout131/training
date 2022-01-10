@@ -1631,4 +1631,19 @@ examples:--
  => "kri" 
 
 
+26. chars → an_array 
+
+Returns an array of characters in str. This is a shorthand for str.each_char.to_a.
+
+If a block is given, which is a deprecated form, works the same as each_char.
+
+example:--
+
+3.0.0 :219 > a="krishan sorout"
+ => "krishan sorout" 
+ 
+3.0.0 :220 > a.chars
+ => ["k", "r", "i", "s", "h", "a", "n", " ", "s", "o", "r", "o", "u", "t"] 
+
+
 
