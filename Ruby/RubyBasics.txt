@@ -1646,4 +1646,36 @@ example:--
  => ["k", "r", "i", "s", "h", "a", "n", " ", "s", "o", "r", "o", "u", "t"] 
 
 
+27.  chop → new_str
+
+Returns a new String with the last character removed. If the string ends with \r\n, both characters are removed. Applying chop to an empty string returns an empty string. String#chomp is often a safer alternative, as it leaves the string unchanged if it doesn't end in a record separator.
+
+examples:--
+3.0.0 :225 > a="hello"
+ => "hello" 
+3.0.0 :226 > a.chop
+ => "hell" 
+
+3.0.0 :227 > a="hello\n\r"
+ => "hello\n\r" 
+3.0.0 :228 > a.chop
+ => "hello\n" 
+ 
+ 3.0.0 :230 > a="hello\r\n"
+ => "hello\r\n" 
+3.0.0 :231 > a.chop
+ => "hello"
+ 
+ 
+ * chop! :- makes changes in original string.
+ 
+ example:-
+ 3.0.0 :232 > a="hello"
+ => "hello" 
+
+3.0.0 :234 > a.chop!
+ => "hell" 
+3.0.0 :235 > a
+ => "hell" 
+
 
