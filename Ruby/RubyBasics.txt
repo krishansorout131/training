@@ -1678,4 +1678,15 @@ examples:--
 3.0.0 :235 > a
  => "hell" 
 
+28.  chr → string click to toggle source
+
+Returns a string containing the first character of self:-
+
+example:-
+
+3.0.0 :236 > s="krishan"
+ => "krishan" 
+3.0.0 :237 > s.chr
+ => "k" 
+
 
