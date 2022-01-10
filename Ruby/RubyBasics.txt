@@ -1532,4 +1532,25 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 Hello world
 Hello world
 
+22.  casecmp(other_string) → -1, 0, 1, or nil
+
+Compares self.downcase and other_string.downcase; returns:
+
+    -1 if other_string.downcase is larger.
+
+    0 if the two are equal.
+
+    1 if other_string.downcase is smaller.
+
+    nil if the two are incomparable.
+
+Examples:
+3.0.0 :165 > 'foo'.casecmp('foo')
+ => 0 
+3.0.0 :166 > 'foo'.casecmp('food')
+ => -1 
+3.0.0 :167 > 'foo'.casecmp('fo')
+ => 1 
+3.0.0 :168 > 'foo'.casecmp(1)
+ => nil 
 
