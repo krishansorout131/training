@@ -1155,4 +1155,30 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 krishan
 krishan
 
+4. reverse and reverse!:- it reverse the string but only copy of string not original string:-
+
+reverse:-
+
+a="krishan"
+puts a.reverse
+
+puts a
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+nahsirk
+krishan
+
+* reverse!:-it also reverse the original string:-
+a="krishan"
+puts a.reverse!
+
+puts a
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+nahsirk
+nahsirk
+
+
 
