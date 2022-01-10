@@ -1772,4 +1772,32 @@ example:=
 3.0.0 :279 > a
  => "hello " 
 
+33.  delete_prefix(prefix) → new_str
+
+Returns a copy of str with leading prefix deleted.
+
+examples:-it only delete prefix values not sufix values;
+
+3.0.0 :280 > a
+ => "hello " 
+3.0.0 :281 > a.delete_prefix("hel")
+ => "lo " 
+3.0.0 :282 > a.delete_prefix("llo")
+ => "hello " 
+
+
+** delete_prefix! :-- it makes changes in original string delete string permanentely:-
+
+example:--
+3.0.0 :286 > a
+ => "hello world" 
+
+3.0.0 :288 > a
+ => "hello world" 
+ 
+3.0.0 :289 > a.delete_prefix!("hello")
+ => " world"
+  
+3.0.0 :290 > a
+ => " world" 
 
