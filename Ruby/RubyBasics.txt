@@ -1089,5 +1089,48 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 my n*me is krish*n
 my n*me is krish*n
 
+2. succ and succ!:-- Returns the successor to self. The successor is calculated by incrementing characters.
+
+The first character to be incremented is the rightmost alphanumeric: or, if no alphanumerics, the rightmost character:-
+
+examples:--
+s='12345'
+puts s.succ
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+12346
+
+s='12345abc'
+puts s.succ
+output:-
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+12345abd
+
+3.0.0 :015 > s
+ => "\xFF\xFF\xFF" 
+3.0.0 :016 > s.succ
+ => "\x01\x00\x00\x00" 
+
+3.0.0 :017 > s="123abc"
+ => "123abc" 
+3.0.0 :018 > s.succ
+ => "123abd" 
+3.0.0 :019 > s
+ => "123abc" 
+
+it makes changes in a copy string not in original string
+
+
+*succ!:-- it makes chnges in original string :-
+
+example:--
+
+3.0.0 :019 > s
+ => "123abc" 
+3.0.0 :020 > s.succ!
+ => "123abd" 
+3.0.0 :021 > s
+ => "123abd" 
+3.0.0 :022 > 
 
 
