@@ -1407,4 +1407,20 @@ example:--
 3.0.0 :117 > s == 123
  => false 
 
+16.   string =~ regexp → integer or nil
+string =~ object → integer or nil
+
+Returns the Integer index of the first substring that matches the given regexp, or nil if no match found:
+examples:--
+3.0.0 :119 > "foo" =~ /f/
+ => 0 
+3.0.0 :120 > "foo" =~ /o/
+ => 1 
+3.0.0 :121 > "foo" =~ /oo/
+ => 1 
+3.0.0 :122 > "food" =~ /d/
+ => 3 
+3.0.0 :123 > "food" =~ /x/
+ => nil 
+
 
