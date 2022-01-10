@@ -1006,3 +1006,56 @@ The sum of x and y is 48.
 The average was 40.
 
 
+
+** string methods:--
+
+1. sub and sub! :-
+
+* sub:- Returns a copy of self with only the first occurrence (not all occurrences) of the given pattern replaced.
+example:-
+
+s='krishan'
+puts s.sub('kri','abc')
+
+puts s
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+abcshan
+krishan
+====> it does not change our original string just make changes in the copy of our string.
+
+s='krishan'
+puts s.sub(/han/,'o')
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+kriso
+
+s='krishan'
+puts s.sub('an','o')
+
+output:--   beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+            krisho
+            
+s='krishan'
+puts s.sub(/[aeiou]/,'o')
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+kroshan
+
+* sub! :-- Returns self with only the first occurrence (not all occurrences) of the given pattern replaced.
+
+examples:-
+
+s='krishan'
+puts s.sub!('kri','abc')
+
+puts s
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+abcshan
+abcshan
+
+===> sub! makes changes in original string not in the copy of string.
