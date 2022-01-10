@@ -1480,3 +1480,14 @@ examples:-
 3.0.0 :142 > "abc\u{6666}".force_encoding("UTF-8").ascii_only?
  => false 
 
+19.  bytesize → integer
+
+Returns the count of bytes in self:
+
+example:--
+3.0.0 :149 > b
+ => "sorout" 
+3.0.0 :150 > b.bytesize
+ => 6 
+
+
