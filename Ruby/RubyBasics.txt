@@ -1302,3 +1302,15 @@ The string, encoding, and capacity arguments may all be used together:
 3.0.0 :073 > a=String.new('hello',encoding:'UTF-8',capacity:25)
  => "hello" 
 3.0.0 :074 > 
+
+9. try_convert(object) → object, new_string, or nil
+
+If object is a String object, returns object.
+
+Otherwise if object responds to :to_str, calls object.to_str and returns the result.
+
+Returns nil if object does not respond to :to_str.
+
+Raises an exception unless object.to_str returns a String object.
+
+
