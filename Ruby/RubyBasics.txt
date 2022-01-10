@@ -1801,3 +1801,33 @@ example:--
 3.0.0 :290 > a
  => " world" 
 
+34. delete_suffix(suffix) → new_str 
+
+Returns a copy of str with trailing suffix deleted.it only delete suffix values not prefix values.and makes changes in a copy string not in original string.
+
+
+3.0.0 :290 > a
+ => " world" 
+3.0.0 :291 > a="hello world"
+ => "hello world" 
+3.0.0 :292 > a.delete_suffix("world")
+ => "hello " 
+3.0.0 :293 > a
+ => "hello world" 
+3.0.0 :294 > a.delete_suffix("hello")
+ => "hello world" 
+
+
+** delete_suffix! :-- it makes changes in original string.
+
+examples:-
+
+3.0.0 :295 > a
+ => "hello world" 
+ 
+3.0.0 :296 > a.delete_suffix!("world")
+ => "hello " 
+
+3.0.0 :297 > a
+ => "hello " 
+
