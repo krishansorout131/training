@@ -1715,7 +1715,7 @@ examples:-
 3.0.0 :243 > a.codepoints
  => [104, 101, 108, 108, 111] 
 
-31.  concat(*objects) → string click to toggle source
+31.  concat(*objects) → string 
 
 Concatenates each object in objects to self and returns self:
 
@@ -1735,4 +1735,41 @@ examples:--
  => "krishan" 
 3.0.0 :250 > a.concat(32,'sorout')
  => "krishan sorout" 
+
+32.   delete([other_str]+) → new_str 
+
+Returns a copy of str with all characters in the intersection of its arguments deleted. Uses the same rules for building the set of characters as String#count.
+
+examples:-
+
+3.0.0 :268 > a.delete("h")
+ => "ello" 
+3.0.0 :269 > a.delete("l")
+ => "heo" 
+3.0.0 :270 > a
+ => "hello" 
+
+3.0.0 :271 > a="my name is krishan"
+ => "my name is krishan" 
+ 
+3.0.0 :272 > a.delete "my name is"
+ => "krh" 
+
+3.0.0 :273 > a="my name is krishan my name is"
+ => "my name is krishan my name is" 
+
+3.0.0 :274 > a.delete "my name is"
+ => "krh" 
+
+
+* delete!:- delete from original string or make changes in original string not in copy of string, 
+
+example:=
+3.0.0 :277 > a
+ => "hello india" 
+3.0.0 :278 > a.delete! "india"
+ => "hello " 
+3.0.0 :279 > a
+ => "hello " 
+
 
