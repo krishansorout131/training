@@ -1490,4 +1490,17 @@ example:--
 3.0.0 :150 > b.bytesize
  => 6 
 
+20.  byteslice(index, length = 1) → string or nil
+byteslice(range) → string or nil 
+
+examples:--
+
+3.0.0 :157 > s='123456789'
+ => "123456789" 
+3.0.0 :158 > s.byteslice(4)
+ => "5" 
+3.0.0 :159 > s.byteslice(2,5)
+ => "34567" 
+3.0.0 :160 > s.byteslice(2,50)
+ => "3456789" 
 
