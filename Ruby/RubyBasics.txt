@@ -1237,4 +1237,28 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 abcshan
 abcshan
 
+7. tr_s :--Processes a copy of str as described in String#tr, then removes duplicate characters in regions that were affected by the translation.
+
+a="hello"
+puts a.tr_s('el','*')
+puts a
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+h*o
+hello
+
+* tr_s!:--Performs String#tr_s processing on str in place, returning str, or nil if no changes were made.
+
+
+a="hello"
+puts a.tr_s!('el','*')     it makes changes in original string
+puts a
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+h*o
+h*o
+
 
