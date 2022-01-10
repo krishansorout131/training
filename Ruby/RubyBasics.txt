@@ -1715,3 +1715,24 @@ examples:-
 3.0.0 :243 > a.codepoints
  => [104, 101, 108, 108, 111] 
 
+31.  concat(*objects) → string click to toggle source
+
+Concatenates each object in objects to self and returns self:
+
+examples:--
+
+3.0.0 :244 > s="foo"
+ => "foo" 
+3.0.0 :245 > s.concat('ok','concated')
+ => "foookconcated" 
+3.0.0 :246 > s
+ => "foookconcated" 
+3.0.0 :247 > s.concat(12,'this',15,'or')
+ => "foookconcated\fthis\u000For" 
+3.0.0 :248 > s
+ => "foookconcated\fthis\u000For" 
+3.0.0 :249 > a="krishan"
+ => "krishan" 
+3.0.0 :250 > a.concat(32,'sorout')
+ => "krishan sorout" 
+
