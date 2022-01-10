@@ -1089,7 +1089,9 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 my n*me is krish*n
 my n*me is krish*n
 
-2. succ and succ!:-- Returns the successor to self. The successor is calculated by incrementing characters.
+2. succ and succ! /next ,next! it is alias of succ and succ!:-- 
+
+* succ:--Returns the successor to self. The successor is calculated by incrementing characters.
 
 The first character to be incremented is the rightmost alphanumeric: or, if no alphanumerics, the rightmost character:-
 
