@@ -1326,3 +1326,20 @@ example :-
 3.0.0 :084 > a * 3
  => "hello hello hello " 
 
+11. string + other_string → new_string
+
+Returns a new String containing other_string concatenated to self:
+
+example:-
+3.0.0 :089 > a="krishan "
+ => "krishan " 
+3.0.0 :090 > b="sorout"
+ => "sorout" 
+3.0.0 :091 > a
+ => "krishan " 
+3.0.0 :092 > b
+ => "sorout" 
+3.0.0 :093 > a + b
+ => "krishan sorout" 
+3.0.0 :094 > 
+
