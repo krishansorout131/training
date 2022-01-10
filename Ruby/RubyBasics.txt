@@ -1586,3 +1586,49 @@ examples:-
  => "12krishan12" 
 3.0.0 :180 > "krishan".center(21,'123')
  => "1231231krishan1231231" 
+ 
+ 25.  chomp(separator=$/) → new_str
+
+Returns a new String with the given record separator removed from the end of str (if present). If $/ has not been changed from the default Ruby record separator, then chomp also removes carriage return characters (that is, it will remove \n, \r, and \r\n). If $/ is an empty string, it will remove all trailing newlines from the string.
+
+examples:--
+
+3.0.0 :201 > a="hello"
+ => "hello" 
+3.0.0 :202 > a.chomp
+ => "hello" 
+ 
+ 3.0.0 :203 > a="hello\n"
+ => "hello\n" 
+3.0.0 :204 > a
+ => "hello\n" 
+3.0.0 :205 > a.chomp
+ => "hello" 
+3.0.0 :206 > a
+ => "hello\n" 
+
+3.0.0 :206 > a
+ => "hello\n" 
+3.0.0 :207 > a.chomp("\n")
+ => "hello" 
+3.0.0 :208 > a         it does not make changes in original string it makes changes in a copy of that string.
+ => "hello\n" 
+
+***chomp! :- it makes changes in original string: -
+3.0.0 :209 > a
+ => "hello\n" 
+3.0.0 :210 > a.chomp!("\n")
+ => "hello" 
+3.0.0 :211 > a
+ => "hello" 
+
+3.0.0 :212 > a="krishan"
+ => "krishan" 
+
+3.0.0 :214 > a.chomp!('shan')
+ => "kri" 
+3.0.0 :215 > a
+ => "kri" 
+
+
+
