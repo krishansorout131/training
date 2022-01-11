@@ -2012,4 +2012,21 @@ examples:-
  => true 
 3.0.0 :064 > a.end_with?('abc','labc')
  => false 
+ 
+ 45.  eql?(object) → true or false
+
+Returns true if object has the same length and content; as self; false otherwise:
+examples:-
+3.0.0 :071 > a
+ => "hello world" 
+
+3.0.0 :067 > a.eql?('hello world')
+ => true 
+3.0.0 :068 > a.eql?('hello worl')
+ => false 
+3.0.0 :069 > a.eql?('hello ')
+ => false 
+3.0.0 :070 > a.eql?(' world')
+ => false 
+
 
