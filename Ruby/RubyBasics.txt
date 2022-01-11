@@ -2125,4 +2125,24 @@ examples:--
 3.0.0 :118 > a.hash
  => -3369285052558037748         
  
- 
+ 51.  hex → integer 
+
+Treats leading characters from str as a string of hexadecimal digits (with an optional sign and an optional 0x) and returns the corresponding number. Zero is returned on error.
+
+examples:--
+3.0.0 :120 > a="hello"
+ => "hello" 
+
+3.0.0 :121 > a.hex
+ => 0 
+
+3.0.0 :122 > 'krishan'.hex
+ => 0 
+
+3.0.0 :123 > '064gdg'.hex
+ => 100 
+
+3.0.0 :124 > '-123hsh46'.hex
+ => -291 
+
+
