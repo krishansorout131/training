@@ -1980,3 +1980,14 @@ examples:--
 3.0.0 :043 > a.empty?
  => true 
 
+43.  encoding → encoding
+
+Returns the Encoding object that represents the encoding of obj.
+examples:--
+
+3.0.0 :054 > a="hello"
+ => "hello" 
+3.0.0 :055 > a.encoding
+ => #<Encoding:UTF-8> 
+
+
