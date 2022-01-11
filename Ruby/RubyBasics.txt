@@ -1965,4 +1965,18 @@ world => "hello\nworld"
  => "hello\nworld" 
 
 
+42.  empty? → true or false 
+
+Returns true if the length of self is zero, false otherwise:
+
+examples:--
+
+3.0.0 :040 > a="hello"
+ => "hello" 
+3.0.0 :041 > a.empty?
+ => false 
+3.0.0 :042"> a=""
+ => "" 
+3.0.0 :043 > a.empty?
+ => true 
 
