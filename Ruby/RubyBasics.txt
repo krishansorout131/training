@@ -1890,4 +1890,23 @@ examples:-
 3.0.0 :018 > a
  => "hello" 
 
+38. each_char {|cstr| block } → str
+each_char → an_enumerator
 
+Passes each character in str to the given block, or returns an enumerator if no block is given.
+
+examples:--
+3.0.0 :018 > a
+ => "hello" 
+
+3.0.0 :019 > a.each_char {|c| print c ," "}
+h e l l o  => "hello" 
+
+3.0.0 :020 > a.each_char {|c| print c }
+hello => "hello" 
+
+ 
+3.0.0 :021 > a.each_char 
+ => #<Enumerator: "hello":each_char>
+ 
+ 
