@@ -2145,4 +2145,30 @@ examples:--
 3.0.0 :124 > '-123hsh46'.hex
  => -291 
 
+52.  include? other_string → true or false
+
+Returns true if self contains other_string, false otherwise:
+examples:--
+
+3.0.0 :125 > a
+ => "hello" 
+
+3.0.0 :126 > a.include?('lo')
+ => true 
+
+3.0.0 :127 > a.include?('o')
+ => true 
+
+3.0.0 :128 > a.include?('ho')
+ => false 
+
+3.0.0 :129 > a.include?('h')
+ => true 
+
+3.0.0 :130 > a.include?('he')
+ => true 
+
+3.0.0 :131 > a.include?('w')
+ => false 
+
 
