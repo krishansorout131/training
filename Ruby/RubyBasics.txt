@@ -2101,3 +2101,28 @@ examples:-
  => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"] 
         
         
+50.  hash → integer
+
+Returns the integer hash value for self. The value is based on the length, content and encoding of self.
+
+examples:--
+
+3.0.0 :113 > a="helo"
+ => "helo" 
+
+3.0.0 :114 > a.hash
+ => -3335701615644714148 
+
+3.0.0 :115 > a=123
+ => 123 
+
+3.0.0 :116 > a.hash
+ => 3102168290569203486 
+
+3.0.0 :117 > a="@krishan121"
+ => "@krishan121" 
+
+3.0.0 :118 > a.hash
+ => -3369285052558037748         
+ 
+ 
