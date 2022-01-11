@@ -1909,4 +1909,17 @@ hello => "hello"
 3.0.0 :021 > a.each_char 
  => #<Enumerator: "hello":each_char>
  
- 
+ 39.  each_codepoint {|integer| block } → str 
+each_codepoint → an_enumerator
+
+Passes the Integer ordinal of each character in str, also known as a codepoint when applied to Unicode strings to the given block. For encodings other than UTF-8/UTF-16(BE|LE)/UTF-32(BE|LE), values are directly derived from the binary representation of each character.
+
+If no block is given, an enumerator is returned instead.
+
+examples:--
+3.0.0 :023 > a.each_codepoint {|a| print a ," "}
+104 101 108 108 111  => "hello" 
+3.0.0 :024 > 
+3.0.0 :025 > a.each_codepoint
+ => #<Enumerator: "hello":each_codepoint> 
+
