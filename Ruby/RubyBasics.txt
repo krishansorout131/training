@@ -1923,3 +1923,17 @@ examples:--
 3.0.0 :025 > a.each_codepoint
  => #<Enumerator: "hello":each_codepoint> 
 
+40.  each_grapheme_cluster {|cstr| block } → str click to toggle source
+     each_grapheme_cluster → an_enumerator
+
+Passes each grapheme cluster in str to the given block, or returns an enumerator if no block is given. Unlike String#each_char, this enumerates by grapheme clusters defined by Unicode Standard Annex #29 unicode.org/reports/tr29/
+
+examples:--
+3.0.0 :026 > a
+ => "hello" 
+3.0.0 :027 > a.each_grapheme_cluster {|a| print a, " "}
+h e l l o  => "hello" 
+
+3.0.0 :028 > a.each_grapheme_cluster.to_a.size
+ => 5 
+
