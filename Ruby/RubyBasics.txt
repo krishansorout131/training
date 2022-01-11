@@ -2336,4 +2336,105 @@ examples:--
 3.0.0 :186 > a.lstrip
  => "hello" 
 
+61. lstrip! :-- 
+
+examples:- makes changes in original string.
+
+3.0.0 :188 > a="  hello world    "
+ => "  hello world    " 
+
+3.0.0 :189 > a.lstrip!
+ => "hello world    " 
+
+3.0.0 :190 > a
+ => "hello world    " 
+
+62. match(pattern, offset = 0) → matchdata or nil
+match(pattern, offset = 0) {|matchdata| ... } → object
+
+Returns a Matchdata object (or nil) based on self and the given pattern.
+examples:--
+
+3.0.0 :202 > a.match('f',0)
+ => #<MatchData "f"> 
+
+3.0.0 :203 > a.match('f',1)
+ => nil 
+
+3.0.0 :204 > a.match('o',1)
+ => #<MatchData "o"> 
+
+3.0.0 :205 > a.match('o',2)
+ => #<MatchData "o"> 
+
+3.0.0 :206 > a.match('o',3)
+ => nil 
+
+3.0.0 :207 > a.match(/f/)
+ => #<MatchData "f"> 
+
+3.0.0 :208 > a.match(/d/)
+ => nil 
+
+63. 	 match?(pattern, offset = 0) → true or false
+
+Returns true or false based on whether a match is found for self and pattern.
+
+Note: does not update Regexp-related global variables.
+
+Computes regexp by converting pattern (if not already a Regexp)
+
+examples:--
+
+3.0.0 :209 > a
+ => "foo" 
+3.0.0 :210 > a.match?(/f/)
+ => true 
+3.0.0 :211 > a.match?(/d/)
+ => false 
+
+64.  oct → integer
+
+Treats leading characters of str as a string of octal digits (with an optional sign) and returns the corresponding number. Returns 0 if the conversion fails.
+examples:--
+3.0.0 :212 > a="123"
+ => "123" 
+
+3.0.0 :213 > a.oct
+ => 83 
+
+3.0.0 :214 > "hello".oct
+ => 0 
+
+3.0.0 :215 > '123hello'.oct
+ => 83 
+
+3.0.0 :216 > 'hello231'.oct
+ => 0 
+
+65.  ord → integer
+
+Returns the Integer ordinal of a one-character string.
+examples:-
+3.0.0 :218 > 'h'.ord
+ => 104 
+3.0.0 :219 > 'e'.ord
+ => 101 
+ 
+ 66.  partition(sep) → [head, sep, tail]
+partition(regexp) → [head, match, tail]
+
+Searches sep or pattern (regexp) in the string and returns the part before it, the match, and the part after it. If it is not found, returns two empty strings and str.
+examples:-
+
+3.0.0 :220 > a="hello"
+ => "hello" 
+3.0.0 :221 > a.partition('l')
+ => ["he", "l", "lo"] 
+3.0.0 :222 > a.partition('ll')
+ => ["he", "ll", "o"] 
+3.0.0 :223 > a.partition(/l/)
+ => ["he", "l", "lo"] 
+3.0.0 :224 > a.partition(/.l/)
+ => ["h", "el", "lo"] 
 
