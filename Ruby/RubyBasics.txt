@@ -2203,4 +2203,29 @@ Returns the Integer index of the first match for the given Regexp regexp, or nil
 3.0.0 :146 > a.index('o',3)
  => nil 
 
+54.  insert(index, other_string) → self 
+
+Inserts the given other_string into self; returns self.
+
+If the Integer index is positive, inserts other_string at offset index:
+
+examples:--
+3.0.0 :147 > a
+ => "foo" 
+
+3.0.0 :149 > a.insert(3," bar")
+ => "foo bar" 
+
+3.0.0 :150 > a.insert(2,"d")
+ => "fodo bar" 
+
+3.0.0 :151 > a
+ => "fodo bar" 
+
+3.0.0 :152 > a.insert(2,"o")
+ => "foodo bar" 
+
+3.0.0 :153 > a.insert(-1,"s")
+ => "foodo bars" 
+
 
