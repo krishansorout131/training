@@ -2053,4 +2053,25 @@ examples:--
 3.0.0 :080 > a.encoding
  => #<Encoding:UTF-8> 
 
+47. freeze()
 
+example:--
+
+a="hello"
+a.freeze()
+puts a.concat(" world")
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+test.rb:3:in `concat': can't modify frozen String: "hello" (FrozenError)
+        from test.rb:3:in `<main>'
+        
+a="hello"
+a.freeze()
+puts a << " world"
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+test.rb:3:in `<main>': can't modify frozen String: "hello" (FrozenError)
+
+        
