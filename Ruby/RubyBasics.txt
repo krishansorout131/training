@@ -1857,3 +1857,21 @@ examples:-
 3.0.0 :305 > a
  => "hello" 
  
+ 36. dump → string
+
+Returns a printable version of self, enclosed in double-quotes, with special characters escaped, and with non-printing characters replaced by hexadecimal notation:
+
+examples:--
+
+3.0.0 :009 > a="hello"
+ => "hello" 
+3.0.0 :010 > a.dump
+ => "\"hello\"" 
+3.0.0 :011 > a="hello \n"
+ => "hello \n" 
+3.0.0 :012 > a.dump
+ => "\"hello \\n\"" 
+3.0.0 :013 > a
+ => "hello \n" 
+
+
