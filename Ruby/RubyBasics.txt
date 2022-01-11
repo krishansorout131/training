@@ -2696,3 +2696,46 @@ examples:-
 3.0.0 :338 > a
  => "helo world" 
 
+
+79.  start_with?([prefixes]+) → true or false
+
+Returns true if str starts with one of the prefixes given. Each of the prefixes should be a String or a Regexp.
+examples:--
+3.0.0 :339 > a
+ => "helo world" 
+3.0.0 :340 > a.start_with?('helo')
+ => true 
+3.0.0 :341 > a.start_with?('elo')
+ => false 
+3.0.0 :342 > a.start_with?('helo','elo')
+ => true 
+3.0.0 :343 > a.start_with?('worl','elo')
+ => false 
+
+
+80.  strip → new_str
+
+Returns a copy of the receiver with leading and trailing whitespace removed.
+
+Whitespace is defined as any of the following characters: null, horizontal tab, line feed, vertical tab, form feed, carriage return, space.
+
+examples:--
+3.0.0 :347 > a="\tgoodbye\r\n"
+ => "\tgoodbye\r\n" 
+
+3.0.0 :349 > a.strip
+ => "goodbye" 
+
+81.  strip! → self or nil
+
+Removes leading and trailing whitespace from the receiver. Returns the altered receiver, or nil if there was no change.
+
+examples:--
+3.0.0 :350 > a
+ => "\tgoodbye\r\n" 
+3.0.0 :351 > a.strip!
+ => "goodbye" 
+3.0.0 :352 > a      makes changes in original string.
+ => "goodbye" 
+
+
