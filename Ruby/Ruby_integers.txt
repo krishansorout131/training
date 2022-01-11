@@ -1,0 +1,87 @@
+******* Integer
+
+An Integer object represents an integer value.
+
+You can create an Integer object explicitly with: An integer literal.
+
+You can convert certain objects to Integers with: Method Integer.
+
+An attempt to add a singleton method to an instance of this class causes an exception to be raised.
+
+
+1. sqrt(numeric) → integer click to toggle source
+
+Returns the integer square root of the non-negative integer n, which is the largest non-negative integer less than or equal to the square root of numeric.
+example:-
+
+3.0.0 :429 > Integer.sqrt(4)
+ => 2 
+3.0.0 :430 > Integer.sqrt(9)
+ => 3 
+3.0.0 :431 > Integer.sqrt(18)
+ => 4 
+3.0.0 :432 > Integer.sqrt(21)
+ => 4 
+3.0.0 :433 > Integer.sqrt(24)
+ => 4 
+3.0.0 :434 > Integer.sqrt(25)
+ => 5 
+
+2.  try_convert(object) → object, integer, or nil
+
+If object is an Integer object, returns object
+example:--
+
+
+
+
+3.  self % other → real_number
+
+Returns self modulo other as a real number.
+
+For integer n and real number r, these expressions are equivalent:
+example:--
+a=10
+b=2
+puts a%b
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
+0
+
+3.0.0 :441 > 34%3
+ => 1 
+
+4.  self & other → integer 
+
+Bitwise AND; each bit in the result is 1 if both corresponding bits in self and other are 1, 0 otherwise:
+
+examples:--
+3.0.0 :443 > 7 & 5
+ => 5 
+3.0.0 :444 > 10 & 6
+ => 2 
+3.0.0 :445 > 10 & 2
+ => 2 
+3.0.0
+
+here 10in bits= 00001010
+     2 in bits= 00000010
+     10&2=      00000010 it means 2.
+ 
+ 5.  self * numeric → numeric_result 
+
+Performs multiplication:
+examples:--
+
+3.0.0 :446 > 10*2
+ => 20 
+3.0.0 :447 > 2*2
+ => 4 
+3.0.0 :448 > 23*1
+3.0.0 :449 > 4 * 2.0
+ => 8.0 
+3.0.0 :450 > 4 * Rational(1,3)
+ => (4/3) 
+3.0.0 :452 > 4 * Complex(2,0)
+ => (8+0i) 
+
