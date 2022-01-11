@@ -2171,4 +2171,36 @@ examples:--
 3.0.0 :131 > a.include?('w')
  => false 
 
+53.  index(substring, offset = 0) → integer or nil 
+index(regexp, offset = 0) → integer or nil
+
+Returns the Integer index of the first occurrence of the given substring, or nil if none found:
+
+examples:--
+3.0.0 :132 > a
+ => "hello" 
+3.0.0 :133 > a.index('o')
+ => 4 
+3.0.0 :134 > a.index('l')
+ => 2 
+3.0.0 :135 > a.index('h')
+ => 0 
+
+Returns the Integer index of the first match for the given Regexp regexp, or nil if none found
+3.0.0 :136 > a.index(/h/)
+ => 0 
+3.0.0 :137 > a.index(/o/)
+ => 4 
+ Integer argument offset, if given, specifies the position in the string to begin the search:
+ 3.0.0 :142 > a="foo"
+ => "foo" 
+3.0.0 :143 > a.index('o')
+ => 1 
+3.0.0 :144 > a.index('o',1)
+ => 1 
+3.0.0 :145 > a.index('o',2)
+ => 2 
+3.0.0 :146 > a.index('o',3)
+ => nil 
+
 
