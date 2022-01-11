@@ -2228,4 +2228,17 @@ examples:--
 3.0.0 :153 > a.insert(-1,"s")
  => "foodo bars" 
 
+55.  inspect → string
+
+Returns a printable version of self, enclosed in double-quotes, and with special characters escaped:
+
+examples:- 
+3.0.0 :154 > a="hello"
+ => "hello" 
+3.0.0 :155 > a.inspect
+ => "\"hello\"" 
+3.0.0 :156 > a="hello\tworld\n"
+ => "hello\tworld\n" 
+3.0.0 :157 > a.inspect
+ => "\"hello\\tworld\\n\"" 
 
