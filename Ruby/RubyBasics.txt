@@ -1875,3 +1875,19 @@ examples:--
  => "hello \n" 
 
 
+37. each_byte {|integer| block } → str
+each_byte → an_enumerator
+
+Passes each byte in str to the given block, or returns an enumerator if no block is given.
+examples:-
+
+3.0.0 :016 > a.each_byte
+ => #<Enumerator: "hello":each_byte> 
+ 
+3.0.0 :017 > a.each_byte {|c| print c ," "}
+104 101 108 108 111  => "hello" 
+
+3.0.0 :018 > a
+ => "hello" 
+
+
