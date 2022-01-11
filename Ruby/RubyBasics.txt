@@ -2074,4 +2074,18 @@ output:--
 beryl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ ruby test.rb
 test.rb:3:in `<main>': can't modify frozen String: "hello" (FrozenError)
 
+48.  getbyte(index) → integer click to toggle source
+
+Returns the byte at zero-based index as an integer:
+examples:--
+
+3.0.0 :100 > a
+ => "hello world" 
+3.0.0 :101 > a.getbyte(0)
+ => 104 
+3.0.0 :102 > a.getbyte(2)
+ => 108 
+3.0.0 :103 > a.getbyte(3)
+ => 108 
+
         
