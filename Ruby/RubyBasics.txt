@@ -2438,3 +2438,261 @@ examples:-
 3.0.0 :224 > a.partition(/.l/)
  => ["h", "el", "lo"] 
 
+67.  prepend(*other_strings) → string 
+
+Prepends each string in other_strings to self and returns self:
+
+examples:-
+3.0.0 :226 > a="world"
+ => "world" 
+3.0.0 :227 > a
+ => "world" 
+3.0.0 :228'> a.prepend('hello ')
+ => "hello world" 
+3.0.0 :229 > a.prepend('hii ','i am krishan ')
+ => "hii i am krishan hello world" 
+
+68.  rindex(substring, offset = self.length) → integer or nil 
+rindex(regexp, offset = self.length) → integer or nil
+
+Returns the Integer index of the last occurrence of the given substring, or nil if none found:
+examples:--
+3.0.0 :230 > a="hello"
+ => "hello" 
+3.0.0 :231 > a.rindex('h')
+ => 0 
+3.0.0 :232 > a.rindex('e')
+ => 1 
+3.0.0 :233 > a.rindex('ee')
+ => nil 
+3.0.0 :234 > a.rindex('ll')
+ => 2 
+
+Returns the Integer index of the last match for the given Regexp regexp, or nil if none found:
+
+3.0.0 :235 > a.rindex(/h/)
+ => 0 
+3.0.0 :236 > a.rindex(/e/)
+ => 1 
+3.0.0 :237 > a.rindex(/l/)
+ => 3 
+3.0.0 :238 > a.rindex(/ll/)
+ => 2 
+Integer argument offset, if given and non-negative, specifies the maximum starting position in the
+
+3.0.0 :241 > a.rindex('h',2)
+ => 0 
+3.0.0 :242 > a.rindex('e',0)
+ => nil 
+3.0.0 :243 > a.rindex('e',1)
+ => 1 
+3.0.0 :244 > a.rindex('e',2)
+ => 1 
+3.0.0 :245 > a.rindex('l',2)
+ => 2 
+3.0.0 :246 > a.rindex('l',3)
+ => 3 
+3.0.0 :247 > a.rindex('l',4)
+ => 3 
+
+
+69.  rjust(integer, padstr=' ') → new_str
+
+If integer is greater than the length of str, returns a new String of length integer with str right justified and padded with padstr; otherwise, returns str.
+
+examples:-
+
+3.0.0 :253 > a.rjust(4)
+ => "hello" 
+3.0.0 :254 > a.rjust(10)
+ => "     hello" 
+
+3.0.0 :256 > a.rjust(10,"12")
+ => "12121hello" 
+
+70.  rpartition(sep) → [head, sep, tail]
+rpartition(regexp) → [head, match, tail]
+
+Searches sep or pattern (regexp) in the string from the end of the string, and returns the part before it, the match, and the part after it. If it is not found, returns two empty strings and str.
+
+examples:--
+
+3.0.0 :257 > a
+ => "hello" 
+3.0.0 :258 > a.rpartition('l')
+ => ["hel", "l", "o"] 
+3.0.0 :259 > a.rpartition('e')
+ => ["h", "e", "llo"] 
+3.0.0 :260 > a.rpartition('x')
+ => ["", "", "hello"] 
+3.0.0 :261 > a.rpartition('a')
+ => ["", "", "hello"] 
+3.0.0 :262 > a.rpartition(/.l/)
+ => ["he", "ll", "o"] 
+
+71.  rstrip → new_str 
+
+Returns a copy of the receiver with trailing whitespace removed. See also String#lstrip and String#strip.
+examples:--
+3.0.0 :264 > a="   hello   "
+ => "   hello   " 
+3.0.0 :265 > a.rstrip
+ => "   hello" 
+
+72.  rstrip! → self or nil
+
+Removes trailing whitespace from the receiver. Returns the altered receiver, or nil if no change was made. See also String#lstrip! and String#strip!.
+
+example:-
+
+3.0.0 :266 > a
+ => "   hello   " 
+3.0.0 :267 > a.rstrip!
+ => "   hello" 
+3.0.0 :268 > a         it makes changes in original string not in copy of string.
+ => "   hello" 
+
+
+73.  scan(pattern) → array
+scan(pattern) {|match, ...| block } → str
+
+Both forms iterate through str, matching the pattern (which may be a Regexp or a String). For each match, a result is generated and either added to the result array or passed to the block. If the pattern contains no groups, each individual result consists of the matched string, $&. If the pattern contains groups, each individual result is itself an array containing one entry per group.
+
+examples:--
+3.0.0 :272 > a="hello world"
+ => "hello world" 
+
+3.0.0 :273 > a.scan(/\w+/)
+ => ["hello", "world"] 
+
+3.0.0 :274 > a.scan(/.../)
+ => ["hel", "lo ", "wor"] 
+
+3.0.0 :275 > a.scan(/..../)
+ => ["hell", "o wo"] 
+
+3.0.0 :276 > a.scan(/../)
+ => ["he", "ll", "o ", "wo", "rl"] 
+
+3.0.0 :277 > a.scan(/(...)/)
+ => [["hel"], ["lo "], ["wor"]] 
+
+3.0.0 :278 > a.scan(/(..)(..)/)
+ => [["he", "ll"], ["o ", "wo"]] 
+
+3.0.0 :283 > a.scan(/\w+/) {|w| print "<<#{w}>>"}
+<<hello>><<world>> => "hello world" 
+
+74.  scrub → new_str
+scrub(repl) → new_str
+scrub{|bytes|} → new_str
+
+If the string is invalid byte sequence then replace invalid bytes with given replacement character, else returns self. If block is given, replace invalid bytes with returned value of the block
+examples:--
+
+3.0.0 :284 > a
+ => "hello world" 
+3.0.0 :285 > a.scrub
+ => "hello world" 
+3.0.0 :286 > 'abc\u4636\x45'.scrub
+ => "abc\\u4636\\x45" 
+
+75.  scrub! → str 
+scrub!(repl) → str
+scrub!{|bytes|} → str
+
+If the string is invalid byte sequence then replace invalid bytes with given replacement character, else returns self. If block is given, replace invalid bytes with returned value of the block.
+
+examples:--
+
+
+75.  slice!(index) → new_string or nil click to toggle source
+slice!(start, length) → new_string or nil
+slice!(range) → new_string or nil
+slice!(regexp, capture = 0) → new_string or nil
+slice!(substring) → new_string or nil
+
+Removes the substring of self specified by the arguments; returns the removed substring.
+
+See String#[] for details about the arguments that specify the substring.
+
+A few examples:
+
+3.0.0 :308 > a.slice!(2)
+ => "l" 
+3.0.0 :309 > a
+ => "helo world" 
+3.0.0 :310 > a.slice!(3..6)
+ => "o wo" 
+3.0.0 :311 > a
+ => "helrld" 
+
+3.0.0 :311 > a
+ => "helrld" 
+3.0.0 :312 > a.slice!(/d/)
+ => "d" 
+3.0.0 :313 > a
+ => "helrl" 
+
+3.0.0 :313 > a
+ => "helrl" 
+3.0.0 :314 > a.slice!('hel')
+ => "hel" 
+3.0.0 :315 > a
+ => "rl" 
+
+76.  split(pattern=nil, [limit]) → an_array
+split(pattern=nil, [limit]) {|sub| block } → str
+
+Divides str into substrings based on a delimiter, returning an array of these substrings.
+
+If pattern is a String, then its contents are used as the delimiter when splitting str. If pattern is a single space, str is split on whitespace, with leading and trailing whitespace and runs of contiguous whitespace characters ignored.
+
+example:--
+3.0.0 :321 > a=" hello world "
+ => " hello world " 
+3.0.0 :322 > a.split
+ => ["hello", "world"] 
+3.0.0 :323 > a.split(' ')
+ => ["hello", "world"] 
+3.0.0 :324/> a.split(/ /)
+ => ["", "hello", "world"] 
+
+3.0.0 :325 > a.split(//)
+ => [" ", "h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " "] 
+
+3.0.0 :326 > a.split(//,3)
+ => [" ", "h", "ello world "] 
+
+77. squeeze([other_str]*) → new_str click to toggle source
+
+Builds a set of characters from the other_str parameter(s) using the procedure described for String#count. Returns a new string where runs of the same character that occur in this set are replaced by a single character. If no arguments are given, all runs of identical characters are replaced by a single character.
+
+examples;--
+
+3.0.0 :328 > a="hello world"
+ => "hello world" 
+3.0.0 :329 > a.squeeze
+ => "helo world" 
+
+3.0.0 :331 > a="hello     world"
+ => "hello     world" 
+3.0.0 :332 > a.squeeze(' ')
+ => "hello world" 
+
+78. squeeze!([other_str]*) → str or nil click to toggle source
+
+Squeezes str in place, returning either str, or nil if no changes were made.
+examples:- 
+
+3.0.0 :334 > a
+ => "hello     world" 
+3.0.0 :335 > a.squeeze!(' ')
+ => "hello world" 
+3.0.0 :336 > a
+ => "hello world" 
+3.0.0 :337 > a.squeeze!
+ => "helo world" 
+3.0.0 :338 > a
+ => "helo world" 
+
