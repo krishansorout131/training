@@ -1937,3 +1937,32 @@ h e l l o  => "hello"
 3.0.0 :028 > a.each_grapheme_cluster.to_a.size
  => 5 
 
+41. each_line(separator=$/, chomp: false) {|substr| block } → str
+each_line(separator=$/, chomp: false) → an_enumerator
+
+Splits str using the supplied parameter as the record separator ($/ by default), passing each substring in turn to the supplied block. If a zero-length record separator is supplied, the string is split into paragraphs delimited by multiple successive newlines.
+
+If chomp is true, separator will be removed from the end of each line.
+
+If no block is given, an enumerator is returned instead.
+
+examples:--
+
+3.0.0 :034 > a="hello\nworld"
+ => "hello\nworld" 
+ 
+3.0.0 :035 > a.each_line {|s| print s}
+hello
+world => "hello\nworld" 
+
+3.0.0 :037 > a
+ => "hello\nworld" 
+3.0.0 :038 > a.each_line('l') {|s| p s}
+"hel"
+"l"
+"o\nworl"
+"d"
+ => "hello\nworld" 
+
+
+
