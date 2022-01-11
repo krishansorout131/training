@@ -2242,3 +2242,98 @@ examples:-
 3.0.0 :157 > a.inspect
  => "\"hello\\tworld\\n\"" 
 
+
+56. intern → symbol click to toggle source
+
+Returns the Symbol corresponding to str, creating the symbol if it did not previously exist
+
+examples:-
+3.0.0 :159 > a="hello"
+ => "hello" 
+
+3.0.0 :160 > a.intern
+ => :hello 
+
+3.0.0 :161 > b='hello'.to_sym
+ => :hello 
+
+3.0.0 :163 > b == :hello
+ => true 
+
+57.  length → integer
+
+Returns the count of characters (not bytes) in self:
+examples:-
+3.0.0 :168 > a
+ => "hello" 
+
+3.0.0 :165 > a.length
+ => 5 
+3.0.0 :166 > b="hello world"
+ => "hello world" 
+3.0.0 :167 > b.length
+ => 11 
+
+58.  lines(separator=$/, chomp: false) → an_array
+
+Returns an array of lines in str split using the supplied record separator ($/ by default). This is a shorthand for str.each_line(separator, getline_args).to_a.
+
+If chomp is true, separator will be removed from the end of each line.
+examples:--
+3.0.0 :169 > a="hello world"
+ => "hello world" 
+3.0.0 :170 > a.lines
+ => ["hello world"] 
+3.0.0 :171 > a.lines(' ')
+ => ["hello ", "world"] 
+3.0.0 :172 > a="hello\n\world\n"
+ => "hello\nworld\n" 
+3.0.0 :173 > a.lines
+ => ["hello\n", "world\n"] 
+3.0.0 :174 > a.lines(chomp:true)
+ => ["hello", "world"] 
+
+59.  ljust(integer, padstr=' ') → new_str click to toggle source
+
+If integer is greater than the length of str, returns a new String of length integer with str left justified and padded with padstr; otherwise, returns str.
+examples:--
+
+3.0.0 :176 > a="hello world"
+ => "hello world" 
+
+3.0.0 :177 > a.ljust(10)
+ => "hello world" 
+
+3.0.0 :178 > a.ljust(11)
+ => "hello world" 
+
+3.0.0 :179 > a.ljust(12)
+ => "hello world " 
+
+3.0.0 :180 > a.ljust(15)
+ => "hello world    " 
+
+3.0.0 :181 > a.ljust(20)
+ => "hello world         " 
+
+3.0.0 :182 > a.ljust(20,'121')
+ => "hello world121121121" 
+
+60.  lstrip → new_str click to toggle source
+
+Returns a copy of the receiver with leading whitespace removed. See also String#rstrip and 
+examples:--
+
+3.0.0 :183 > a="  hello world    "
+ => "  hello world    " 
+
+3.0.0 :184 > a.lstrip
+ => "hello world    " 
+
+3.0.0 :185 > a="hello"
+ => "hello" 
+
+3.0.0 :186 > a.lstrip
+ => "hello" 
+
+
