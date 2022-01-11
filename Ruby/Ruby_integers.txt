@@ -85,3 +85,149 @@ examples:--
 3.0.0 :452 > 4 * Complex(2,0)
  => (8+0i) 
 
+6.  self ** numeric → numeric_result click to toggle source
+
+Raises self to the power of numeric:
+examples:-
+3.0.0 :453 > 2 ** 3
+ => 8 
+3.0.0 :454 > 3 **2
+ => 9 
+3.0.0 :455 > 2 ** -3
+ => (1/8) 
+ 
+ 7.  self + numeric → numeric_result click to toggle source
+
+Performs addition:
+example:--
+3.0.0 :456 > 2 + 3
+ => 5 
+3.0.0 :457 > 45 + 45
+ => 90
+ 
+8.self - numeric → numeric_result click to toggle source
+
+Performs subtraction:
+example:-- 3.0.0 :458 > 335 - 43
+ => 292 
+3.0.0 :459 > 10 - 2
+ => 8 
+
+9.  -int → integer click to toggle source
+
+Returns int, negated.
+example:--
+
+3.0.0 :460 > -3
+ => -3 
+3.0.0 :461 > -535
+ => -535 
+
+10.  self / numeric → numeric_result
+
+Performs division; for integer numeric, truncates the result to an integer:
+example:--
+3.0.0 :463 > 4 / 2
+ => 2 
+3.0.0 :464 > 9 / 2
+ => 4 
+
+3.0.0 :465 > 4 / -3
+ => -2 
+3.0.0 :466 > -4 / -3
+ => 1 
+
+
+ self < other → true or false
+
+Returns true if the value of self is less than that of other
+examples:- 
+3.0.0 :467 > 5 < 3
+ => false 
+3.0.0 :468 > 6 > 5
+ => true 
+
+11.  self << count → integer
+
+Returns self with bits shifted count positions to the left, or to the right if count is negative:
+examples:--
+
+3.0.0 :481 > 9 << 3
+ => 72 
+3.0.0 :482 > 4 << 3
+ => 32 
+
+
+12. self <= real → true or false
+
+Returns true if the value of self is less than or equal to that of other:
+examples:--
+3.0.0 :483 > 4 <= 2
+ => false 
+3.0.0 :484 > 4 <= 8
+ => true
+ 
+ 13.  self <=> other → -1, 0, +1, or nil
+
+Returns:
+
+    -1, if self is less than other.
+
+    0, if self is equal to other.
+
+    1, if self is greater then other.
+
+    nil, if self and other are incomparable.
+
+Examples:
+3.0.0 :485 > 5 <=> 5
+ => 0 
+3.0.0 :486 > 5 <=> 6
+ => -1 
+3.0.0 :487 > 5 <=> 3
+ => 1 
+3.0.0 :488 > 5 <=> a
+ => nil 
+
+14.  self == other → true or false
+
+Returns true if self is numerically equal to other; false otherwise.
+examples;-
+
+3.0.0 :489 > 5 == 4
+ => false 
+3.0.0 :490 > 4 == 4
+ => true 
+ 
+ 15.  self[offset] → 0 or 1
+self[offset, size] → integer
+self[range] → integer
+
+Returns a slice of bits from self.
+
+With argument offset, returns the bit at the given offset, where offset 0 refers to the least significant bit:
+
+examples:-
+3.0.0 :491 > a=12312345
+ => 12312345 
+3.0.0 :492 > a[0]
+ => 1 
+3.0.0 :493 > a[2]
+ => 0 
+3.0.0 :494 > a[3]
+ => 1 
+ 
+ 16.  self ^ other → integer
+
+Bitwise EXCLUSIVE OR; each bit in the result is 1 if the corresponding bits in self and other are different, 0 otherwise:
+
+examples:--
+ 3.0.0 :495 >  9 ^ 3
+ => 10 
+ description:-- 9= 00001001
+                3= 00000011
+                   00001010 it means 10 because 1 1 means 0 and 1 0 means 1 or 0 1 means 1 here
+                   
+                   
+           
+
