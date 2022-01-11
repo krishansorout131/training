@@ -2029,4 +2029,28 @@ examples:-
 3.0.0 :070 > a.eql?(' world')
  => false 
 
+46. force_encoding(encoding) → str 
+
+Changes the encoding to encoding and returns self.
+
+examples:--
+
+.0.0 :075 > a.force_encoding("ASCII-8BIT")
+ => "hello world" 
+
+3.0.0 :076 > a.encoding
+ => #<Encoding:ASCII-8BIT> 
+
+3.0.0 :077 > a
+ => "hello world" 
+
+3.0.0 :078 > a.encoding
+ => #<Encoding:ASCII-8BIT> 
+
+3.0.0 :079 > a.force_encoding("UTF-8")
+ => "hello world" 
+
+3.0.0 :080 > a.encoding
+ => #<Encoding:UTF-8> 
+
 
