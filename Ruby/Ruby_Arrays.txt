@@ -230,4 +230,172 @@ examples:--
 3.0.0 :234 > arr.include?(435)
  => true 
 
+****** Adding Items to Arrays:--
+
+11.  push(*objects) → self
+
+Appends trailing elements.
+
+Appends each argument in objects to self; returns self:
+examples:--
+
+3.0.0 :235 > arr
+ => [12, 435, 2, 767, 455] 
+
+3.0.0 :236 > arr.push(1)
+ => [12, 435, 2, 767, 455, 1] 
+
+3.0.0 :237 > arr
+ => [12, 435, 2, 767, 455, 1] 
+
+3.0.0 :238 > arr.push(3,4,5)
+ => [12, 435, 2, 767, 455, 1, 3, 4, 5] 
+
+12.  unshift(*objects) → self
+unshift will add a new item to the beginning of an array.
+Prepends the given objects to self:
+examples:-
+3.0.0 :239 > arr.unshift("arr")
+ => ["arr", 12, 435, 2, 767, 455, 1, 3, 4, 5]
+ 
+ 13.  insert(index, *objects) → self 
+Using the insert method, you can also insert multiple values at once:
+Inserts given objects before or after the element at Integer index offset; returns self.
+
+When index is non-negative, inserts all given objects before the element at offset index
+examples:-
+3.0.0 :240 > arr.insert(1,"hello","world")
+ => ["arr", "hello", "world", 12, 435, 2, 767, 455, 1, 3, 4, 5] 
+
+
+******* Removing Items from an Array:--
+
+
+14.  pop → object or nil
+pop(n) → new_array
+
+Removes and returns trailing elements.
+
+When no argument is given and self is not empty, removes and returns the last element:
+examples:--
+ => ["arr", "hello", "world", 12, 435, 2, 767, 455, 1, 3, 4, 5] 
+
+3.0.0 :247 > arr.pop
+ => 5 
+
+3.0.0 :248 > arr
+ => ["arr", "hello", "world", 12, 435, 2, 767, 455, 1, 3, 4] 
+
+3.0.0 :249 > arr.pop(2)
+ => [3, 4] 
+
+3.0.0 :250 > arr
+ => ["arr", "hello", "world", 12, 435, 2, 767, 455, 1] 
+
+
+15.  shift → object or nil
+shift(n) → new_array
+
+Removes and returns leading elements.
+
+When no argument is given, removes and returns the first element: 
+example:-
+3.0.0 :252 > arr
+ => ["arr", "hello", "world", 12, 435, 2, 767, 455, 1] 
+3.0.0 :253 > arr.shift
+ => "arr" 
+3.0.0 :254 > arr
+ => ["hello", "world", 12, 435, 2, 767, 455, 1] 
+
+3.0.0 :255 > arr.shift(2)
+ => ["hello", "world"] 
+3.0.0 :256 > arr
+ => [12, 435, 2, 767, 455, 1] 
+
+16. delete(obj) → deleted_object 
+delete(obj) {|nosuch| ... } → deleted_object or block_return
+
+Removes zero or more elements from self; returns self.
+
+When no block is given, removes from self each element ele such that ele == obj; returns the last deleted element:
+
+examples:--
+
+3.0.0 :262 > arr.delete("world")
+ => "world"
+  
+3.0.0 :263 > arr
+ => [1, "hello", 12, 435, 2, 767, 455, 1] 
+ 
+ 17.  delete_at(index) → deleted_object or nil 
+
+Deletes an element from self, per the given Integer index.
+
+When index is non-negative, deletes the element at offset index:
+
+examples:--
+3.0.0 :270 > arr
+ => ["hello", 12, 435, 2, 767, 455] 
+3.0.0 :271 > arr.delete_at(0)
+ => "hello" 
+3.0.0 :272 > arr
+ => [12, 435, 2, 767, 455] 
+
+18. compact → new_array
+
+Returns a new Array containing all non-nil elements from self:
+example:-
+3.0.0 :276 > ab=[nil,1,2,3,nil]
+ => [nil, 1, 2, 3, nil] 
+3.0.0 :277 > ab.compact      it makes changes in a copy array not in original array.
+ => [1, 2, 3] 
+
+19. compact! → self or nil 
+
+Removes all nil elements from self.
+
+Returns self if any elements removed, otherwise nil.
+example:-- it makes changes in original array. and permanentely remove nil values from array.
+
+3.0.0 :287 > ab
+ => [3, nil, nil, 1, 2, 3] 
+3.0.0 :288 > ab.compact!
+ => [3, 1, 2, 3] 
+3.0.0 :289 > ab
+ => [3, 1, 2, 3] 
+
+20. uniq → new_array
+uniq {|element| ... } → new_array
+
+Returns a new Array containing those elements from self that are not duplicates, the first occurrence always being retained.
+
+With no block given, identifies and omits duplicates using method eql? to compare.
+
+examples:--
+3.0.0 :290 > ab
+ => [3, 1, 2, 3] 
+3.0.0 :291 > ab.uniq      only makes changes in a copy array .
+ => [3, 1, 2] 
+3.0.0 :292 > ab
+ => [3, 1, 2, 3] 
+
+
+21. uniq! → self or nil click to toggle source
+uniq! {|element| ... } → self or nil
+
+Removes duplicate elements from self, the first occurrence always being retained; returns self if any elements removed, nil otherwise.
+
+With no block given, identifies and removes elements using method eql? to compare.
+
+Returns self if any elements removed:
+examples:--
+
+3.0.0 :299 > arr
+ => [12, 435, 2, 767, 455, 455, 455, 455] 
+3.0.0 :300 > arr.uniq!
+ => [12, 435, 2, 767, 455]      permanentely remove all duplicate values from array. 
+3.0.0 :301 > arr
+ => [12, 435, 2, 767, 455] 
+
+
 
