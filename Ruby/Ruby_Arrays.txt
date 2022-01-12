@@ -1,0 +1,233 @@
+                                        ----------------------> Array <--------------------------
+
+An Array is an ordered, integer-indexed collection of objects, called elements. Any object may be an Array element.
+
+Array Indexes:--
+
+Array indexing starts at 0, as in C or Java.
+
+A positive index is an offset from the first element:
+
+    Index 0 indicates the first element.
+
+    Index 1 indicates the second element.
+
+Creating Arrays:--
+
+You can create an Array object explicitly with:
+
+ * An array literal.
+
+You can convert certain objects to Arrays with:
+
+ * Method Array.
+
+An Array can contain different types of objects. For example, the array below contains an Integer, a String and a Float:
+
+3.0.0 :149 > arr=[1,"two",3.0]
+ => [1, "two", 3.0] 
+3.0.0 :150 > arr
+ => [1, "two", 3.0] 
+3.0.0 :151 > 
+
+
+* aray using method:--
+
+3.0.0 :153 > a=Array.new()
+ => [] 
+3.0.0 :154 > a
+ => [] 
+
+3.0.0 :155 > a=Array.new(3)
+ => [nil, nil, nil] 
+
+3.0.0 :156 > a=Array.new(3,true)
+ => [true, true, true] 
+
+3.0.0 :157 > a=Array.new(3) {|i| i.to_s}
+ => ["0", "1", "2"] 
+
+
+This is also a quick way to build up multi-dimensional arrays:
+
+3.0.0 :158 > a=Array.new(3) {Array.new(3)}
+ => [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]] 
+
+** Accessing Elements:--
+
+Elements in an array can be retrieved using the Array#[] method. It can take a single integer argument (a numeric index), a pair of arguments (start and length) or a range. Negative indices start counting from the end, with -1 being the last element.
+
+3.0.0 :162 > arr[1]
+ => 2 
+3.0.0 :163 > arr[5]
+ => 6 
+3.0.0 :164 > arr[1,4]
+ => [2, 3, 4, 5] 
+3.0.0 :165 > arr[1..4]
+ => [2, 3, 4, 5] 
+
+
+******** Array Methods :---
+
+1.  at(index) → object 
+
+Returns the element at Integer offset index; does not modify self.
+examples:-
+
+3.0.0 :168 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :169 > arr.at(3)
+ => 4 
+
+2.  fetch(index) → element click to toggle source
+fetch(index, default_value) → element
+fetch(index) {|index| ... } → element 
+
+examples:-
+3.0.0 :181 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :182 > arr.fetch(2)
+ => 3 
+3.0.0 :183 > arr.fetch(3)
+ => 4 
+ 
+ 3.0.0 :184 > arr.fetch(1) {|i| raise 'cannot happen'}
+ => 2 
+3.0.0 :185 > arr.fetch(50) {|i| "value for #{i}"}
+ => "value for 50" 
+3.0.0 :186 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.  first → object or nil
+first(n) → new_array
+
+Returns elements from self; does not modify self.
+
+When no argument is given, returns the first element:
+examples:--
+
+3.0.0 :186 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.0.0 :187 > arr.first
+ => 1 
+
+3.0.0 :188 > arr.first(3)
+ => [1, 2, 3] 
+
+4.  last → object or nil
+last(n) → new_array
+
+Returns elements from self; self is not modified.
+
+When no argument is given, returns the last element:
+examples:--
+3.0.0 :189 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :190 > arr.last
+ => 7 
+3.0.0 :191 > arr.last(3)
+ => [5, 6, 7] 
+
+5. take(n) → new_array
+
+Returns a new Array containing the first n element of self, where n is a non-negative Integer; does not modify self.
+
+Examples:
+3.0.0 :192 > arr.take(1)
+ => [1] 
+3.0.0 :193 > arr.take(2)
+ => [1, 2] 
+3.0.0 :194 > arr.take(3)
+ => [1, 2, 3] 
+3.0.0 :195 > arr.take(100)
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+
+6.  drop(n) → new_array
+
+Returns a new Array containing all but the first n element of self, where n is a non-negative Integer; does not modify self.
+
+Examples:
+
+3.0.0 :203 > a
+ => [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+3.0.0 :204 > a.drop(7)
+ => [8, 9] 
+3.0.0 :205 > a.drop(6)
+ => [7, 8, 9] 
+3.0.0 :206 > a.drop(8)
+ => [9] 
+
+
+****** Obtaining Information about an Array
+
+7.  length → an_integer 
+
+Returns the count of elements in self
+examples:--
+3.0.0 :208 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :209 > arr.length
+ => 7 
+
+8. count → an_integer 
+count(obj) → an_integer
+count {|element| ... } → an_integer
+
+Returns a count of specified elements.
+
+With no argument and no block, returns the count of all elements:-
+
+examples:--
+3.0.0 :226 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.0.0 :227 > arr.count
+ => 7 
+
+3.0.0 :218 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.0.0 :219 > arr.count {|i| i>3}
+ => 4 
+
+
+9.  empty? → true or false
+
+Returns true if the count of elements in self is zero, false otherwise.
+example:-
+
+3.0.0 :226 > arr
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.0.0 :228 > arr.empty?
+ => false 
+
+3.0.0 :229 > arr=[]
+ => [] 
+
+3.0.0 :230 > arr.empty?
+ => true 
+
+10.  include?(obj) → true or false 
+
+Returns true if for some index i in self, obj == self[i]; otherwise false:
+examples:--
+
+3.0.0 :229 > arr=[]
+ => [] 
+
+3.0.0 :231 > arr.include?(4)
+ => false 
+
+3.0.0 :232 > arr
+ => [] 
+
+3.0.0 :233 > arr=[12,435,2,767,455]
+ => [12, 435, 2, 767, 455] 
+
+3.0.0 :234 > arr.include?(435)
+ => true 
+
+
