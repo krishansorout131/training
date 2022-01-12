@@ -398,4 +398,70 @@ examples:--
  => [12, 435, 2, 767, 455] 
 
 
+*********** Iterating over Arrays:--
 
+22.  each {|element| ... } → self
+each → Enumerator
+
+Iterates over array elements.
+
+When a block given, passes each successive array element to the block; returns self:
+examples:--
+3.0.0 :303 > arr.each {|i| print i,' '}
+12 435 2 767 455  => [12, 435, 2, 767, 455] 
+
+
+3.0.0 :002 > a=["hello",123,456.2]
+ => ["hello", 123, 456.2] 
+3.0.0 :003 > a.each {|i| puts "#{i.class} #{i}"}
+String hello
+Integer 123
+Float 456.2
+ => ["hello", 123, 456.2] 
+
+23.  reverse_each {|element| ... } → self 
+reverse_each → Enumerator
+
+Iterates backwards over array elements.
+
+When a block given, passes, in reverse order, each element to the block; returns self:
+examples:-
+3.0.0 :007 > a.reverse_each
+ => #<Enumerator: ["hello", 123, 456.2]:reverse_each> 
+
+3.0.0 :008 > a.reverse_each {|i| print i ,' '}
+
+456.2 123 hello  => ["hello", 123, 456.2] 
+
+24. The map method can be used to create a new array based on the original array, but with the values modified by the supplied block:
+
+ map {|element| ... } → new_array 
+map → new_enumerator
+
+Calls the block, if given, with each element of self; returns a new Array whose elements are the return values from the block:
+
+examples:-- 
+3.0.0 :012 > a.map
+ => #<Enumerator: ["hello", 123, 456.2]:map> 
+
+3.0.0 :014 > a.map {|a| print a, ' '}
+hello 123 456.2  => [nil, nil, nil] 
+
+
+25. map! {|element| ... } → self
+map! → new_enumerator
+
+Calls the block, if given, with each element; replaces the element with the block's return value:
+examples:--
+3.0.0 :023 > a
+ => [1, 3, 5, 7, 9, 2, 4] 
+
+3.0.0 :024 > a.map! {|a| print a, ' '}
+1 3 5 7 9 2 4  => [nil, nil, nil, nil, nil, nil, nil] 
+
+3.0.0 :025 > a
+ => [nil, nil, nil, nil, nil, nil, nil] 
+
+
+
+26. 
