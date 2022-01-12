@@ -463,5 +463,80 @@ examples:--
  => [nil, nil, nil, nil, nil, nil, nil] 
 
 
+****** Methods for creating new array:--
 
-26. 
+26.[] (*args) 
+
+Returns a new array populated with the given objects.
+examples:--
+3.0.0 :028 > b=Array.[](1,2,3,4,5)
+ => [1, 2, 3, 4, 5] 
+3.0.0 :029 > b
+ => [1, 2, 3, 4, 5] 
+
+27.  new → new_empty_array
+new(array) → new_array
+new(size) → new_array
+new(size, default_value) → new_array
+new(size) {|index| ... } → new_array 
+examples:--
+
+3.0.0 :030 > a=Array.new(["hello","i","am","krishan"])
+ => ["hello", "i", "am", "krishan"] 
+3.0.0 :031 > a
+ => ["hello", "i", "am", "krishan"] 
+
+3.0.0 :032 > b=Array.new()
+ => [] 
+3.0.0 :033 > b=Array.new(3)
+ => [nil, nil, nil] 
+
+28.  try_convert(object) → object, new_array, or nil click to toggle source
+
+If object is an Array object, returns object.
+
+Otherwise if object responds to :to_ary, calls object.to_ary and returns the result.
+
+Returns nil if object does not respond to :to_ary
+
+Raises an exception unless object.to_ary returns an Array object.
+examples:--
+
+
+
+*****Methods for Querying:--
+
+29. all? → true or false
+all? {|element| ... } → true or false
+all?(obj) → true or false 
+examples:--
+3.0.0 :038 > a
+ => ["hello", "i", "am", "krishan"] 
+3.0.0 :039 > a.all?
+ => true 
+3.0.0 :040 > b
+ => [nil, nil, nil] 
+3.0.0 :041 > b.all?
+ => false 
+
+30.  any? → true or false click to toggle source
+any? {|element| ... } → true or false
+any?(obj) → true or false 
+
+examples:--
+3.0.0 :042 > a
+ => ["hello", "i", "am", "krishan"] 
+3.0.0 :043 > a.any?
+ => true 
+3.0.0 :044 > b.any?
+ => false 
+3.0.0 :045 > b.push(1,2,3)
+ => [nil, nil, nil, 1, 2, 3] 
+3.0.0 :046 > b.any?
+ => true 
+
+3.0.0 :047 > [0,1,2].any? {|i| i>1}
+ => true 
+3.0.0 :048 > [0,1,2].any? {|i| i>2}
+ => false 
+
