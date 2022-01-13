@@ -433,6 +433,152 @@ examples:-
 
 456.2 123 hello  => ["hello", 123, 456.2] 
 
+
+** each_index {|index| ... } → self
+each_index → Enumerator
+
+Iterates over array indexes.
+
+When a block given, passes each successive array index to the block; returns self:
+
+examples:-
+
+3.0.0 :269 > a
+ => [1, 2, 3, 4, 5] 
+3.0.0 :270 > a.each_index {|i| puts "#{i} #{a[i]}" }
+0 1
+1 2
+2 3
+3 4
+4 5
+ => [1, 2, 3, 4, 5] 
+
+**  cycle {|element| ... } → nil 
+cycle(count) {|element| ... } → nil
+cycle → new_enumerator
+cycle(count) → new_enumerator
+
+When called with positive Integer argument count and a block, calls the block with each element, then does so again, until it has done so count times; returns nil:
+
+examples:- 
+3.0.0 :012 > a
+ => [1, 2, 3, 4] 
+3.0.0 :013 > b=[]
+ => [] 
+3.0.0 :014 > a.cycle(1) {|i| b.push(i) } 
+ => nil 
+3.0.0 :015 > b
+ => [1, 2, 3, 4] 
+
+***  combination(n) {|element| ... } → self 
+combination(n) → new_enumerator
+
+Calls the block, if given, with combinations of elements of self; returns self. The order of combinations is indeterminate.
+
+When a block and an in-range positive Integer argument n (0 < n <= self.size) are given, calls the block with all n-tuple combinations of self.
+
+examples:-
+
+3.0.0 :016 > a
+ => [1, 2, 3, 4] 
+3.0.0 :017 > a.combination(2) {|i| p i }
+[1, 2]
+[1, 3]
+[1, 4]
+[2, 3]
+[2, 4]
+[3, 4]
+ => [1, 2, 3, 4] 
+
+3.0.0 :024 > a.combination(3) {|i| p i}  
+[1, 2, 3]
+[1, 2, 4]
+[1, 3, 4]
+[2, 3, 4]
+ => [1, 2, 3, 4] 
+ 
+ ***  permutation {|element| ... } → self
+permutation(n) {|element| ... } → self
+permutation → new_enumerator
+permutation(n) → new_enumerator
+
+When invoked with a block, yield all permutations of elements of self; returns self. The order of permutations is indeterminate.
+
+When a block and an in-range positive Integer argument n (0 < n <= self.size) are given, calls the block with all n-tuple permutations of self.
+
+examples:--
+
+3.0.0 :026 > a.permutation(2) {|i| p i}
+[1, 2]
+[1, 3]
+[1, 4]
+[2, 1]
+[2, 3]
+[2, 4]
+[3, 1]
+[3, 2]
+[3, 4]
+[4, 1]
+[4, 2]
+[4, 3]
+ => [1, 2, 3, 4] 
+
+****  repeated_combination(n) {|combination| ... } → self click to toggle source
+repeated_combination(n) → new_enumerator
+
+Calls the block with each repeated combination of length n of the elements of self; each combination is an Array; returns self. The order of the combinations is indeterminate.
+
+When a block and a positive Integer argument n are given, calls the block with each n-tuple repeated combination of the elements of self. The number of combinations is (n+1)(n+2)/2.
+
+n = 1:
+
+examples:--
+
+3.0.0 :028 > a.repeated_combination(2) {|i| p i }
+[1, 1]
+[1, 2]
+[1, 3]
+[1, 4]
+[2, 2]
+[2, 3]
+[2, 4]
+[3, 3]
+[3, 4]
+[4, 4]
+ => [1, 2, 3, 4] 
+
+
+***  repeated_permutation(n) {|permutation| ... } → self
+repeated_permutation(n) → new_enumerator
+
+Calls the block with each repeated permutation of length n of the elements of self; each permutation is an Array; returns self. The order of the permutations is indeterminate.
+
+When a block and a positive Integer argument n are given, calls the block with each n-tuple repeated permutation of the elements of self. The number of permutations is self.size**n.
+
+n = 1:
+
+example:--
+3.0.0 :033 > a.repeated_permutation(2) {|i| p i }
+[1, 1]
+[1, 2]
+[1, 3]
+[1, 4]
+[2, 1]
+[2, 2]
+[2, 3]
+[2, 4]
+[3, 1]
+[3, 2]
+[3, 3]
+[3, 4]
+[4, 1]
+[4, 2]
+[4, 3]
+[4, 4]
+ => [1, 2, 3, 4] 
+
+
+
 24. The map method can be used to create a new array based on the original array, but with the values modified by the supplied block:
 
  map {|element| ... } → new_array 
@@ -1484,6 +1630,7 @@ examples:--
  => [3, 4, 5] 
 3.0.0 :256 > a.product(c)
  => [[1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5]] 
+
 
 
 
