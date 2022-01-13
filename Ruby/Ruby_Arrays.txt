@@ -491,7 +491,7 @@ examples:--
 3.0.0 :033 > b=Array.new(3)
  => [nil, nil, nil] 
 
-28.  try_convert(object) → object, new_array, or nil click to toggle source
+28.  try_convert(object) → object, new_array, or nil 
 
 If object is an Array object, returns object.
 
@@ -519,7 +519,7 @@ examples:--
 3.0.0 :041 > b.all?
  => false 
 
-30.  any? → true or false click to toggle source
+30.  any? → true or false 
 any? {|element| ... } → true or false
 any?(obj) → true or false 
 
@@ -540,3 +540,151 @@ examples:--
 3.0.0 :048 > [0,1,2].any? {|i| i>2}
  => false 
 
+31. none? → true or false
+none? {|element| ... } → true or false
+none?(obj) → true or false
+
+Returns true if no element of self meet a given criterion.
+
+With no block given and no argument, returns true if self has no truthy elements, false otherwise:
+examples:--
+3.0.0 :003 > b=[]
+ => []                     none is true when every element of array is not meet given critertion.
+3.0.0 :004 > b.none?
+ => true 
+3.0.0 :005 > b=[nil,nil]
+ => [nil, nil] 
+3.0.0 :006 > b.none?
+ => true 
+3.0.0 :007 > b=[1,nil]
+ => [1, nil] 
+3.0.0 :008 > b.none?
+ => false 
+
+3.0.0 :009 > a=[1,2,3]
+ => [1, 2, 3] 
+3.0.0 :010 > a.none? {|i| i>3}
+ => true 
+3.0.0 :011 > a.none? {|i| i>4}
+ => true 
+3.0.0 :012 > a.none? {|i| i>2}
+ => false 
+
+32.  one? → true or false 
+one? {|element| ... } → true or false
+one?(obj) → true or false
+
+Returns true if exactly one element of self meets a given criterion.
+
+With no block given and no argument, returns true if self has exactly one truthy element, false otherwise:
+
+examples:- only on one element meet critertion then it is true otherwise false;
+
+3.0.0 :013 > a
+ => [1, 2, 3] 
+3.0.0 :014 > b
+ => [1, nil] 
+3.0.0 :015 > a.one?
+ => false 
+3.0.0 :016 > b.one?
+ => true 
+3.0.0 :017 > b=[nil,1,3]
+ => [nil, 1, 3] 
+3.0.0 :018 > b.one?
+ => false 
+
+3.0.0 :023 > a.one? {|i| i<3}
+ => false 
+3.0.0 :024 > a.one? {|i| i<2}
+ => true 
+3.0.0 :025 > a
+ => [1, 2, 3] 
+
+33.  count → an_integer 
+count(obj) → an_integer
+count {|element| ... } → an_integer
+
+Returns a count of specified elements.
+
+With no argument and no block, returns the count of all elements:
+
+examples:-
+
+3.0.0 :026 > a
+ => [1, 2, 3] 
+3.0.0 :027 > a.count
+ => 3 
+3.0.0 :028 > b
+ => [nil, 1, 3] 
+3.0.0 :029 > b.count
+ => 3 
+
+3.0.0 :033 > a.count {|i| i < 3}
+ => 2 
+3.0.0 :034 > a
+ => [1, 2, 3] 
+
+34.  index(object) → integer or nil 
+index {|element| ... } → integer or nil
+index → new_enumerator
+
+Returns the index of a specified element.
+
+When argument object is given but no block, returns the index of the first element element for which object == element:
+
+eaxmples:--
+
+3.0.0 :035 > a
+ => [1, 2, 3] 
+3.0.0 :036 > a.index(2)
+ => 1 
+3.0.0 :037 > a.index(3)
+ => 2 
+3.0.0 :038 > a.push("hello","world")
+ => [1, 2, 3, "hello", "world"] 
+3.0.0 :039 > a.index("world")
+ => 4 
+
+3.0.0 :040 > a.index {|i| i == "world"}
+ => 4 
+
+
+35.  rindex(object) → integer or nil c
+rindex {|element| ... } → integer or nil
+rindex → new_enumerator
+
+Returns the index of the last element for which object == element.
+
+When argument object is given but no block, returns the index of the last such element found:
+
+example:-
+
+3.0.0 :042 > a
+ => [1, 2, 3, "hello", "world", 1] 
+3.0.0 :043 > a.rindex(1)                 it checks elements from right side and return first match only.
+ => 5 
+
+
+36.  hash → integer
+
+Returns the integer hash value for self.
+
+Two arrays with the same content will have the same hash code (and will compare using eql?):
+examples:--
+
+3.0.0 :044 > a
+ => [1, 2, 3, "hello", "world", 1] 
+
+3.0.0 :045 > a.hash
+ => 4498992473896220533 
+
+3.0.0 :046 > b=a
+ => [1, 2, 3, "hello", "world", 1] 
+
+3.0.0 :047 > b
+ => [1, 2, 3, "hello", "world", 1] 
+
+3.0.0 :048 > b.hash
+ => 4498992473896220533 
+ 
+ 
