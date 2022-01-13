@@ -96,3 +96,310 @@ examples:--
 3.0.0 :044 > Date.today
  => #<Date: 2022-01-13 ((2459593j,0s,0n),+0s,2299161j)> 
 
+
+******* Public Class Methods:--
+
+
+8. _parse(string[, comp=true], limit: 128) → hash
+
+Parses the given representation of date and time, and returns a hash of parsed elements.
+
+examples:--
+3.0.0 :047 > Date._parse('2001-02-03')
+ => {:year=>2001, :mon=>2, :mday=>3} 
+
+9.  _strptime(string[, format='%F']) → hash 
+
+Parses the given representation of date and time with the given template, and returns a hash of parsed elements. _strptime does not support specification of flags and width unlike strftime.
+
+examples:-
+3.0.0 :048 > Date._strptime('2001-02-03','%Y-%m-%d')
+ => {:year=>2001, :mon=>2, :mday=>3} 
+
+10.  gregorian_leap?(year) → bool 
+
+Returns true if the given year is a leap year of the proleptic Gregorian calendar.
+
+examples:-
+3.0.0 :051 > Date.gregorian_leap?(2004)
+ => true 
+3.0.0 :052 > Date.gregorian_leap?(2008)
+ => true 
+3.0.0 :053 > Date.gregorian_leap?(2007)
+ => false 
+
+11. httpdate(string='Mon, 01 Jan -4712 00:00:00 GMT'[, start=Date::ITALY], limit: 128) → date 
+
+Creates a new Date object by parsing from a string according to some RFC 2616 format.
+examples:--
+3.0.0 :054 > Date.httpdate('sat, 03 Feb 2001 00:00:00 GMT')
+ => #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)> 
+ 
+ 12.  iso8601(string='-4712-01-01'[, start=Date::ITALY], limit: 128) → date
+
+Creates a new Date object by parsing from a string according to some typical ISO 8601 format
+examples:--
+3.0.0 :055 > Date.iso8601('2021-02-03')
+ => #<Date: 2021-02-03 ((2459249j,0s,0n),+0s,2299161j)> 
+
+13.  jisx0301(string='-4712-01-01'[, start=Date::ITALY], limit: 128) → date 
+
+Creates a new Date object by parsing from a string according to some typical JIS X 0301 formats.
+examples:-
+3.0.0 :056 > Date.jisx0301('H13.02.03')
+ => #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)> 
+
+14.  julian_leap?(year) → bool click to toggle source
+
+Returns true if the given year is a leap year of the proleptic Julian calendar.
+examples:--
+3.0.0 :065 > Date.julian_leap?(2020)
+ => true 
+3.0.0 :066 > Date.julian_leap?(2024)
+ => true 
+3.0.0 :067 > Date.julian_leap?(2023)
+ => false 
+
+15.  valid_civil?(year, month, mday[, start=Date::ITALY]) → bool
+
+Returns true if the given calendar date is valid, and false if not. Valid in this context is whether the arguments passed to this method would be accepted by ::new.
+
+examples:-
+3.0.0 :068 > Date.valid_date?(2001,2,3)
+ => true 
+3.0.0 :069 > Date.valid_date?(2001,13,3)
+ => false 
+3.0.0 :070 > Date.valid_date?(2001,12,32)
+ => false 
+
+16.  valid_commercial?(cwyear, cweek, cwday[, start=Date::ITALY]) → bool
+
+Returns true if the given week date is valid, and false if not.
+examples:--
+3.0.0 :074 > Date.valid_commercial?(2021,15,6)
+ => true 
+
+17.  valid_jd?(jd[, start=Date::ITALY]) → bool 
+
+Just returns true. It's nonsense, but is for symmetry.
+
+examples:--
+3.0.0 :077 > Date.valid_jd?(2459593)
+ => true 
+3.0.0 :078 > Date.valid_jd?(459593)
+ => true 
+3.0.0 :079 > Date.valid_jd?(593)
+
+18.  valid_ordinal?(year, yday[, start=Date::ITALY]) → bool 
+
+Returns true if the given ordinal date is valid, and false if not.
+example:--
+3.0.0 :080 > Date.valid_ordinal?(2001,34)
+ => true 
+3.0.0 :081 > Date.valid_ordinal?(2001,340)
+ => true 
+3.0.0 :082 > Date.valid_ordinal?(2001,367)
+ => false 
+
+19.  xmlschema(string='-4712-01-01'[, start=Date::ITALY], limit: 128) → date
+
+Creates a new Date object by parsing from a string according to some typical XML Schema formats.
+examples:--
+3.0.0 :083 > Date.xmlschema('2001-02-03')
+ => #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)>
+ 
+  
+  
+  ******* Public Instance Methods:--
+  
+20.  d + other → date
+
+Returns a date object pointing other days after self. The other should be a numeric value. If the other is a fractional number, assumes its precision is at most nanosecond.
+example:-
+3.0.0 :084 > Date.new(2001,2,3) + 1
+ => #<Date: 2001-02-04 ((2451945j,0s,0n),+0s,2299161j)> 
+
+3.0.0 :085 > Date.new(2001,2,3) + 2
+ => #<Date: 2001-02-05 ((2451946j,0s,0n),+0s,2299161j)> 
+
+21.  d - other → date or rational 
+
+Returns the difference between the two dates if the other is a date object. If the other is a numeric value, returns a date object pointing other days before self. If the other is a fractional number, assumes its precision is at most nanosecond.  
+examples:--
+3.0.0 :086 > Date.new(2001,2,3) - 2
+ => #<Date: 2001-02-01 ((2451942j,0s,0n),+0s,2299161j)> 
+ 
+ 22.  d << n → date
+
+Returns a date object pointing n months before self. The argument n should be a numeric value.
+example:--
+3.0.0 :087 > Date.new(2001,2,3) << 2
+ => #<Date: 2000-12-03 ((2451882j,0s,0n),+0s,2299161j)> 
+3.0.0 :088 > Date.new(2001,2,3) << 1
+ => #<Date: 2001-01-03 ((2451913j,0s,0n),+0s,2299161j)> 
+
+23.  d <=> other → -1, 0, +1 or nil
+
+Compares the two dates and returns -1, zero, 1 or nil. The other should be a date object or a numeric value as an astronomical Julian day number.
+examples:-
+3.0.0 :089 > Date.new(2001,2,3) <=> Date.new(2001,2,4)
+ => -1 
+3.0.0 :090 > Date.new(2001,2,3) <=> Date.new(2001,2,3)
+ => 0 
+3.0.0 :091 > Date.new(2001,2,3) <=> Date.new(2001,2,2)
+ => 1 
+
+24.  d === other → bool 
+
+Returns true if they are the same day.
+examples:-
+3.0.0 :092 > Date.new(2001,2,3) === Date.new(2001,2,3)
+ => true 
+3.0.0 :093 > Date.new(2001,2,3) === Date.new(2001,2,2)
+ => false 
+
+25.  d >> n → date
+
+Returns a date object pointing n months after self. The argument n should be a numeric value.
+example:-
+3.0.0 :094 > Date.new(2001,2,3)  >>  1 
+ => #<Date: 2001-03-03 ((2451972j,0s,0n),+0s,2299161j)> 
+3.0.0 :095 > Date.new(2001,2,3)  >>  2
+ => #<Date: 2001-04-03 ((2452003j,0s,0n),+0s,2299161j)> 
+
+26.  ajd → rational
+
+Returns the astronomical Julian day number. This is a fractional number, which is not adjusted by the offset.
+examples:-
+3.0.0 :096 > DateTime.new(2001,2,3,4,5,6,'+7').ajd
+ => (11769328217/4800) 
+ 
+ 27.  amjd → rational 
+
+Returns the astronomical modified Julian day number. This is a fractional number, which is not adjusted by the offset.
+examples:--
+3.0.0 :097 > DateTime.new(2001,2,3,4,5,6,'+7').amjd  
+ => (249325817/4800) 
+
+28.  cwday → fixnum
+
+Returns the day of calendar week (1-7, Monday is 1).
+example:--
+3.0.0 :098 > Date.new(2022,1,13).cwday 
+ => 4 
+ 
+ 29.  cweek → fixnum
+
+Returns the calendar week number (1-53).
+example:--
+3.0.0 :101 > Date.new(2022,1,13).cweek
+ => 2 
+
+30.  cwyear → integer 
+
+Returns the calendar week based year.
+examples:--
+3.0.0 :102 > Date.new(2022,1,13).cwyear
+ => 2022 
+
+31.  day → fixnum
+
+Returns the day of the month (1-31).
+example:-
+3.0.0 :103 > Date.new(2022,1,13).mday
+ => 13 
+
+32.  day_fraction → rational 
+
+Returns the fractional part of the day.
+examples:-
+ 
+3.0.0 :104 > DateTime.new(2001,2,3,12).day_fraction 
+ => (1/2) 
+
+33.  gregorian? → bool 
+Returns true if the date is on or after the day of calendar reform.
+examples:-
+3.0.0 :110 > Date.new(1582,10,15).gregorian?  
+ => true 
+
+(Date.new(1582,10,15) - 1).gregorian? 
+
+34.  inspect → string
+
+Returns the value as a string for inspection.
+example:-
+3.0.0 :111 > Date.new(2001,2,3).inspect
+ => "#<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)>" 
+
+35.  jd → integer 
+
+Returns the Julian day number. This is a whole number, which is adjusted by the offset as the local time.
+example:-
+3.0.0 :112 > DateTime.new(2001,2,3,4,5,6,'+7').jd  
+ => 2451944 
+
+36.  jisx0301 → string
+
+Returns a string in a JIS X 0301 format.
+example:-
+3.0.0 :113 > Date.new(2001,2,3).jisx0301
+ => "H13.02.03" 
+
+37.  julian? → bool
+
+Returns true if the date is before the day of calendar reform
+example:-
+3.0.0 :114 > Date.new(1582,10,15).julian?  
+ => false 
+3.0.0 :115 > (Date.new(1582,10,15) - 1).julian?   
+ => true 
+
+38.  ld → integer 
+
+Returns the Lilian day number. This is a whole number, which is adjusted by the offset as the local time.
+example:-
+3.0.0 :116 > Date.new(2001,2,3).ld     
+ => 152784 
+
+39.  leap? → bool 
+
+Returns true if the year is a leap year.
+
+example:-
+3.0.0 :117 > Date.new(2000).leap? 
+ => true 
+3.0.0 :118 > Date.new(2003).leap? 
+ => false 
+ 
+ 40.  mjd → integer
+
+Returns the modified Julian day number. This is a whole number, which is adjusted by the offset as the local time.
+example:-
+3.0.0 :119 > DateTime.new(2001,2,3,4,5,6,'+7').mjd 
+ => 51943 
+ 
+ 41.  mon → fixnum 
+month → fixnum
+
+Returns the month (1-12).
+example:--
+3.0.0 :120 > Date.new(2001,2,3).mon     
+ => 2 
+
+42.  new_start([start=Date::ITALY]) → date 
+
+Duplicates self and resets its day of calendar reform.
+example:-
+3.0.0 :121 > d = Date.new(1582,10,15)
+ => #<Date: 1582-10-15 ((2299161j,0s,0n),+0s,2299161j)> 
+3.0.0 :122 > d.new_start(Date::JULIAN)   
+ => #<Date: 1582-10-05 ((2299161j,0s,0n),+0s,Infj)> 
+ 
+ 43.  next_year([n=1]) → date 
+
+This method is equivalent to d >> (n * 12).
+example:-
+3.0.0 :123 > Date.new(2001,2,3).next_year  
+ => #<Date: 2002-02-03 ((2452309j,0s,0n),+0s,2299161j)> 
+
