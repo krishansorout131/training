@@ -938,7 +938,9 @@ examples:--
                        it gets minimum and maximum values from array.
 3.0.0 :093 > a
  => [1, 2, 3, 4] 
-3.0.0 :094 > a.minmax
+3.0.0 :094 > a.minmax     
+
+Methods for Converting
  => [1, 4] 
 
 3.0.0 :004 > ['0', '00', '000'].minmax {|a, b| a.size <=> b.size }
@@ -960,7 +962,9 @@ examples:--
  => [4, 5, 6] 
 3.0.0 :014 > a.assoc(2)   it return first match with object at index 0 on first occurance.
  => [2, 3, 4] 
+     
 
+Methods for Converting
 3.0.0 :015 > a.assoc(5)
  => nil 
 
@@ -1632,6 +1636,150 @@ examples:--
  => [[1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5]] 
 
 
+****** Methods for Converting:---
 
+81.  flatten → new_array
+flatten(level) → new_array
 
+Returns a new Array that is a recursive flattening of self:
+
+    Each non-Array element is unchanged.
+
+    Each Array is replaced by its individual elements.
+
+With non-negative Integer argument level, flattens recursively through level levels:
+
+examples:--
+
+3.0.0 :034 > a = [ 0, [ 1, [2, 3], 4 ], 5 ]
+ => [0, [1, [2, 3], 4], 5] 
+3.0.0 :035 > a.flatten(3)
+ => [0, 1, 2, 3, 4, 5] 
+3.0.0 :036 > a.flatten(2)
+ => [0, 1, 2, 3, 4, 5] 
+3.0.0 :037 > a
+ => [0, [1, [2, 3], 4], 5] 
+3.0.0 :038 > a.flatten
+ => [0, 1, 2, 3, 4, 5] 
+
+82.  inspect → new_string
+
+Returns the new String formed by calling method #inspect on each array element:
+
+a = [:foo, 'bar', 2]
+a.inspect # => "[:foo, \"bar\", 2]"
+
+Array#to_s is an alias for Array#inspect.
+Also aliased as: to_s 
+
+exmples:--
+
+3.0.0 :039 > a
+ => [0, [1, [2, 3], 4], 5] 
+3.0.0 :040 > a.inspect
+ => "[0, [1, [2, 3], 4], 5]" 
+
+83.  join →new_string
+join(separator = $,) → new_string
+
+Returns the new String formed by joining the array elements after conversion. For each element element
+
+    Uses element.to_s if element is not a kind_of?(Array).
+
+    Uses recursive element.join(separator) if element is a kind_of?(Array).
+
+With no argument, joins using the output field separator, $,:
+
+examples:--
+3.0.0 :042 > a=["hello","world"]
+ => ["hello", "world"] 
+3.0.0 :043 > a.join
+ => "helloworld" 
+
+84.  to_h → new_hash 
+to_h {|item| ... } → new_hash
+
+Returns a new Hash formed from self.
+
+When a block is given, calls the block with each array element; the block must return a 2-element Array whose two elements form a key-value pair in the returned Hash:
+examples:--
+
+3.0.0 :057 > a
+ => ["foo", :bar, 1, [2, 3], {:baz=>4}] 
+3.0.0 :058 > h = a.to_h {|item| [item, item] }
+ => {"foo"=>"foo", :bar=>:bar, 1=>1, [2, 3]=>[2, 3], {:baz=>4}=>{:baz...
+ 
+ 85.  transpose → new_array 
+
+Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size:
+
+example:--
+
+3.0.0 :064 > a = [[:a0, :a1], [:b0, :b1], [:c0, :c1]]
+ => [[:a0, :a1], [:b0, :b1], [:c0, :c1]] 
+3.0.0 :065 > a.transpose
+ => [[:a0, :b0, :c0], [:a1, :b1, :c1]] 
+
+86.  zip(*other_arrays) → new_array
+zip(*other_arrays) {|other_array| ... } → nil
+
+When no block given, returns a new Array new_array of size self.size whose elements are Arrays.
+
+Each nested array new_array[n] is of size other_arrays.size+1, and contains:
+
+    The nth element of self.
+
+    The nth element of each of the other_arrays.
+
+If all other_arrays and self are the same size:
+
+examples:--
+
+3.0.0 :069 > a
+ => [1, 2, 3, 4, 5] 
+3.0.0 :070 > b=[3,4,5,6,7]
+ => [3, 4, 5, 6, 7] 
+3.0.0 :071 > c=[9,77,4,3,6]
+ => [9, 77, 4, 3, 6] 
+3.0.0 :072 > d=a.zip(b,c)
+ => [[1, 3, 9], [2, 4, 77], [3, 5, 4], [4, 6, 3], [5, 7, 6]] 
+
+******* Other Methods:-
+
+87.  array * n → new_array 
+array * string_separator → new_string
+
+When non-negative argument Integer n is given, returns a new Array built by concatenating the n copies of self:
+examples:--
+3.0.0 :074 > a=[1,2]
+ => [1, 2] 
+3.0.0 :075 > b = a * 3
+ => [1, 2, 1, 2, 1, 2] 
+
+88.  pack( aTemplateString ) → aBinaryString 
+pack( aTemplateString, buffer: aBufferString ) → aBufferString
+
+Packs the contents of arr into a binary sequence according to the directives in aTemplateString (see the table below) Directives “A,'' “a,'' and “Z'' may be followed by a count, which gives the width of the resulting field.
+
+examples:--
+
+3.0.0 :080 > a
+ => ["a", "b", "c"] 
+ 
+ 3.0.0 :081 > a.pack("A3A3A3")
+ => "a  b  c  " 
+ 
+ 89.  sum(init = 0) → object
+sum(init = 0) {|element| ... } → object
+
+When no block is given, returns the object equivalent to:
+examples:--
+
+3.0.0 :084 > a=[1,2,3,4,5,6]
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :085 > a.sum
+ => 21 
+
+3.0.0 :086 > a.sum(10)
+ => 31 
 
