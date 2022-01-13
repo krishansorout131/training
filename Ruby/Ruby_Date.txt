@@ -1,0 +1,98 @@
+                                               --------------->  Date  <----------------
+                                               
+*** Calendar Date:--
+
+The calendar date is a particular day of a calendar year, identified by its ordinal number within a calendar month within that year.
+In those classes, this is so-called “civil”.                                             
+
+*** Ordinal Date:--
+
+The ordinal date is a particular day of a calendar year identified by its ordinal number within the year.
+In those classes, this is so-called “ordinal”.
+
+*** Week Date:--
+
+The week date is a date identified by calendar week and day numbers.
+
+The calendar week is a seven day period within a calendar year, starting on a Monday and identified by its ordinal number within the year; the first calendar week of the year is the one that includes the first Thursday of that year. In the Gregorian calendar, this is equivalent to the week which includes January 4.
+
+In those classes, this is so-called “commercial”.
+
+
+Date methods :--
+
+1. Date::new :--
+examples:--
+3.0.0 :002 > require 'date'
+ => true 
+3.0.0 :003 > Date.new(2001,2,3)
+ => #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)> 
+ 
+ 3.0.0 :004 > Date.new(2000,7,26)
+ => #<Date: 2000-07-26 ((2451752j,0s,0n),+0s,2299161j)> 
+
+ 2.  jd([jd=0[, start=Date::ITALY]]) → date
+
+Creates a date object denoting the given chronological Julian day number.
+examples:--
+
+3.0.0 :023 > Date.jd(2459593)
+ => #<Date: 2022-01-13 ((2459593j,0s,0n),+0s,2299161j)>
+ 
+ 3.0.0 :030 > Date.jd(2451752)
+ => #<Date: 2000-07-26 ((2451752j,0s,0n),+0s,2299161j)> 
+
+
+3.  ordinal([year=-4712[, yday=1[, start=Date::ITALY]]]) → date
+
+Creates a date object denoting the given ordinal date.
+
+The day of year should be a negative or a positive number (as a relative day from the end of year when negative). It should not be zero
+
+example:--
+3.0.0 :031 > Date.ordinal(2000)
+ => #<Date: 2000-01-01 ((2451545j,0s,0n),+0s,2299161j)> 
+ 
+3.0.0 :035 > Date.ordinal(2000,208)
+ => #<Date: 2000-07-26 ((2451752j,0s,0n),+0s,2299161j)> 
+
+4.  commercial([cwyear=-4712[, cweek=1[, cwday=1[, start=Date::ITALY]]]]) → date
+
+Creates a date object denoting the given week date.
+
+The week and the day of week should be a negative or a positive number (as a relative week/day from the end of year/week when negative). They should not be zero:--
+
+examples:--
+3.0.0 :037 > Date.commercial(2000)
+ => #<Date: 2000-01-03 ((2451547j,0s,0n),+0s,2299161j)> 
+3.0.0 :038 > Date.commercial(2001,5,6)
+ => #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)> 
+
+5.  parse(string='-4712-01-01'[, comp=true[, start=Date::ITALY]], limit: 128) → date
+
+Parses the given representation of date and time, and creates a date object.
+
+example:-
+3.0.0 :040 > Date.parse('2001-02-02')
+ => #<Date: 2001-02-02 ((2451943j,0s,0n),+0s,2299161j)> 
+
+3.0.0 :041 > Date.parse('20220113')
+ => #<Date: 2022-01-13 ((2459593j,0s,0n),+0s,2299161j)> 
+
+3.0.0 :042 > Date.parse('13th jan 2022')
+ => #<Date: 2022-01-13 ((2459593j,0s,0n),+0s,2299161j)> 
+
+6.  strptime([string='-4712-01-01'[, format='%F'[, start=Date::ITALY]]]) → date 
+
+Parses the given representation of date and time with the given template, and creates a date object. strptime does not support specification of flags and width unlike strftime.
+examples:-
+3.0.0 :043 > Date.strptime('2001-03-09','%Y-%m-%d')
+ => #<Date: 2001-03-09 ((2451978j,0s,0n),+0s,2299161j)> 
+
+7.  today([start=Date::ITALY]) → date 
+
+Creates a date object denoting the present day
+examples:--
+3.0.0 :044 > Date.today
+ => #<Date: 2022-01-13 ((2459593j,0s,0n),+0s,2299161j)> 
+
