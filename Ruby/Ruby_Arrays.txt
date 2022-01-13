@@ -755,4 +755,429 @@ example:-
 ************* Methods for Fetching :--
 
 
-40. 
+40.  max → element
+max {|a, b| ... } → element
+max(n) → new_array
+max(n) {|a, b| ... } → new_array
+
+Returns one of the following:
+
+    The maximum-valued element from self.
+
+    A new Array of maximum-valued elements selected from self.
+
+When no block is given, each element in self must respond to method <=> with an Integer.
+
+With no argument and no block, returns the element in self having the maximum value per method <=>:
+
+examples :--
+
+3.0.0 :089 > a
+ => [1, 2, 3, 4] 
+3.0.0 :090 > a.max
+ => 4 
+3.0.0 :091 > a.max(3)
+ => [4, 3, 2] 
+3.0.0 :092 > a.max(4)
+ => [4, 3, 2, 1] 
+
+41.  minmax → [min_val, max_val]
+minmax {|a, b| ... } → [min_val, max_val]
+
+Returns a new 2-element Array containing the minimum and maximum values from self, either per method <=> or per a given block:.
+
+When no block is given, each element in self must respond to method <=> with an Integer; returns a new 2-element Array containing the minimum and maximum values from self, per method <=>:
+
+examples:--
+                       it gets minimum and maximum values from array.
+3.0.0 :093 > a
+ => [1, 2, 3, 4] 
+3.0.0 :094 > a.minmax
+ => [1, 4] 
+
+3.0.0 :004 > ['0', '00', '000'].minmax {|a, b| a.size <=> b.size }
+ => ["0", "000"] 
+
+3.0.0 :007 > ['1','3','60'].minmax {|a, b| a.size <=> b.size }
+ => ["1", "60"] 
+
+
+42.  assoc(obj) → found_array or nil 
+
+Returns the first element in self that is an Array whose first element == obj:
+
+examples:--
+
+3.0.0 :012 > a=[[2,3,4],[4,5,6],[4,5,6,7]]
+ => [[2, 3, 4], [4, 5, 6], [4, 5, 6, 7]] 
+3.0.0 :013 > a.assoc(4)
+ => [4, 5, 6] 
+3.0.0 :014 > a.assoc(2)   it return first match with object at index 0 on first occurance.
+ => [2, 3, 4] 
+
+3.0.0 :015 > a.assoc(5)
+ => nil 
+
+
+43.   rassoc(obj) → found_array or nil 
+
+Returns the first element in self that is an Array whose second element == obj:
+
+examples:-- it takes the array where 1st index match the object and on first occurance.
+
+3.0.0 :025 > a=[[1,2,3,4,5],[3,1,4,5,6],[54,6,45,767]]
+ => [[1, 2, 3, 4, 5], [3, 1, 4, 5, 6], [54, 6, 45, 767]] 
+3.0.0 :026 > a.rassoc(1)
+ => [3, 1, 4, 5, 6] 
+3.0.0 :027 > a.rassoc(6)
+ => [54, 6, 45, 767] 
+
+44.   values_at(*indexes) → new_array
+
+Returns a new Array whose elements are the elements of self at the given Integer or Range indexes.
+
+For each positive index, returns the element at offset index:
+examples:--
+ 
+ 3.0.0 :031 > a
+ => [[1, 2, 3, 4, 5], [3, 1, 4, 5, 6], [54, 6, 45, 767]] 
+
+3.0.0 :032 > a[0]
+ => [1, 2, 3, 4, 5] 
+
+3.0.0 :033 > a[1]
+ => [3, 1, 4, 5, 6] 
+
+3.0.0 :034 > a.values_at(1,2)
+ => [[3, 1, 4, 5, 6], [54, 6, 45, 767]] 
+
+
+45.  dig(index, *identifiers) → object 
+
+Finds and returns the object in nested objects that is specified by index and identifiers. The nested objects may be instances of various classes. See Dig Methods.
+
+Examples:
+
+3.0.0 :037 > a
+ => [[1, 2, 3, 4, 5], [3, 1, 4, 5, 6], [54, 6, 45, 767]] 
+3.0.0 :038 > a.dig(0)
+ => [1, 2, 3, 4, 5] 
+ => [3, 1, 4, 5, 6] 
+3.0.0 :040 > a.dig(2)
+ => [54, 6, 45, 767] 
+3.0.0 :041 > a.dig(0,1)
+ => 2 
+
+46.  drop(n) → new_array 
+
+Returns a new Array containing all but the first n element of self, where n is a non-negative Integer; does not modify self.
+
+Examples:
+
+3.0.0 :044 > a=[13,52,2,3,4,5,9]
+ => [13, 52, 2, 3, 4, 5, 9] 
+3.0.0 :045 > a.drop(2)
+ => [2, 3, 4, 5, 9] 
+3.0.0 :046 > a.drop(4)
+ => [4, 5, 9] 
+
+47.  drop_while {|element| ... } → new_array 
+drop_while → new_enumerator
+
+Returns a new Array containing zero or more trailing elements of self; does not modify self.
+
+With a block given, calls the block with each successive element of self; stops if the block returns false or nil; returns a new Array omitting those elements for which the block returned a truthy value:
+
+examples:--
+
+3.0.0 :052 > a=[1,2,3,4,5,6,7]
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :053 > a.drop_while {|i| i < 4}
+ => [4, 5, 6, 7] 
+
+48.  take(n) → new_array
+
+Returns a new Array containing the first n element of self, where n is a non-negative Integer; does not modify self.
+
+Examples:
+
+3.0.0 :054 > a
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :055 > a.take(3)
+ => [1, 2, 3] 
+3.0.0 :056 > a.take(5)
+ => [1, 2, 3, 4, 5] 
+
+49.  take_while {|element| ... } → new_array 
+take_while → new_enumerator
+
+Returns a new Array containing zero or more leading elements of self; does not modify self.
+
+With a block given, calls the block with each successive element of self; stops if the block returns false or nil; returns a new Array containing those elements for which the block returned a truthy value:
+
+examples:-
+
+3.0.0 :057 > a
+ => [1, 2, 3, 4, 5, 6, 7] 
+
+3.0.0 :058 > a.take_while {|i| i < 5}
+ => [1, 2, 3, 4] 
+
+3.0.0 :060 > a.take_while {|i| i < 3}
+ => [1, 2] 
+
+
+50. slice(index) → object or nil
+slice(start, length) → object or nil
+slice(range) → object or nil
+slice(aseq) → object or nil
+
+Returns elements from self; does not modify self.
+
+When a single Integer argument index is given, returns the element at offset index:
+
+examples:--
+
+3.0.0 :061 > a
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :062 > a[3]
+ => 4 
+3.0.0 :063 > a[3,6]
+ => [4, 5, 6, 7] 
+3.0.0 :064 > a.slice(0)
+ => 1 
+3.0.0 :065 > a.slice(3,6)
+ => [4, 5, 6, 7] 
+
+3.0.0 :066 > a.slice(3..6)
+ => [4, 5, 6, 7] 
+
+51.  slice!(n) → object or nil
+slice!(start, length) → new_array or nil
+slice!(range) → new_array or nil
+
+Removes and returns elements from self.
+
+When the only argument is an Integer n, removes and returns the nth element in self:
+
+examples:--       permanentely delete values from array .
+
+3.0.0 :071 > a
+ => [1, 2, 3, 4, 5, 6, 7] 
+3.0.0 :072 > a.slice!(3..7)
+ => [4, 5, 6, 7] 
+3.0.0 :073 > a
+ => [1, 2, 3] 
+
+
+52.  sort → new_array 
+sort {|a, b| ... } → new_array
+
+Returns a new Array whose elements are those from self, sorted.
+
+With no block, compares elements using operator <=> (see Comparable):
+
+examples:--
+
+3.0.0 :077 > a=[12,34,2,56,45]
+ => [12, 34, 2, 56, 45] 
+3.0.0 :078 > a.sort
+ => [2, 12, 34, 45, 56] 
+
+3.0.0 :081 > a
+ => [12, 34, 2, 56, 45] 
+3.0.0 :082 > a.sort {|a, b| a <=> b }
+ => [2, 12, 34, 45, 56] 
+
+53.  sort! → self
+sort! {|a, b| ... } → self
+
+Returns self with its elements sorted in place.
+
+With no block, compares elements using operator <=> (see Comparable):
+
+examples:-
+
+3.0.0 :083 > a
+ => [12, 34, 2, 56, 45] 
+3.0.0 :084 > a.sort!
+ => [2, 12, 34, 45, 56] 
+3.0.0 :085 > a
+ => [2, 12, 34, 45, 56] 
+
+54.  reverse → new_array
+
+Returns a new Array with the elements of self in reverse order.
+example:--
+3.0.0 :086 > a
+ => [2, 12, 34, 45, 56] 
+3.0.0 :087 > a.reverse
+ => [56, 45, 34, 12, 2] 
+
+55.  reverse! → self 
+
+Reverses self in place:
+
+ examples:--
+ 
+ 3.0.0 :090 > a
+ => [2, 12, 34, 45, 56] 
+3.0.0 :091 > a.reverse!
+ => [56, 45, 34, 12, 2] 
+3.0.0 :092 > a
+ => [56, 45, 34, 12, 2] 
+
+56.  select {|element| ... } → new_array click to toggle source
+select → new_enumerator
+
+Calls the block, if given, with each element of self; returns a new Array containing those elements of self for which the block returns a truthy value:
+
+examples:--
+
+3.0.0 :095 > a.select {|i| i.to_s.start_with?('3')}
+ => [34] 
+
+3.0.0 :096 > a
+ => [56, 45, 34, 12, 2] 
+
+3.0.0 :097 > a.select {|i| i.to_s.end_with?('2')}
+ => [12, 2] 
+ 
+ 3.0.0 :099 > a.select
+ => #<Enumerator: [56, 45, 34, 12, 2]:select> 
+
+
+57.  select! {|element| ... } → self or nil
+select! → new_enumerator
+
+Calls the block, if given with each element of self; removes from self those elements for which the block returns false or nil.
+
+Returns self if any elements were removed:
+
+examples:--
+
+3.0.0 :100 > a
+ => [56, 45, 34, 12, 2] 
+ 
+3.0.0 :102 > a.select! {|i| i.to_s.end_with?('2') }
+ => [12, 2] 
+
+3.0.0 :103 > a
+ => [12, 2] 
+
+
+58.  rotate → new_array
+rotate(count) → new_array
+
+Returns a new Array formed from self with elements rotated from one end to the other.
+
+When no argument given, returns a new Array that is like self, except that the first element has been rotated to the last position:
+
+example:--
+
+3.0.0 :104 > a=[1,2,3,4,5,6]
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :105 > a.rotate
+ => [2, 3, 4, 5, 6, 1] 
+3.0.0 :106 > a
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :107 > a.rotate
+ => [2, 3, 4, 5, 6, 1] 
+3.0.0 :108 > a.rotate(3)
+ => [4, 5, 6, 1, 2, 3] 
+
+59.  rotate! → self
+rotate!(count) → self
+
+Rotates self in place by moving elements from one end to the other; returns self.
+
+When no argument given, rotates the first element to the last position:
+examples:--
+3.0.0 :110 > a
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :111 > a.rotate!(3)
+ => [4, 5, 6, 1, 2, 3] 
+3.0.0 :112 > a
+ => [4, 5, 6, 1, 2, 3] 
+ 
+ 60.  bsearch {|element| ... } → object 
+bsearch → new_enumerator
+
+Returns an element from self selected by a binary search.
+
+examples:--
+3.0.0 :121 > a.sort
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :122 > a.sort.bsearch {|i| i >= 4}
+ => 4 
+3.0.0 :123 > a.sort.bsearch {|i| i >= 3}
+ => 3 
+
+
+3.0.0 :114 > a.bsearch
+ => #<Enumerator: [4, 5, 6, 1, 2, 3]:bsearch> 
+
+61.  bsearch_index {|element| ... } → integer or nil 
+bsearch_index → new_enumerator
+
+Searches self as described at method bsearch, but returns the index of the found element instead of the element itself.
+
+examples:--
+3.0.0 :124 > a.sort.bsearch_index {|i| i >= 3}
+ => 2 
+3.0.0 :125 > a.sort.bsearch_index {|i| i >= 6}
+ => 5 
+
+62.  sample(random: Random) → object 
+sample(n, random: Random) → new_ary
+
+Returns random elements from self.
+
+When no arguments are given, returns a random element from sel
+
+examples:--
+
+3.0.0 :126 > a
+ => [4, 5, 6, 1, 2, 3] 
+3.0.0 :127 > a.sample
+ => 6 
+3.0.0 :128 > a.sample
+ => 5 
+3.0.0 :129 > a.sample
+ => 5 
+3.0.0 :130 > a.sample
+ => 6 
+3.0.0 :131 > a.sample
+ => 4 
+3.0.0 :132 > a.sample(3)
+ => [6, 4, 5] 
+
+63.  shuffle(random: Random) → new_ary 
+
+Returns a new array with elements of self shuffled.
+
+examples:--
+
+3.0.0 :135 > a
+ => [1, 2, 3, 4, 5, 6] 
+
+3.0.0 :136 > a.shuffle
+ => [3, 1, 4, 5, 6, 2] 
+
+3.0.0 :137 > a.shuffle
+ => [4, 1, 3, 5, 6, 2] 
+
+
+64.  shuffle!(random: Random) → array 
+
+Shuffles the elements of self in place.
+examples:--
+
+3.0.0 :138 > a
+ => [1, 2, 3, 4, 5, 6] 
+3.0.0 :139 > a.shuffle!
+ => [3, 4, 2, 6, 1, 5] 
+3.0.0 :140 > a
+ => [3, 4, 2, 6, 1, 5] 
+
+
