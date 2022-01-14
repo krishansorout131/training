@@ -403,3 +403,70 @@ example:-
 3.0.0 :123 > Date.new(2001,2,3).next_year  
  => #<Date: 2002-02-03 ((2452309j,0s,0n),+0s,2299161j)> 
 
+44.  prev_year([n=1]) → date 
+
+This method is equivalent to d << (n * 12).
+
+examples:-
+3.0.0 :002 > Date.new(2002,3,4).prev_year
+ => #<Date: 2001-03-04 ((2451973j,0s,0n),+0s,2299161j)> 
+
+45.  start → float
+
+Returns the Julian day number denoting the day of calendar reform.
+example:--
+3.0.0 :003 > Date.new(2001,2,3).start 
+ => 2299161.0 
+
+46.  step(limit[, step=1]) → enumerator
+step(limit[, step=1]){|date| ...} → self
+
+Iterates evaluation of the given block, which takes a date object. The limit should be a date object.
+
+examples:-
+3.0.0 :004 > Date.new(2001).step(Date.new(2001,-1,-1)).select{|d| d.sunday?}.siz
+e
+ => 52 
+ 
+ 47.  succ → date
+
+Returns a date object denoting the following day.
+example:--
+3.0.0 :005 > Date.new(2022,01,14).succ
+ => #<Date: 2022-01-15 ((2459595j,0s,0n),+0s,2299161j)> 
+
+48.  sunday? → bool 
+
+Returns true if the date is Sunday.
+
+examples:--
+3.0.0 :006 > Date.new(2022,01,14).sunday?
+ => false 
+3.0.0 :007 > Date.new(2022,01,14).friday?
+ => true 
+ 
+ 49.  wday → fixnum 
+
+Returns the day of week (0-6, Sunday is zero).
+
+examples:-
+3.0.0 :008 > Date.new(2022,01,14).wday
+ => 5 
+ 
+ 50.  yday → fixnum
+
+Returns the day of the year (1-366).
+examples:-
+
+3.0.0 :009 > Date.new(2022,01,14).yday
+ => 14 
+
+51.  year → integer click to toggle source
+
+Returns the year:-
+
+examples:--
+3.0.0 :010 > Date.new(2022,01,14).year
+ => 2022 
+ 
+ 
