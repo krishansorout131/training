@@ -1,0 +1,161 @@
+                                             --------------------> Hash <------------------------
+                                             
+A Hash maps each of its unique keys to a specific value.
+
+A Hash has certain similarities to an Array, but:
+
+  ->  An Array index is always an Integer.
+
+  ->  A Hash key can be (almost) any object.
+                                            
+*** Hash Data Syntax :-
+
+The older syntax for Hash data uses the “hash rocket,” =>:                                            
+
+example:--
+3.0.0 :045 > h={:foo => 0, :bar => 1, :baz => 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+**** Alternatively, but only for a Hash key that's a Symbol, you can use a newer JSON-style syntax, where each bareword becomes a Symbol:
+
+example:--
+3.0.0 :046 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+ 
+ 
+ ****Common Uses:--
+ 
+ You can use a Hash to give names to objects:
+ 
+ 3.0.0 :011 > person={name: 'krishan', age: 21}
+ => {:name=>"krishan", :age=>21} 
+
+*** You can use a Hash to give names to method arguments:
+
+example:--
+
+3.0.0 :012 > def some_method(hash)
+3.0.0 :013 >   p hash
+3.0.0 :014 > end  
+ => :some_method 
+3.0.0 :015 > some_method({name: 'krishan', age: 21})
+{:name=>"krishan", :age=>21}
+ => {:name=>"krishan", :age=>21} 
+
+
+**** Creating a Hash:--
+
+You can create a Hash object explicitly with:
+
+  -> A hash literal.
+
+You can convert certain objects to Hashes with:
+
+  -> Method Hash.
+
+You can create a Hash by calling method Hash.new.
+
+Create an empty Hash:
+
+example:--
+
+3.0.0 :017 > h=Hash.new
+ => {} 
+3.0.0 :018 > h.class
+ => Hash 
+
+You can create a Hash by calling method Hash.[].
+
+Create an empty Hash:
+
+3.0.0 :020 > a = Hash[]
+ => {} 
+
+Create a Hash with initial entries:
+
+3.0.0 :021 > h=Hash[foo: 0, bar: 1, baz: 2]
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+You can create a Hash by using its literal form (curly braces).
+
+Create an empty Hash:
+3.0.0 :022 > h = {}
+ => {} 
+3.0.0 :023 > h.class
+ => Hash 
+
+3.0.0 :024 > h = {name: 'hash', value: 'method'}
+ => {:name=>"hash", :value=>"method"} 
+
+*** Hash Value Basics:--
+
+The simplest way to retrieve a Hash value (instance method []):
+
+3.0.0 :025 > h[:name]
+ => "hash" 
+ 
+ *The simplest way to create or update a Hash value (instance method []=):
+ 
+ 3.0.0 :028 > h[:class] = 'Hash'
+ => "Hash" 
+3.0.0 :029 > h
+ => {:name=>"hash", :value=>"method", :class=>"Hash"}
+ 
+ * The simplest way to delete a Hash entry (instance method delete):
+ 
+ 3.0.0 :030 > h.delete(:value)
+ => "method" 
+
+3.0.0 :032 > h
+ => {:name=>"hash", :class=>"Hash"} 
+
+
+** Modifying an Active Hash Key:-
+
+Modifying a Hash key while it is in use damages the hash's index.
+
+This Hash has keys that are Arrays:
+
+3.0.0 :033 > a0 = [:foo, :bar]
+3.0.0 :034 > a1 = [:baz, :bat]
+ => [:baz, :bat] 
+
+3.0.0 :035 > h = {a0 => 0, a1 => 1}
+ => {[:foo, :bar]=>0, [:baz, :bat]=>1} 
+
+3.0.0 :036 > h.include?(a0)
+ => true 
+
+3.0.0 :037 > h[a0]
+ => 0 
+
+3.0.0 :038 > a0.hash
+ => 852498651238071332 
+
+Modifying array element a0[0] changes its hash value:
+
+3.0.0 :040 > a0[0]=:bam
+ => :bam 
+3.0.0 :041 > a0.hash
+ => -986508766701199928 
+3.0.0 :042 > a0
+ => [:bam, :bar] 
+
+And damages the Hash index:
+
+3.0.0 :044 > h
+ => {[:bam, :bar]=>0, [:baz, :bat]=>1} 
+3.0.0 :045 > h.include?(a0)
+ => false 
+3.0.0 :046 > h[a0]
+ => nil 
+
+3.0.0 :054 > h.rehash                     You can repair the hash index using method rehash:
+ => {[:bam, :bar]=>0, [:baz, :bat]=>1} 
+3.0.0 :055 > h.include?(a0)
+ => true 
+3.0.0 :056 > h[a0]
+ => 0 
+
+
+
