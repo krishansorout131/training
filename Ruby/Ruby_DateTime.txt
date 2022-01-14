@@ -82,4 +82,142 @@ examples:-
 3.0.0 :027 > DateTime.now()
  => #<DateTime: 2022-01-14T11:09:24+05:30 ((2459594j,20364s,300225814n),+19800s,2299161j)> 
 
-8. 
+
+***** Public Class Methods:--
+
+
+8.  _strptime(string[, format='%FT%T%z']) → hash 
+
+Parses the given representation of date and time with the given template, and returns a hash of parsed elements. _strptime does not support specification of flags and width unlike strftime.
+
+
+examples:--
+3.0.0 :028 > DateTime._strptime('2001-02-03T04:05:06+07:00', '%Y-%m-%dT%H:%M:%S
+%z')
+ => {:year=>2001, :mon=>2, :mday=>3, :hour=>4, :min=>5, :sec=>6, :zone=>"+07:00", :offset=>25200} 
+
+
+9.  httpdate(string='Mon, 01 Jan -4712 00:00:00 GMT'[, start=Date::ITALY]) → datetime 
+
+Creates a new DateTime object by parsing from a string according to some RFC 2616 format.
+examples:--
+3.0.0 :029 > DateTime.httpdate('sat, 03 Feb 2001 04:05:06 GMT')
+ => #<DateTime: 2001-02-03T04:05:06+00:00 ((2451944j,14706s,0n),+0s,2299161j)> 
+
+
+10.  iso8601(string='-4712-01-01T00:00:00+00:00'[, start=Date::ITALY], limit: 128) → datetime
+
+Creates a new DateTime object by parsing from a string according to some typical ISO 8601 formats.
+examples:--
+3.0.0 :030 > DateTime.iso8601('2001-02-03T04:05:06+07:00')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+ 
+ 11.  jisx0301(string='-4712-01-01T00:00:00+00:00'[, start=Date::ITALY], limit: 128) → datetime
+
+Creates a new DateTime object by parsing from a string according to some typical JIS X 0301 formats.
+
+3.0.0 :031 > DateTime.jisx0301('H13.02.03T04:05:06+07:00')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+
+12. rfc2822(string='Mon, 1 Jan -4712 00:00:00 +0000'[, start=Date::ITALY], limit: 128) → datetime
+
+Creates a new DateTime object by parsing from a string according to some typical RFC 2822 formats.
+
+examples:-
+3.0.0 :032 > DateTime.rfc2822('Sat, 3 Feb 2001 04:05:06 +0700')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+ 
+ 13.  rfc3339(string='-4712-01-01T00:00:00+00:00'[, start=Date::ITALY], limit: 128) → datetime
+
+Creates a new DateTime object by parsing from a string according to some typical RFC 3339 formats.
+
+3.0.0 :033 > DateTime.rfc3339('2001-02-03T04:05:06+07:00')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+
+14.  xmlschema(string='-4712-01-01T00:00:00+00:00'[, start=Date::ITALY], limit: 128) → datetime 
+
+Creates a new DateTime object by parsing from a string according to some typical XML Schema formats
+
+examples:--
+3.0.0 :034 > DateTime.xmlschema('2001-02-03T04:05:06+07:00')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+
+
+********* Public Instance Methods:--
+
+
+15.   hour → fixnum
+
+Returns the hour (0-23).
+examples:--
+3.0.0 :035 > DateTime.new(2001,2,3,8,5,6).hour  
+ => 8 
+ 
+ 16.  iso8601([n=0]) → string 
+xmlschema([n=0]) → string
+
+This method is equivalent to strftime('%FT%T%:z'). The optional argument n is the number of digits for fractional seconds.
+
+examples:- 
+3.0.0 :036 > DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
+ => "2001-02-03T04:05:06.123456789+07:00" 
+
+17.  min → fixnum 
+minute → fixnum
+
+Returns the minute (0-59).
+examples:--
+3.0.0 :037 > DateTime.new(2022,01,14,11,32,10).min
+ => 32 
+
+18.  new_offset([offset=0]) → date 
+Duplicates self and resets its offset.
+
+examples:--
+3.0.0 :038 > d = DateTime.new(2001,2,3,4,5,6,'-02:00')
+ => #<DateTime: 2001-02-03T04:05:06-02:00 ((2451944j,21906s,0n),-7200s,22... 
+3.0.0 :039 > d.new_offset('+09:00')
+ => #<DateTime: 2001-02-03T15:05:06+09:00 ((2451944j,21906s,0n),+32400s,2299161j)>
+ 
+ 19.  offset → rational 
+
+Returns the offset.
+examples:--
+3.0.0 :040 > DateTime.parse('04pm+0730').offset  
+ => (5/16) 
+3.0.0 :041 
+
+20.  sec → fixnum
+second → fixnum
+
+Returns the second (0-59).
+examples:--
+
+3.0.0 :041 > DateTime.new(2022,01,14,11,32,10).sec
+ => 10 
+
+21.  second_fraction → rational 
+Returns the fractional part of the second.
+
+examples:-
+3.0.0 :042 > DateTime.new(2001,2,3,4,5,6.5).sec_fraction  
+ => (1/2) 
+
+22.  to_s → string 
+
+Returns a string in an ISO 8601 format. (This method doesn't use the expanded representations.)
+
+examples:--
+
+3.0.0 :043 > DateTime.new(2001,2,3,4,5,6,'-7').to_s
+ => "2001-02-03T04:05:06-07:00" 
+ 
+ 23.  zone → string
+
+Returns the timezone.
+examples:--
+
+3.0.0 :044 > DateTime.parse('04pm+0730').zone  
+ => "+07:30" 
+ 
+ 
