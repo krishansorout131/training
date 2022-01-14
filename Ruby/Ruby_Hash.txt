@@ -158,4 +158,461 @@ And damages the Hash index:
  => 0 
 
 
+**** Hash Methods :--
 
+1.  new(default_value = nil) → new_hash 
+new {|hash, key| ... } → new_hash
+
+Returns a new empty Hash object.
+
+example:--
+
+3.0.0 :057 > h=Hash.new
+ => {} 
+ 
+ 2.  try_convert(obj) → obj, new_hash, or nil 
+
+If obj is a Hash object, returns obj.
+
+Otherwise if obj responds to :to_hash, calls obj.to_hash and returns the result.
+
+Returns nil if obj does not respond to :to_hash
+
+3.0.0 :063 > h = {name: 'krishan', age: 21 }
+ => {:name=>"krishan", :age=>21} 
+3.0.0 :064 > a=Hash.try_convert(h)
+ => {:name=>"krishan", :age=>21} 
+3.0.0 :065 > a.hash
+ => 4273739771844398418 
+3.0.0 :066 > h.hash
+ => 4273739771844398418 
+
+
+***** Methods for Setting Hash State :--
+
+3.  compare_by_identity → self
+
+Sets self to consider only identity in comparing keys; two keys are considered the same only if they are the same object; returns self.
+
+By default, these two object are considered to be the same key, so s1 will overwrite s0:
+
+examples:-
+
+3.0.0 :067 > s0 = 'x'
+3.0.0 :068 > s1 = 'x'
+3.0.0 :069 > h={}
+ => {} 
+3.0.0 :070 > h.compare_by_identity?
+ => false 
+3.0.0 :071 > h[s0] = 0
+ => 0 
+3.0.0 :072 > h[s1] = 1
+ => 1 
+3.0.0 :073 > h
+ => {"x"=>1} 
+
+3.0.0 :075 > h = {}
+3.0.0 :076 > h.compare_by_identity
+ => {} 
+3.0.0 :077 > h.compare_by_identity?
+ => true 
+3.0.0 :078 > h[s0] = 0
+ => 0 
+3.0.0 :079 > h[s1] = 1
+ => 1 
+3.0.0 :080 > h
+ => {"x"=>0, "x"=>1} 
+
+
+4.  compare_by_identity? → true or false 
+
+Returns true if compare_by_identity has been called, false otherwise.
+
+5.  default = value → object 
+
+Sets the default value to value; returns value:
+
+example:--
+3.0.0 :086 > h
+ => {} 
+3.0.0 :087 > h.default
+ => nil 
+3.0.0 :088 > h.default = false 
+ => false 
+3.0.0 :089 > h.default
+ => false 
+
+6.  default_proc = proc → proc
+
+Sets the default proc for self to proc: (see Default Values):
+examples:--
+
+3.0.0 :090 > h = {}
+3.0.0 :091 > h.default_proc
+ => nil 
+3.0.0 :092 > h.default_proc = proc {|hash, key| "Default value for #{key}" }
+ => #<Proc:0x00005655240875a8 (irb):92> 
+3.0.0 :093 > h.default_proc.class
+ => Proc 
+3.0.0 :094 > h.default_proc
+ => #<Proc:0x00005655240875a8 (irb):92> 
+3.0.0 :095 > h.default_proc = nil
+ => nil 
+3.0.0 :096 > h.default_proc
+ => nil 
+
+
+********  Methods for Querying :--
+
+
+7. any? → true or false 
+any?(object) → true or false
+any? {|key, value| ... } → true or false
+
+Returns true if any element satisfies a given criterion; false otherwise.
+
+With no argument and no block, returns true if self is non-empty; false if empty.
+
+With argument object and no block, returns true if for any key key h.assoc(key) == object:
+
+examples:--
+3.0.0 :097 > h = {foo: 0, bar: 1, baz: 2}
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :098 > h.any?([:foo, 0])
+ => true 
+3.0.0 :099 > h.any?([:foo, 1])
+ => false 
+
+3.0.0 :100 > h.any? {|key, value| value < 3}
+ => true 
+3.0.0 :101 > h.any? {|key, value| value > 3}
+ => false 
+
+8.  empty? → true or false
+
+Returns true if there are no hash entries, false otherwise:
+example:--
+3.0.0 :102 > a = {}
+ => {} 
+3.0.0 :103 > a.empty?
+ => true 
+3.0.0 :104 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :105 > h.empty?
+ => false 
+
+9.  eql? object → true or false
+
+Returns true if all of the following are true:
+object is a Hash object.
+hash and object have the same keys (regardless of order).
+For each key key, h[key] eql? object[key].
+
+Otherwise, returns false.
+
+examples:--
+3.0.0 :108 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :109 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :110 > h1.eql? h
+ => true 
+
+10.  hash → an_integer
+
+Returns the Integer hash-code for the hash.
+
+Two Hash objects have the same hash-code if their content is the same (regardless or order):
+examples:
+3.0.0 :111 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+3.0.0 :112 > h1
+ => {:foo=>0, :bar=>1, :baz=>2} 
+
+3.0.0 :113 > h.hash
+ => 2773770272121397956 
+
+3.0.0 :114 > h.hash == h1.hash
+ => true 
+
+
+11.  include?(key) → true or false
+
+Methods has_key?, key?, and member? are aliases for #include?.
+
+Returns true if key is a key in self, otherwise false.
+example:--
+
+3.0.0 :124 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :125 > h.include?(:foo)
+ => true 
+3.0.0 :126 > h.include?(:food)
+ => false 
+
+12.  has_key?(key) → true or false
+
+Methods has_key?, key?, and member? are aliases for #include?.
+
+Returns true if key is a key in self, otherwise false.
+
+examples:-- 
+3.0.0 :128 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :129 > h.has_key?(:foo)
+ => true 
+3.0.0 :130 > h.has_key?(:food)
+ => false 
+
+13.  length → integer
+
+Returns the count of entries in self:
+
+example:- 
+3.0.0 :131 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :132 > h.length
+ => 3 
+
+14.  value?(value) → true or false
+
+Method value? is an alias for #has_value?.
+
+Returns true if value is a value in self, otherwise false.
+example:--
+3.0.0 :133 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :134 > h.value?(1)
+ => true 
+3.0.0 :135 > h.value?(3)
+ => false 
+
+
+******** Methods for Comparing
+
+15.  hash < other_hash → true or false
+
+Returns true if hash is a proper subset of other_hash, false otherwise:
+example:--
+3.0.0 :137 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :138 > h1
+ => {:foo=>0, :bar=>1} 
+3.0.0 :139 > h1 < h
+ => true 
+
+16.  hash == object → true or false
+
+Returns true if all of the following are true:
+
+    object is a Hash object.
+
+    hash and object have the same keys (regardless of order).
+
+    For each key key, hash[key] == object[key].
+
+example:--
+3.0.0 :141 > h1
+ => {:foo=>0, :bar=>1} 
+3.0.0 :142 > h2
+ => {:foo=>0, :bar=>1} 
+3.0.0 :143 > h1 == h2
+ => true 
+
+17.  hash >= other_hash → true or false 
+
+Returns true if hash is a superset of other_hash, false otherwise:
+example:--
+
+3.0.0 :144 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :145 > h1
+ => {:foo=>0, :bar=>1} 
+3.0.0 :146 > h >= h1
+ => true 
+3.0.0 :147 > h1 >= h
+ => false 
+
+********* Methods for Fetching :--
+
+18.  hash[key] → value 
+
+Returns the value associated with the given key, if found: 
+example:-
+3.0.0 :148 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :149 > h[:foo]
+ => 0 
+3.0.0 :150 > h[:bar]
+ => 1 
+
+19.  assoc(key) → new_array or nil
+
+If the given key is found, returns a 2-element Array containing that key and its value:
+example:-
+3.0.0 :151 > h.assoc(:foo)
+ => [:foo, 0] 
+3.0.0 :152 > h.assoc(:bar)
+ => [:bar, 1] 
+
+20. ig(key, *identifiers) → object
+
+Finds and returns the object in nested objects that is specified by key and identifiers. The nested objects may be instances of various classes. See Dig Methods.
+
+example:--
+ 3.0.0 :154 > a
+ => {:foo=>{:bar=>{:baz=>2}}} 
+3.0.0 :155 > a.dig(:foo)
+ => {:bar=>{:baz=>2}} 
+3.0.0 :156 > a.dig(:bar)
+ => nil 
+3.0.0 :157 > a.dig(:foo, :bar)
+ => {:baz=>2} 
+3.0.0 :158 > a.dig(:foo, :bar, :baz)
+ => 2 
+
+21. fetch(key) → object
+fetch(key, default_value) → object
+fetch(key) {|key| ... } → object
+
+Returns the value for the given key, if found.
+examples:-
+3.0.0 :159 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :160 > h.fetch(:foo)
+ => 0 
+ 
+ 22.  fetch_values(*keys) → new_array
+fetch_values(*keys) {|key| ... } → new_array
+
+Returns a new Array containing the values associated with the given keys *keys:
+exmples:--
+
+3.0.0 :161 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :162 > h.fetch_values(:foo, :bar, :baz)
+ => [0, 1, 2] 
+
+3.0.0 :166 > val = h.fetch_values(:bar, :foo, :bad) {|key| key.to_s}
+ => [1, 0, "bad"]
+ 
+ 23.  key(value) → key or nil 
+
+Returns the key for the first-found entry with the given value (see Entry Order):
+examples:-
+3.0.0 :167 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :168 > h.key(0)
+ => :foo 
+3.0.0 :169 > h.key(2)
+ => :baz 
+3.0.0 :170 > 
+
+24.  keys → new_array 
+
+Returns a new Array containing all keys in self:
+example:--
+3.0.0 :170 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :171 > h.keys
+ => [:foo, :bar, :baz] 
+
+25.  rassoc(value) → new_array or nil 
+
+Returns a new 2-element Array consisting of the key and value of the first-found entry whose value is == to value (see Entry Order):
+exmples:-
+3.0.0 :173 > h.rassoc(0)
+ => [:foo, 0] 
+3.0.0 :174 > h.rassoc(2)
+ => [:baz, 2] 
+
+26.  values → new_array 
+
+Returns a new Array containing all values in self
+example:-
+3.0.0 :175 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :176 > h.values
+ => [0, 1, 2] 
+
+27.  values_at(*keys) → new_array
+
+Returns a new Array containing values for the given keys:
+
+example:--
+3.0.0 :177 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :178 > h.values_at(:foo, :bar, :baz)
+ => [0, 1, 2] 
+
+
+********* Methods for Assigning:--
+
+28.  store(key, value)
+
+Hash#store is an alias for Hash#[]=.
+
+Associates the given value with the given key; returns value.
+
+If the given key exists, replaces its value with the given value; the ordering is not affected (see Entry Order):
+examples:-
+3.0.0 :179 > h
+ => {:foo=>0, :bar=>1, :baz=>2} 
+3.0.0 :180 > h.store(:baz, 5)
+ => 5 
+3.0.0 :181 > h
+ => {:foo=>0, :bar=>1, :baz=>5} 
+
+3.0.0 :183 > h.store(:bat, 15)
+ => 15 
+3.0.0 :184 > h
+ => {:foo=>0, :bar=>1, :baz=>5, :bat=>15} 
+
+29.  merge → copy_of_self
+merge(*other_hashes) → new_hash
+merge(*other_hashes) { |key, old_value, new_value| ... } → new_hash
+
+Returns the new Hash formed by merging each of other_hashes into a copy of self.
+
+Each argument in other_hashes must be a Hash.
+
+example:--
+
+3.0.0 :189 > h3
+ => {:abc=>123} 
+3.0.0 :190 > h.merge(h3)
+ => {:foo=>0, :bar=>1, :baz=>5, :bat=>15, :abc=>123} 
+
+30.  merge! → self 
+merge!(*other_hashes) → self
+merge!(*other_hashes) { |key, old_value, new_value| ... } → self 
+ 
+example:-
+3.0.0 :193 > h
+ => {:foo=>0, :bar=>1, :baz=>5, :bat=>15} 
+3.0.0 :194 > h3
+ => {:abc=>123} 
+3.0.0 :195 > h.merge!(h3)
+ => {:foo=>0, :bar=>1, :baz=>5, :bat=>15, :abc=>123} 
+3.0.0 :196 > h
+ => {:foo=>0, :bar=>1, :baz=>5, :bat=>15, :abc=>123} 
+
+31.  replace(other_hash) → self 
+
+Replaces the entire contents of self with the contents of other_hash; returns self:
+
+examples:-
+3.0.0 :197 > h1
+ => {:foo=>0, :bar=>1} 
+
+3.0.0 :198 > h3
+ => {:abc=>123} 
+
+3.0.0 :199 > h1.replace(h3)
+ => {:abc=>123} 
+
+3.0.0 :200 > h1
+ => {:abc=>123} 
+ 
+ 
