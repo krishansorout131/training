@@ -1,0 +1,85 @@
+                                  ----------------------------->  DateTime  <-------------------------------
+                                  
+ A subclass of Date that easily handles date, hour, minute, second, and offset.
+
+DateTime class is considered deprecated. Use Time class.
+
+DateTime does not consider any leap seconds, does not track any summer time rules.
+
+
+***** DateTime Methods :--
+
+
+1.new([year=-4712[, month=1[, mday=1[, hour=0[, minute=0[, second=0[, offset=0[, start=Date::ITALY]]]]]]]]) → datetime 
+
+Creates a DateTime object denoting the given calendar date.                                
+
+examples:-- 
+
+3.0.0 :011 > DateTime.new(2022,01,14)
+ => #<DateTime: 2022-01-14T00:00:00+00:00 ((2459594j,0s,0n),+0s,2299161j)>
+ 
+ 3.0.0 :015 > DateTime.new(2022,01,14,10,47,00,'+7')
+ => #<DateTime: 2022-01-14T10:47:00+07:00 ((2459594j,13620s,0n),+25200s,2299161j)> 
+
+ 2.   jd([jd=0[, hour=0[, minute=0[, second=0[, offset=0[, start=Date::ITALY]]]]]]) → datetime 
+
+Creates a DateTime object denoting the given chronological Julian day numb
+example:-
+3.0.0 :016 > DateTime.jd(2459594)
+ => #<DateTime: 2022-01-14T00:00:00+00:00 ((2459594j,0s,0n),+0s,2299161j)> 
+
+3.0.0 :018 > DateTime.jd(2459594,10,52,10)
+ => #<DateTime: 2022-01-14T10:52:10+00:00 ((2459594j,39130s,0n),+0s,2299161j)> 
+
+
+3.  ordinal([year=-4712[, yday=1[, hour=0[, minute=0[, second=0[, offset=0[, start=Date::ITALY]]]]]]]) → datetime
+
+Creates a DateTime object denoting the given ordinal date.
+
+example:-
+3.0.0 :019 > DateTime.ordinal(2022,34)
+ => #<DateTime: 2022-02-03T00:00:00+00:00 ((2459614j,0s,0n),+0s,2299161j)> 
+
+3.0.0 :020 > DateTime.ordinal(2022,34,10,56,59,'+7')
+ => #<DateTime: 2022-02-03T10:56:59+07:00 ((2459614j,14219s,0n),+25200s,2299161j)> 
+
+
+4.  commercial([cwyear=-4712[, cweek=1[, cwday=1[, hour=0[, minute=0[, second=0[, offset=0[, start=Date::ITALY]]]]]]]]) → datetime
+
+Creates a DateTime object denoting the given week date.
+example:--
+
+3.0.0 :024 > DateTime.commercial(2001,5,6,4,5,6,'+7')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+
+5.  parse(string='-4712-01-01T00:00:00+00:00'[, comp=true[, start=Date::ITALY]], limit: 128) → datetime
+
+Parses the given representation of date and time, and creates a DateTime object.
+
+examples:-
+DateTime.parse('2001-02-03T04:05:06+07:00')
+
+6.  strptime([string='-4712-01-01T00:00:00+00:00'[, format='%FT%T%z'[ ,start=Date::ITALY]]]) → datetime
+
+Parses the given representation of date and time with the given template, and creates a DateTime object. strptime does not support specification of flags and width unlike strftime.
+
+examples:-
+3.0.0 :025 > DateTime.strptime('2001-02-03T04:05:06+07:00', '%Y-%m-%dT%H:%M:%S%z
+')
+ => #<DateTime: 2001-02-03T04:05:06+07:00 ((2451943j,75906s,0n),+25200s,2299161j)> 
+
+3.0.0 :026 > DateTime.strptime('03-02-2001 04:05:06 PM', '%d-%m-%Y %I:%M:%S %p')
+
+ => #<DateTime: 2001-02-03T16:05:06+00:00 ((2451944j,57906s,0n),+0s,2299161j)> 
+
+
+7.  now([start=Date::ITALY]) → datetime 
+
+Creates a DateTime object denoting the present time.
+examples:-
+
+3.0.0 :027 > DateTime.now()
+ => #<DateTime: 2022-01-14T11:09:24+05:30 ((2459594j,20364s,300225814n),+19800s,2299161j)> 
+
+8. 
