@@ -5,21 +5,21 @@
 
 
 def vovel_reverse(str)
-    string = ""  
-    for i in 0 ... str.length
-      if str[i].match?(/[aeiouAEIOU]/)
-        string << str[i]  
-      end
+  string = ""  
+  for i in 0 ... str.length
+    if str[i].match?(/[aeiouAEIOU]/)
+      string << str[i]  
     end
-    len = (string.length) - 1
-    for i in 0 ... str.length
-      if str[i].match?(/[aeiouAEIOU]/)
-        str[i] = string[len]  
-        len -= 1
-      end
-    end    
-    return str
+  end
+  len = (string.length) - 1
+  for i in 0 ... str.length
+    if str[i].match?(/[aeiouAEIOU]/)
+      str[i] = string[len]  
+      len -= 1
+    end
   end    
+  return str
+end    
   
   reversedString = vovel_reverse("my name is krishan")
   puts reversedString
