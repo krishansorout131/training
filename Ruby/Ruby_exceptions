@@ -1,0 +1,158 @@
+                                          ----------------->  Ruby - Exceptions  <------------------------
+                                          
+
+The execution and the exception always go together. If you are opening a file, which does not exist, then if you did not handle this situation properly, then your program is considered to be of bad quality.
+
+Syntax:--
+
+begin  
+# -  
+rescue OneTypeOfException  
+# -  
+rescue AnotherTypeOfException  
+# -  
+else  
+# Other exceptions
+ensure
+# Always will be executed
+end
+                                          
+*** Using retry Statement
+
+You can capture an exception using rescue block and then use retry statement to execute begin block from the beginning.
+
+example:-- 
+class Exception
+  @@num = 5
+  @@d = 0
+  begin
+  puts @@num / @@d
+  rescue ZeroDivisionError
+    puts "dividing number by 0 always give 0"
+    @@d = 1
+    retry
+  end  
+end
+
+# output:-- 
+dividing number by 0 always give 0
+
+*** Using raise Statement
+
+You can use raise statement to raise an exception. The following method raises an exception whenever it's called. It's second message will be printed.
+
+Syntax:-
+
+raise 
+OR
+raise "Error Message" 
+OR
+raise ExceptionType, "Error Message"
+OR
+raise ExceptionType, "Error Message" condition
+
+
+example:--
+
+begin  
+  puts 'I am before the raise.'  
+  raise 'An error has occurred.'  
+  puts 'I am after the raise.'  
+rescue  
+    puts 'I am rescued.'  
+end  
+ puts 'I am after the begin block.'
+ 
+ output:--
+ 
+I am before the raise.
+I am rescued.
+I am after the begin block.
+
+example:-- 
+
+begin
+    no1 = Integer(gets)
+    no2 = Integer(gets)
+    raise RuntimeError if no2 < 3
+    puts "Hello"
+    no2 / no1
+    raise ZeroDivisionError if no1 == 0
+  rescue RuntimeError => e
+    puts "Rescue 1 Block"
+    puts e
+    retry #if we dont use retry it will not execute code after where we raise exception
+  rescue ZeroDivisionError => e
+    puts "rescue 2 block "
+    puts e
+    retry
+  else
+    puts "Else Block" #it will executes if no rescue called
+  ensure
+    puts "Ensure block" #it will always execute
+  end
+  output:--
+  
+5
+1
+Rescue 1 Block
+RuntimeError
+0
+5
+Hello
+rescue 2 block 
+divided by 0
+5
+7
+Hello
+Else Block
+Ensure block
+
+
+**Catch and Throw
+
+While the exception mechanism of raise and rescue is great for abandoning the execution when things go wrong, it's sometimes nice to be able to jump out of some deeply nested construct during normal processing. This is where catch and throw come in handy.
+
+The catch defines a block that is labeled with the given name (which may be a Symbol or a String). The block is executed normally until a throw is encountered.
+
+syntax :--
+
+throw :lablename
+#.. this will not be executed
+catch :lablename do
+#.. matching catch will be executed after a throw is encountered.
+end
+
+OR
+
+throw :lablename condition
+#.. this will not be executed
+catch :lablename do
+#.. matching catch will be executed after a throw is encountered.
+end
+
+example:--
+def promptAndGet(prompt)
+    print prompt
+    res = readline.chomp
+    throw :quitRequested if res == "!"
+    return res
+end
+ 
+catch :quitRequested do
+    name = promptAndGet("Name: ")
+    age = promptAndGet("Age: ")
+    sex = promptAndGet("Sex: ")
+    # ..
+    # process information
+end
+promptAndGet("Name:")
+
+output:--
+
+Name: krishan
+Age: 21
+Sex: m
+Name:krishan sorout
+
+
