@@ -60,3 +60,197 @@ output:--
 Bhagat singhberyl@beryl-HP-ProBook-6460b:~/Desktop/RubyPractical$ 
 
 
+*** The File.new Method
+
+You can create a File object using File.new method for reading, writing, or both, according to the mode string. Finally, you can use File.close method to close that file.
+
+example:-
+a = File.new("file1.txt",'w+')
+a.syswrite("This is file handling file")
+a.close
+
+
+** The File.open Method
+
+You can use File.open method to create a new file object and assign that file object to a file. However, there is one difference in between File.open and File.new methods. The difference is that the File.open method can be associated with a block, whereas you cannot do the same using the File.new method.
+
+example:--
+File.open("file2.txt",'w+') do |f2|
+  f2.syswrite("This is second file using File.open method ")
+end  
+
+
+*** list of The Different Modes of opening a File −
+
+* r = Read-only mode. The file pointer is placed at the beginning of the file. This is the default mode.
+
+* r+ = Read-write mode. The file pointer will be at the beginning of the file.
+
+* a =Write-only mode. The file pointer is at the end of the file if the file exists. That is, the file is in the append mode. 
+  If the file does not exist, it creates a new file for writing.
+
+* a+ = Read and write mode. The file pointer is at the end of the file if the file exists. The file opens in the append mode.
+  If the file does not exist, it creates a new file for reading and writing.
+
+* w = Write-only mode. Overwrites the file if the file exists. If the file does not exist, creates a new file for writing.
+
+* w+ = Read-write mode. Overwrites the existing file if the file exists. If the file does not exist, creates a new file for reading and writing.
+
+
+*** The sysread Method
+
+You can use the method sysread to read the contents of a file. You can open the file in any of the modes when using the method sysread. For example −
+
+File.open("file2.txt",'r+') do |f2|
+  if f2
+    content = f2.sysread(50)
+    puts content
+  else
+    puts "unable to open file"  
+  end
+end  
+
+output:-- This is second file using File.open method 
+
+** The syswrite Method
+
+You can use the method syswrite to write the contents into a file. You need to open the file in write mode when using the method syswrite. For example −
+
+File.open("file2.txt",'r+') do |f2|
+  f2.syswrite(" This is write using syswrite function")  
+end  
+
+output:--  This is write using syswrite function
+
+** The each_byte Method
+
+This method belongs to the class File. The method each_byte is always associated with a block. Consider the following code sample −
+
+example:- 
+
+aFile = File.new("file2.txt", "r+")
+if aFile
+   aFile.each_byte {|ch| putc ch; putc ?. }
+else
+   puts "Unable to open file!"
+end
+
+output:--
+
+t.h.i.s. .i.s. .w.r.i.t.e. .u.s.i.n.g. .s.y.s.w.r.i.t.e. .f.u.n.c.t.i.o.n.
+
+** The IO.readlines Method
+
+The class File is a subclass of the class IO. The class IO also has some methods, which can be used to manipulate files.
+
+One of the IO class methods is IO.readlines. This method returns the contents of the file line by line. The following code displays the use of the method IO.readlines −
+
+example:-- 
+arr = IO.readlines("file2.txt")
+puts arr[0]
+
+output:-- 
+this is write using syswrite function
+
+** The IO.foreach Method
+
+This method also returns output line by line. The difference between the method foreach and the method readlines is that the method foreach is associated with a block. However, unlike the method readlines, the method foreach does not return an array. For example −
+
+IO.foreach("file2.txt"){|block| puts block}
+output:-
+this is write using syswrite function
+
+** Renaming and Deleting Files
+
+You can rename and delete files programmatically with Ruby with the rename and delete methods.
+examples:--
+File.rename("f2.txt","file2.txt")
+
+
+File.delete("file1.txt")
+
+
+** File Modes and Ownership
+
+Use the chmod method with a mask to change the mode or permissions/access list of a file −
+
+file = File.new( "file1.txt", "w" )
+file.chmod( 0755 )
+  
+  it only allow write operations.
+  
+  0700 - rwx for owner
+  0400 - r for for owner
+  0200 - w for owner
+  0100 - x for owner
+  0070 -rwx for group
+  0040 - r for group
+  0020 - w for group
+  0010 - x for group
+  4000 - set user id on execution
+  2000 - set group id on execution
+  1000 - save swappwd text, even after use
+  
+** File Inquiries:-
+
+file = File.open("file2.txt") if File::exists?( "file2.txt" )
+puts file
+output:--
+#<File:0x000055811d78fed0>
+
+ puts File.file?( "file1.txt" ) 
+true
+
+# a directory
+puts File::directory?( "/home/beryl/Desktop/RubyPractical/file" ) # => true
+
+# a file
+puts File::directory?( "file.rb" ) # => false
+
+puts File.readable?( "file1.txt" )   # => true
+puts File.writable?( "file1.txt" )   # => true
+puts File.executable?( "file1.txt" ) # => false
+
+puts File.zero?( "file2.txt" ) #true
+
+puts File.size?( "file1.txt" ) #11
+
+puts File::ftype( "file1.txt" )  #file
+
+puts File::ctime( "file1.txt" ) 
+puts File::mtime( "file1.txt" ) 
+puts File::atime( "file1.txt" ) 
+
+#  output :--
+2022-01-20 15:09:05 +0530
+2022-01-20 15:09:05 +0530
+2022-01-20 15:09:05 +0530  
+
+
+*** Directories in Ruby
+
+All files are contained within various directories, and Ruby has no problem handling these too. Whereas the File class handles files, directories are handled with the Dir class.
+
+** Navigating Through Directories:-
+
+puts Dir.pwd
+/home/beryl/Desktop/RubyPractical/file
+
+** Creating a Directory:--
+
+Dir.mkdir("handling", 755)
+
+*** Deleting a Directory:--
+
+Dir.delete("handling")
+
+** Creating Files & Temporary Directories
+
+Temporary files are those that might be created briefly during a program's execution but aren't a permanent store of information.
+
+require 'tmpdir'
+   tempfilename = File.join(Dir.tmpdir, "tingtong")
+   tempfile = File.new(tempfilename, "w")
+   tempfile.puts "This is a temporary file"
+   tempfile.close
+   File.delete(tempfilename)
