@@ -1,0 +1,28 @@
+                                                  -------------> Ruby on Rails <----------------
+                                                  
+  
+**  What is Rails?
+
+    An extremely productive web-application framework.
+
+    Written in Ruby by David Heinemeier Hansson.
+
+    You could develop a web application at least ten times faster with Rails than you could with a typical Java framework.
+
+    An open source Ruby framework for developing database-backed web applications.
+
+    Configure your code with Database Schema.
+
+    No compilation phase required.
+
+*** install rails:--
+gem install rails
+
+*** checking version 
+rails -v
+
+*** creating first project :--
+
+rails new demo -d postgresql
+
+                                                  
