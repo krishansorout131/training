@@ -25,4 +25,203 @@ rails -v
 
 rails new demo -d postgresql
 
-                                                  
+*** conect to database postgresql :-- Make some changes under config/database.yml file
+
+-> Add our user name like postgres 
+-> Add our password for postgres
+   
+* create database :-- 
+ for creating database for the project we need to run :-
+ rails db:create    command on terminal in root directory of project : beryl@beryl-HP-ProBook-6460b:~/Desktop/demo$
+ 
+ ** drop database :--
+ rails db:drop
+ 
+beryl@beryl-HP-ProBook-6460b:~/Desktop/myapp$ rake db:drop
+Dropped database 'myapp_development'
+Database 'myapp_test' does not exist
+ 
+                                                    
+*** starting serever :--
+rails server
+
+after this to see your app type localhost address and see your app :-
+
+http://localhost:3000                                                    
+
+
+--------------------------------
+
+** Ruby on Rails MVC Framework
+
+The Model View Controller principle divides the work of an application into three separate but closely cooperative subsystems.
+
+* Model (ActiveRecord )
+
+It maintains the relationship between the objects and the database and handles validation, association, transactions, and more.
+
+This subsystem is implemented in ActiveRecord library, which provides an interface and binding between the tables in a relational database and the Ruby program code that manipulates database records. Ruby method names are automatically generated from the field names of database tables.
+
+
+* View ( ActionView )
+
+It is a presentation of data in a particular format, triggered by a controller's decision to present the data. They are script-based template systems like JSP, ASP, PHP, and very easy to integrate with AJAX technology.
+
+This subsystem is implemented in ActionView library, which is an Embedded Ruby (ERb) based system for defining presentation templates for data presentation. Every Web connection to a Rails application results in the displaying of a view.
+
+
+* Controller ( ActionController )
+
+The facility within the application that directs traffic, on the one hand, querying the models for specific data, and on the other hand, organizing that data (searching, sorting, messaging it) into a form that fits the needs of a given view.
+
+This subsystem is implemented in ActionController, which is a data broker sitting between ActiveRecord (the database interface) and ActionView (the presentation engine).
+
+
+                                                 -------------------------------------------------
+
+* Workflow for Creating Rails Applications
+
+    Use the rails command to create the basic skeleton of the application.
+
+    Create a database on the PostgreSQL server to hold your data.
+
+    Configure the application to know where your database is located and the login credentials for it.
+
+    Create Rails Active Records (Models), because they are the business objects you'll be working with in your controllers.
+
+    Generate Migrations that simplify the creating and maintaining of database tables and columns.
+
+    Write Controller Code to put a life in your application.
+
+    Create Views to present your data through User Interface.
+
+
+**** Rails Active Record is the Object/Relational Mapping (ORM) layer supplied with Rails. It closely follows the standard ORM model, which is as follows −
+
+    tables map to classes,
+    rows map to objects and
+    columns map to object attributes.
+
+Rails Active Records provide an interface and binding between the tables in a relational database and the Ruby program code that manipulates database records. Ruby method names are automatically generated from the field names of database tables.
+
+
+** create project : hospital_management:--
+rails new hospital_management
+
+** Adding first table :--
+
+rails generate model Employee
+
+
+**** rails db:migrate
+== 20220122105744 CreateEmployees: migrating ==================================
+-- create_table(:employees)
+   -> 0.3356s
+== 20220122105744 CreateEmployees: migrated (0.3357s) =========================
+
+
+** Add new column to employees table:-
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails generate migration ToAddColumnToEmployee
+      invoke  active_record
+      create    db/migrate/20220122112043_to_add_column_to_employee.rb
+      
+* program :--
+ 
+class ToAddColumnToEmployee < ActiveRecord::Migration[7.0]
+  def change
+    add_column :employees, :salary, :integer
+
+  end
+end
+     
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
+== 20220122112043 ToAddColumnToEmployee: migrating ============================
+-- add_column(:employees, :salary, :integer)
+   -> 0.0043s
+== 20220122112043 ToAddColumnToEmployee: migrated (0.0044s) ===================
+
+** Remove a column from table:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails g migration RemoveColumnFromPatient
+      invoke  active_record
+      create    db/migrate/20220122114502_remove_column_from_patient.rb
+      
+program:--
+
+class RemoveColumnFromPatient < ActiveRecord::Migration[7.0]
+  def change
+    remove_column :patients, :address, :text
+  end
+end
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
+== 20220122114502 RemoveColumnFromPatient: migrating ==========================
+-- remove_column(:patients, :address, :text)
+   -> 0.0333s
+== 20220122114502 RemoveColumnFromPatient: migrated (0.0334s) =================
+
+*** Adding index,change column type, set column not null:-
+
+class ToChangeInEmployee < ActiveRecord::Migration[7.0]
+  def change
+    add_index :employees, :name
+    change_column :employees, :specialization, :string
+    change_column_null :employees, :gender, false
+    
+  end
+end
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
+== 20220122115429 ToChangeInEmployee: migrating ===============================
+-- add_index(:employees, :name)
+   -> 0.0700s
+-- change_column(:employees, :specialization, :string)
+   -> 0.0217s
+-- change_column_null(:employees, :gender, false)
+   -> 0.0028s
+== 20220122115429 ToChangeInEmployee: migrated (0.0950s) ======================
+
+*** Adding foreign key :-
+
+class AddForeignKey < ActiveRecord::Migration[7.0]
+  def change
+    add_foreign_key :departments, :employees, column: :id, primary_key: :id
+    add_column :employees, :d_id, :string
+
+
+  end
+end
+
+output:--
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
+== 20220122121654 AddForeignKey: migrating ====================================
+-- add_foreign_key(:departments, :employees, {:column=>:id, :primary_key=>:id})
+   -> 0.0592s
+-- add_column(:employees, :d_id, :string)
+   -> 0.0087s
+== 20220122121654 AddForeignKey: migrated (0.0681s) ===========================
+
+** removing foreign key:-
+
+class RemoveForeignKey < ActiveRecord::Migration[7.0]
+  def change
+    remove_foreign_key :departments, column: :id
+  
+  end
+end
+
+output:--
+
+beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
+== 20220122122925 RemoveForeignKey: migrating =================================
+-- remove_foreign_key(:departments, {:column=>:id})
+   -> 0.0101s
+== 20220122122925 RemoveForeignKey: migrated (0.0103s) ========================
+
+      
+
