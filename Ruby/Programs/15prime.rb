@@ -1,4 +1,4 @@
-# 5. Create a function that takes an array and returns a new array containing only prime numbers.
+# 15. Create a function that takes an array and returns a new array containing only prime numbers.
 
   def prime(arr)
     array = []
