@@ -372,3 +372,219 @@ output:--
 == 20220124061349 RenameTable: migrated (0.0151s) =============================
 
 
+*** CRUD: Reading and Writing Data:--
+
+* write operation :--
+3.0.0 :005 > employee = Employee.new(name: "ajay", dob: "15-07-2000", gender: "male", specialization: "medicine specialist"
+, salary: 10000).save
+
+ #<Employee:0x0000561abe5abf98
+  id: 5,
+  name: "ajay",
+  gender: "male",
+  dob: Sat, 15 Jul 2000,
+  specialization: "medicine specialist",
+  salary: 10000,
+  department_id: nil,
+  created_at: Mon, 24 Jan 2022 10:52:20.757229000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 10:52:20.757229000 UTC +00:00>] 
+  
+  ** 3.0.0 :026 > department = Department.create(name: "medical department")
+  
+  3.0.0 :024 > departments = Department.all
+  
+  Department Load (0.6ms)  SELECT "departments".* FROM "departments"
+ =>                                                                             
+[#<Department:0x0000561abf1f75e0                                                
+...                                                                             
+3.0.0 :025 > departments
+ => 
+[#<Department:0x0000561abf1f75e0                                                
+  id: 1,                                                                        
+  name: "medical department",                                                   
+  created_at: Mon, 24 Jan 2022 11:05:13.547846000 UTC +00:00,                   
+  updated_at: Mon, 24 Jan 2022 11:05:13.547846000 UTC +00:00>]  
+  
+  *** Read :--
+  
+  3.0.0 :038 > patients = Patient.all
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients"
+ =>                                                                       
+[#<Patient:0x0000561abf0903c8                                             
+...                                                                       
+3.0.0 :039 > patients
+ => 
+[#<Patient:0x0000561abf0903c8                                             
+  id: 1,                                                                  
+  name: "Ram kumar",                                                      
+  gender: "male",                                                         
+  dob: Wed, 23 Sep 1998,                                                  
+  address: "hodal",                                                       
+  created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,             
+  updated_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00>,            
+ #<Patient:0x0000561abf0902b0                                             
+  id: 2,                                     
+  name: "Shyam kumar",                       
+  gender: "male",                            
+  dob: Wed, 20 Aug 1997,                     
+  address: "bahin",                          
+  created_at: Mon, 24 Jan 2022 11:35:11.989627000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 11:35:11.989627000 UTC +00:00>,
+ #<Patient:0x0000561abf0901e8
+  id: 3,
+  name: "Seema devi",
+  gender: "female",
+  dob: Wed, 21 Apr 1993,
+  address: "ramgadh",
+  created_at: Mon, 24 Jan 2022 11:36:09.731998000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 11:36:09.731998000 UTC +00:00>] 
+3.0.0 :040 > 
+
+-----------------------------------------
+
+*** 3.0.0 :040 > patient = Patient.first
+
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" ORDER BY "patients"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ =>                                                                      
+#<Patient:0x0000561abf0ef260                                             
+...                                                                      
+3.0.0 :041 > patient
+ => 
+#<Patient:0x0000561abf0ef260                                             
+ id: 1,                                                                  
+ name: "Ram kumar",                                                      
+ gender: "male",                                                         
+ dob: Wed, 23 Sep 1998,                                                  
+ address: "hodal",                                                       
+ created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,             
+ updated_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00>             
+3.0.0 :042 > 
+
+-----------------------------------------
+
+3.0.0 :042 > patient = Patient.find_by(name: "Seema devi")
+
+  Patient Load (0.8ms)  SELECT "patients".* FROM "patients" WHERE "patients"."name" = $1 LIMIT $2  [["name", "Seema devi"], ["LIMIT", 1]]                                                             
+ =>                                                                        
+#<Patient:0x0000561abd68f7f8                                               
+...                                                                        
+3.0.0 :043 > patient
+ => 
+#<Patient:0x0000561abd68f7f8                                               
+ id: 3,                                                                    
+ name: "Seema devi",                                                       
+ gender: "female",                                                         
+ dob: Wed, 21 Apr 1993,                                                    
+ address: "ramgadh",                                        
+ created_at: Mon, 24 Jan 2022 11:36:09.731998000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 11:36:09.731998000 UTC +00:00> 
+ 
+ -------------------------------------------------
+ 
+ 3.0.0 :044 > patients = Patient.where(name: "Ram kumar", address: "hodal").order(created_at: :desc)
+ 
+  Patient Load (39.9ms)  SELECT "patients".* FROM "patients" WHERE "patients"."name" = $1 AND "patients"."address" = $2 ORDER BY "patients"."created_at" DESC  [["name", "Ram kumar"], ["address", "hodal"]]                                          
+ =>                                                                                                                        
+[#<Patient:0x0000561abf902ab0                                                                                              
+...                                                                                                                        
+3.0.0 :045 > patients
+ => 
+[#<Patient:0x0000561abf902ab0                                                                                              
+  id: 1,                                                                                                                   
+  name: "Ram kumar",                                                                                                       
+  gender: "male",                                                                                                          
+  dob: Wed, 23 Sep 1998,                                                                                                   
+  address: "hodal",                                                                                                        
+  created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,                                                              
+  updated_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00>]                                                             
+3.0.0 :046 > 
+
+--------------------------------------------------
+
+*** Update:--
+
+Once an Active Record object has been retrieved, its attributes can be modified and it can be saved to the database.
+
+patient = Patient.first
+
+3.0.0 :039 > patient
+ => 
+ id: 1,                                                                  
+ name: "Ram kumar",                                                      
+ gender: "male",                                                         
+ dob: Wed, 23 Sep 1998,                                                  
+ address: "hodal",                                                       
+ created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,             
+ updated_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00>             
+
+3.0.0 :048 > patient.name = "Ravi kumar"
+ => "Ravi kumar" 
+
+3.0.0 :049 > patient.save
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Update (0.8ms)  UPDATE "patients" SET "name" = $1, "updated_at" = $2 WHERE "patients"."id" = $3  [["name", "Ravi kumar"], ["updated_at", "2022-01-24 11:53:39.774876"], ["id", 1]]
+  TRANSACTION (34.1ms)  COMMIT                                 
+ => true                
+
+
+****
+3.0.0 :053 > patient.update(name: "Ram kumar")
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Update (0.7ms)  UPDATE "patients" SET "name" = $1, "updated_at" = $2 WHERE "patients"."id" = $3  [["name", "Ram kumar"], ["updated_at", "2022-01-24 11:57:04.174980"], ["id", 1]]
+  TRANSACTION (38.4ms)  COMMIT                                 
+ => true                             
+ 
+ ****
+ .0.0 :060 > patients.update(:all, address: "hodal")
+  TRANSACTION (0.4ms)  BEGIN
+  Patient Update (31.5ms)  UPDATE "patients" SET "address" = $1, "updated_at" = $2 WHERE "patients"."id" = $3  [["address", "hodal"], ["updated_at", "2022-01-24 12:02:26.789530"], ["id", 2]]                    
+  TRANSACTION (16.1ms)  COMMIT                                                         
+  TRANSACTION (0.3ms)  BEGIN                                                           
+  Patient Update (0.7ms)  UPDATE "patients" SET "address" = $1, "updated_at" = $2 WHERE "patients"."id" = $3  [["address", "hodal"], ["updated_at", "2022-01-24 12:02:26.840387"], ["id", 3]]                     
+  TRANSACTION (4.4ms)  COMMIT    
+  
+  -----------------------------------------------
+  
+  **** Delete:--
+  
+  employee = Employee.find_by(salary: 5000)
+  
+  id: 1,                                                                    
+ name: "krishan",                                                          
+ gender: "male",                                                           
+ dob: Wed, 26 Jul 2000,                                                    
+ specialization: nil,                                                      
+ salary: 5000,                                                             
+ department_id: nil,                                                       
+ created_at: Mon, 24 Jan 2022 10:26:17.466001000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 10:26:17.466001000 UTC +00:00> 
+
+
+3.0.0 :072 > employee.destroy
+
+  TRANSACTION (0.3ms)  BEGIN
+  Employee Destroy (0.6ms)  DELETE FROM "employees" WHERE "employees"."id" = $1  [["id", 1]]
+  TRANSACTION (54.6ms)  COMMIT  
+  
+  
+  
+  3.0.0 :077 > Employee.destroy_by(id: 3)
+  
+  Employee Load (0.5ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1  [["id", 3]]
+  TRANSACTION (0.4ms)  BEGIN                                    
+  Employee Destroy (0.5ms)  DELETE FROM "employees" WHERE "employees"."id" = $1  [["id", 3]]
+  TRANSACTION (36.8ms)  COMMIT                                  
+ =>
+                                                              
+[#<Employee:0x0000561abf9da6e0                                  
+  id: 3,                                                        
+  name: "mohit",                                                
+  gender: "male",                                               
+  dob: Tue, 01 Feb 2000,                                        
+  specialization: nil,                                          
+  salary: nil,                                                  
+  department_id: nil,                                           
+  created_at: Mon, 24 Jan 2022 10:30:30.671896000 UTC +00:00,   
+  updated_at: Mon, 24 Jan 2022 10:30:30.671896000 UTC +00:00>]  
+  
+  
