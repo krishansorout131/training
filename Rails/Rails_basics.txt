@@ -223,5 +223,152 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/hospital_management$ rails db:migrate
    -> 0.0101s
 == 20220122122925 RemoveForeignKey: migrated (0.0103s) ========================
 
+
+*** Adding refrence :--
+class AddingRefrence < ActiveRecord::Migration[7.0]
+  def change
+    add_reference(:departments, :employees,foreign_key: true)
+  end
+end
+
+output:--
+== 20220124051125 AddingRefrence: migrating ===================================
+-- add_reference(:departments, :employees, {:foreign_key=>true})
+   -> 0.3366s
+== 20220124051125 AddingRefrence: migrated (0.3368s) ==========================
+
+*** create table :- rails g migration CreateNewtable
+
+class CreateNewtable < ActiveRecord::Migration[7.0]
+  def change
+    create_table :lab do |t|
+     
+      t.string :name
+      t.integer :lab_code
+    end
+  end
+end
+
+output:--
+
+== 20220124052741 CreateNewtable: migrating ===================================
+-- create_table(:lab)
+   -> 0.5052s
+== 20220124052741 CreateNewtable: migrated (0.5054s) ==========================
       
+
+** drop table :--
+
+class RemoveTable < ActiveRecord::Migration[7.0]
+  def change
+    drop_table :lab
+  end
+end
+
+output:--
+== 20220124053534 RemoveTable: migrating ======================================
+-- drop_table(:lab)
+   -> 0.0393s
+== 20220124053534 RemoveTable: migrated (0.0394s) =============================
+
+** Remove index :-
+
+class RemoveIndeFromEmployees < ActiveRecord::Migration[7.0]
+  def change
+    remove_index :employees, :name
+  end
+end
+
+output:--
+== 20220124054045 RemoveIndeFromEmployees: migrating ==========================
+-- remove_index(:employees, :name)
+   -> 0.0081s
+== 20220124054045 RemoveIndeFromEmployees: migrated (0.0082s) =================
+
+** Remove Refrence :--
+
+class RemoveRefrence < ActiveRecord::Migration[7.0]
+  def change
+    remove_reference :departments, :employees, foreign_key: true
+  end
+end
+
+output:--
+== 20220124054434 RemoveRefrence: migrating ===================================
+-- remove_reference(:departments, :employees, {:foreign_key=>true})
+   -> 0.0133s
+== 20220124054434 RemoveRefrence: migrated (0.0135s) ==========================
+
+*** remove Timestamps :--
+class RemoveTimestamps < ActiveRecord::Migration[7.0]
+  def change
+    remove_timestamps :departments
+  end
+end
+
+output:--
+== 20220124055015 RemoveTimestamps: migrating =================================
+-- remove_timestamps(:departments)
+   -> 0.0065s
+== 20220124055015 RemoveTimestamps: migrated (0.0067s) ========================
+
+** Adding Timestamps :--
+
+class AddingTimestamps < ActiveRecord::Migration[7.0]
+  def change
+    add_timestamps :departments, null: false
+  end
+end
+
+output:--
+== 20220124055321 AddingTimestamps: migrating =================================
+-- add_timestamps(:departments, {:null=>false})
+   -> 0.0063s
+== 20220124055321 AddingTimestamps: migrated (0.0064s) ========================
+
+** rename column :-
+class RenamingColumn < ActiveRecord::Migration[7.0]
+  def change
+    rename_column :patients, :gender, :address
+    add_index :employees, :name
+  end
+end
+
+output:--
+== 20220124055751 RenamingColumn: migrating ===================================
+-- rename_column(:patients, :gender, :address)
+   -> 0.0071s
+-- add_index(:employees, :name)
+   -> 0.1535s
+== 20220124055751 RenamingColumn: migrated (0.1608s) ==========================
+
+
+
+*** rename index :--
+class RenameIndex < ActiveRecord::Migration[7.0]
+  def change
+    rename_index :employees, "index_employees_on_name", "n"
+  end
+end
+
+output:
+== 20220124060412 RenameIndex: migrating ======================================
+-- rename_index(:employees, "index_employees_on_name", "n")
+   -> 0.0062s
+== 20220124060412 RenameIndex: migrated (0.0065s) =============================
+
+*** rename table :-
+class RenameTable < ActiveRecord::Migration[7.0]
+  def change
+    rename_table 'patients', 'all_patients'
+  end
+end
+
+output:--
+
+== 20220124061349 RenameTable: migrating ======================================
+-- rename_table("patients", "all_patients")
+   -> 0.0149s
+== 20220124061349 RenameTable: migrated (0.0151s) =============================
+
 
