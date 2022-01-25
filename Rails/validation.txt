@@ -1,0 +1,49 @@
+                              -----------------------------> Active Record Validations <-----------------------------
+                           
+                           
+*** valid? and invalid?
+
+Before saving an Active Record object, Rails runs your validations. If these validations produce any errors, Rails does not save the object.
+
+You can also run these validations on your own. valid? triggers your validations and returns true if no errors were found in the object, and false otherwise.                             
+
+example:-
+
+class Employee < ApplicationRecord
+    validates :salary, presence: true 
+end
+
+output:--
+3.0.0 :006 > employee = Employee.create(name: "Krishan", gender: "male").valid?
+ => false 
+ 
+ 3.0.0 :011 > employee.errors.objects.first.full_message
+ => "Salary can't be blank" 
+3.0.0 :012 > 
+
+3.0.0 :012 > employee.errors.size
+ => 1
+ 
+ 3.0.0 :020 > employee.errors.objects[0]
+ => #<ActiveModel::Error attribute=salary, type=blank, options={}> 
+ 
+ 
+ class Employee < ApplicationRecord
+    validates :salary, presence: true 
+    validates :specialization, presence: true
+end
+
+3.0.0 :014 > employee = Employee.create(name: "Krishan", gender: "male")
+
+3.0.0 :014 > employee.errors
+ => #<ActiveModel::Errors [#<ActiveModel::Error attribute=salary, type=blank, options={}>, #<ActiveModel::Error attribute=specialization, type=blank, options={}>]>                         
+3.0.0 :015 > 
+
+errors:--
+
+                        ^                                                                     
+3.0.0 :013 > employee.errors.objects[1].full_message
+ => "Specialization can't be blank" 
+3.0.0 :014 > 
+
+
