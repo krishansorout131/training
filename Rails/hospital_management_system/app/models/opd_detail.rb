@@ -1,0 +1,2 @@
+class OpdDetail < ApplicationRecord
+end
