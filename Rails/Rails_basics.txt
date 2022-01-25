@@ -587,4 +587,243 @@ patient = Patient.first
   created_at: Mon, 24 Jan 2022 10:30:30.671896000 UTC +00:00,   
   updated_at: Mon, 24 Jan 2022 10:30:30.671896000 UTC +00:00>]  
   
+
+--------------------------------------------------------------------
+
+
+**** Retrieving Objects from the Database:--
+
+* 3.0.0 :005 > employee = Employee.find(11)
+
+output:-
+3.0.0 :007 > employee
+ => 
+#<Employee:0x000055fcefa731a8
+ id: 11,                    
+ name: "Kapil",             
+ gender: "male",            
+ dob: Thu, 25 Jun 1998,     
+ specialization: "radiologist",
+ salary: 52000,             
+ department_id: 4,          
+ created_at: Mon, 24 Jan 2022 12:46:25.719846000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 12:46:25.719846000 UTC +00:00> 
+
+
+* employees = Employee.find([11,16])
+it will show employees where id = 11 and 16
+
+**3.0.0 :017 > employee = Employee.take   it show first record 
+
+3.0.0 :021 > employee = Employee.take(5)  it shows first 5 results
+
+3.0.0 :023 > employee = Employee.first(3) it shows first 3 results only in asscending order 
+
+
+* last : -
+3.0.0 :032 > employee = Employee.last     returns the last value 
   
+3.0.0 :032 > employee = Employee.last(3)  returns the last 3 values
+
+
+**find_by
+
+3.0.0 :037 > employee = Employee.find_by(name: "Jai singh")
+
+3.0.0 :038 > employee
+ => 
+#<Employee:0x000055fcef929fb8                                                      
+ id: 12,                                                                           
+ name: "Jai singh",                                                                
+ gender: "male",                                                                   
+ dob: Wed, 08 Jul 1998,                                                            
+ specialization: "orthopedic surgeon",                                             
+ salary: 100000,                                                                   
+ department_id: 7,
+ created_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00> 
+
+** where :-
+3.0.0 :041 > employee = Employee.where(name: "Jai singh")
+
+
+**** Conditions :--
+range condition:-
+
+3.0.0 :048 > Employee.where(id: 14 .. 16)
+
+it print three values where id is 14, 15, 16
+
+
+* subset condition :-- in condition
+
+3.0.0 :048 > Employee.where(id: [1,2,3,6,7,8])
+
+
+it will print all values which are matched with table 
+
+
+* not in condition:--
+ 
+3.0.0 :050 > Employee.where.not(id: [1,2,5,6,8])
+
+it only shows the values which is not matched with values in array
+
+
+** or condition :-
+
+3.0.0 :053 > Employee.where(name: "Jai singh").or(Employee.where(id: [1,2,3]))
+
+[#<Employee:0x000055fcefbb0b60                    it only print jai singh because id 1,2,3 is not present in database.
+  id: 12,
+  name: "Jai singh",
+  gender: "male",
+  dob: Wed, 08 Jul 1998,
+  specialization: "orthopedic surgeon",
+  salary: 100000,
+  department_id: 7,
+  created_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00>] 
+
+
+*** and :-
+
+3.0.0 :054 > Employee.where(name: "Jai singh").where(id: [11,12,13])
+
+[#<Employee:0x000055fcefa78c98                                                                   
+  id: 12,                                                                                        
+  name: "Jai singh",                                                                             
+  gender: "male",                                                                                
+  dob: Wed, 08 Jul 1998,                                                                         
+  specialization: "orthopedic surgeon",                                                          
+  salary: 100000,                                                                                
+  department_id: 7,                                                                              
+  created_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00,                                    
+  updated_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00>]     
+  
+  
+3.0.0 :055 > Employee.where(name: "Jai singh").and(Employee.where(id: [1,2,3]))
+  Employee Load (1.0ms)  SELECT "employees".* FROM "employees" WHERE "employees"."name" = $1 AND "employees"."id" IN ($2, $3, $4)  [["name", "Jai singh"], ["id", 1], ["id", 2], ["id", 3]]       
+ => []  
+ 
+
+** ordering:--
+
+3.0.0 :058 > Employee.order(created_at: :desc)
+
+it print all values in descending order as per created time start with last creat value end with first create value
+
+
+*** Selecting Specific Fields:--
+
+3.0.0 :066 > employees = Employee.select(:name, :dob).limit(3)
+
+  Employee Load (0.5ms)  SELECT "employees"."name", "employees"."dob" FROM "employees" LIMIT $1  [["LIMIT", 3]]                                                                        
+ =>                                                                                   
+[#<Employee:0x000055fcefa13af0 id: nil, name: "Harkesh Singh", dob: Thu, 05 Jul 1990>,
+...                                                                                   
+3.0.0 :067 > employees
+ => 
+[#<Employee:0x000055fcefa13af0 id: nil, name: "Harkesh Singh", dob: Thu, 05 Jul 1990>,
+ #<Employee:0x000055fcefa13a28 id: nil, name: "ajay", dob: Sat, 15 Jul 2000>,         
+ #<Employee:0x000055fcefa13960 id: nil, name: "Nikunj goyal", dob: Thu, 04 Jun 1992>] 
+3.0.0 :068 >    
+  
+  
+3.0.0 :070 > employees = Employee.select(:department_id).distinct
+
+*** Limit and Offset :-
+
+3.0.0 :074 > Employee.limit(1)        only show one value 
+
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" LIMIT $1  [["LIMIT", 1]]
+ => 
+[#<Employee:0x000055fcf05e3628
+  id: 6,
+  name: "Harkesh Singh",
+  gender: "male",
+  dob: Thu, 05 Jul 1990,
+  specialization: "physician",
+  salary: 50000,
+  department_id: 1,
+  created_at: Mon, 24 Jan 2022 11:16:41.439184000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 11:16:41.439184000 UTC +00:00>] 
+  
+  
+  3.0.0 :074 > Employee.limit(5)        only show first five value 
+  
+
+3.0.0 :080 > Employee.limit(5).offset(2)
+  
+  it leaves first 2 values and start with 3rd value end with 8th value
+  
+  
+  
+*** Group :-
+
+3.0.0 :082 > Employee.select(:department_id).group("department_id")
+  Employee Load (1.1ms)  SELECT "employees"."department_id" FROM "employees" GROUP BY "employees"."department_id"
+ => 
+[#<Employee:0x000055fcf0648af0 id: nil, department_id: 3>,
+ #<Employee:0x000055fcf0648a28 id: nil, department_id: 5>,
+ #<Employee:0x000055fcf0648960 id: nil, department_id: 4>,
+ #<Employee:0x000055fcf0648870 id: nil, department_id: 6>,
+ #<Employee:0x000055fcf0648758 id: nil, department_id: 2>,
+ #<Employee:0x000055fcf0648690 id: nil, department_id: 7>,
+ #<Employee:0x000055fcf06485a0 id: nil, department_id: 1>] 
+
+
+3.0.0 :083 > Employee.select(:department_id).group("department_id").count
+
+total of grouped items:
+
+  Employee Count (0.reverse_order9ms)  SELECT COUNT("employees"."department_id") AS "count_department_id", "employees"."department_id" AS "employees_department_id" FROM "employees" GROUP BY "employees"."department_id"
+ 
+ => {3=>2, 5=>1, 4=>1, 6=>2, 2=>1, 7=>1, 1=>5} 
+  
+  
+*** Overriding Conditions:-
+
+ unscope :-
+
+3.0.0 :100 > Employee.where('id < 10').limit(5).order('updated_at desc').unscope(:order)
+
+
+** only :-
+
+3.0.0 :106 > Employee.where('id > 10').limit(5).order('updated_at desc').only(:order, :where)
+
+here only the functions / conditions written inside only () will work.
+
+
+** reselect  :--
+
+employee = Employee.select(:name, :salary).reselect(:created_at)
+
+it only select values inside reselect function.
+
+*** reverse_order :-
+
+3.0.0 :115 > Employee.order(created_at: :desc).reverse_order
+
+it shows opposite results of order function.
+
+** rewhere:-
+
+3.0.0 :118 > Employee.where(name: "Jai singh").rewhere(name: "Nikunj goyal")
+
+  Employee Load (0.8ms)  SELECT "employees".* FROM "employees" WHERE "employees"."name" = $1  [["name", "Nikunj goyal"]]                                                                  
+ =>                                                                                      
+[#<Employee:0x000055fcf0419338                                                           
+  id: 7,                                                                             
+  name: "Nikunj goyal",                                                              
+  gender: "male",                                                                    
+  dob: Thu, 04 Jun 1992,                                                             
+  specialization: "medicine specialist",                                             
+  salary: 60000,                                                                     
+  department_id: 1,                                                                  
+  created_at: Mon, 24 Jan 2022 12:38:31.097100000 UTC +00:00,                        
+  updated_at: Mon, 24 Jan 2022 12:38:31.097100000 UTC +00:00>]     
+
+
+
