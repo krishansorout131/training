@@ -47,3 +47,50 @@ errors:--
 3.0.0 :014 > 
 
 
+*** comparision:--
+This check will validate a comparison between any two comparable values. The validator requires a compare option be supplied. Each option accepts a value, proc, or symbol. Any class that includes Comparable can be compared.
+less_than, greater_than, equal_to, greater_than_equal_to
+
+3.0.0 :006 > employee = Employee.create(name: "Karan", gender: "male", specialization: "Ward boy", salary: 60000)
+
+class Employee < ApplicationRecord
+  validates :salary, comparison: {less_than_or_equal_to: 50000}
+end
+
+
+=> 
+ id: 25,                                                                                                                   
+ name: "Karan",                                                                                                            
+ gender: "male",            
+ dob: nil,                  
+ specialization: "Ward boy",
+ salary: 6000,              
+ department_id: nil,        
+ created_at: Wed, 26 Jan 2022 06:44:09.045075000 UTC +00:00,
+ updated_at: Wed, 26 Jan 2022 06:44:09.045075000 UTC +00:00> 
+ 
+ 3.0.0 :006 > employee = Employee.create(name: "Karan", gender: "male", specialization: "Ward boy", salary: 70000)
+ 
+ error:-
+ 
+ 3.0.0 :006 > employee.errors.objects.first.full_message
+ => "Salary must be less than or equal to 50000" 
+ 
+ 
+ ** exclusion
+
+This helper validates that the attributes' values are not included in a given set. In fact, this set can be any enumerable object.
+
+3.0.0 :004 > patient = Patient.create(name: "ravi", gender: "male", address: "delhi")
+
+class Patient < ApplicationRecord
+  validates :address, exclusion: { in: %w(delhi gurugram), message: "%{value} is reserved." }
+end
+
+
+error:--
+
+3.0.0 :005 > patient.errors.objects.first.full_message
+ => "Address gurugram is reserved." 
+ 
+ 
