@@ -7,6 +7,8 @@ class Employee < ApplicationRecord
   #validates :specialization, absence: true
   validates :name, uniqueness: true
   belongs_to :department
-  has_many :opd_details
-  has_many :patients, through: :opd_details
+  #has_many :opd_details
+  #has_many :patients, through: :opd_details
+  has_one :opd_detail
+  has_one :patient, through: :opd_detail
 end
