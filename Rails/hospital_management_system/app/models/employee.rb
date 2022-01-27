@@ -5,4 +5,5 @@ class Employee < ApplicationRecord
   validates :name, format: { with: /\A[a-zA-Z]+\z/}
   validates :salary, numericality: { only_integer: true}
   validates :specialization, absence: true
+  validates :name, uniqueness: true
 end
