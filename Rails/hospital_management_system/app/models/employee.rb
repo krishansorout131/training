@@ -3,4 +3,6 @@ class Employee < ApplicationRecord
   validates :specialization, presence: true
   validates :salary, comparison: { greater_than_or_equal_to: 10000 }
   validates :name, format: { with: /\A[a-zA-Z]+\z/}
+  validates :salary, numericality: { only_integer: true}
+  
 end
