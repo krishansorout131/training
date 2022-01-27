@@ -6,4 +6,5 @@ class Employee < ApplicationRecord
   validates :salary, numericality: { only_integer: true}
   #validates :specialization, absence: true
   validates :name, uniqueness: true
+  belongs_to :department
 end
