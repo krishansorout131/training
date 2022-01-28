@@ -1,0 +1,153 @@
+                              ------------------------->  Active Record Associations  <-------------------------
+                              
+                              
+**** Associations
+
+In Rails, an association is a connection between two Active Record models. Why do we need associations between models? Because they make common operations simpler and easier in your code.                               
+
+
+** The Types of Associations
+
+Rails supports six types of associations:
+
+    belongs_to
+    has_one
+    has_many
+    has_many :through
+    has_one :through
+    has_and_belongs_to_many
+
+
+** The belongs_to Association :--
+
+A belongs_to association sets up a connection with another model, such that each instance of the declaring model "belongs to" one instance of the other model.
+
+* department has many employees and employee belongs to department,
+
+class Department < ApplicationRecord
+  has_many :employees  
+end
+
+class Employee < ApplicationRecord
+  belongs_to :department
+end
+
+query 1 :- find deparment detais of a selected employee.
+
+3.0.0 :007 > employee = Employee.find_by(id: 6 )
+
+3.0.0 :008 > employee.department
+  Department Load (0.5ms)  SELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]                                                           
+ =>                                                                   
+#<Department:0x0000556a5d3a2d58                                       
+ id: 1,                                                               
+ name: "medical department",                                          
+ created_at: Mon, 24 Jan 2022 11:05:13.547846000 UTC +00:00,          
+ updated_at: Mon, 24 Jan 2022 11:05:13.547846000 UTC +00:00>     
+
+
+3.0.0 :009 > employee.department.name
+ => "medical department" 
+
+
+
+*** many to many relation / The has_many :through Association :--
+
+A has_many :through association is often used to set up a many-to-many connection with another model. This association indicates that the declaring model can be matched with zero or more instances of another model by proceeding through a third model.
+
+
+queries:--
+
+1. find all appoinments of a patient with multiple doctors.
+
+3.0.0 :001 > patient = Patient.first
+  Patient Load (0.5ms)  SELECT "patients".* FROM "patients" ORDER BY "patients"."id" ASC LIMIT $1  [["LIMIT", 1]]
+ =>                                                                      
+#<Patient:0x00007f6b1caf2420  
+
+3.0.0 :002 > patient.employees
+  Employee Load (1.9ms)  SELECT "employees".* FROM "employees" INNER JOIN "opd_details" ON "employees"."id" = "opd_details"."employee_id" WHERE "opd_details"."patient_id" = $1  [["patient_id", 1]]
+ =>                                                                      
+[#<Employee:0x0000564f81f04840                                           
+  id: 6,                                                                 
+  name: "Harkesh Singh",                                                 
+  gender: "male",                                                        
+  dob: Thu, 05 Jul 1990,                                                 
+  specialization: "physician",                                   
+  salary: 50000,                                                 
+  department_id: 1,                                              
+  created_at: Mon, 24 Jan 2022 11:16:41.439184000 UTC +00:00,    
+  updated_at: Mon, 24 Jan 2022 11:16:41.439184000 UTC +00:00>,   
+ #<Employee:0x0000564f81f7e2a8                                   
+  id: 12,
+  name: "Jai singh",
+  gender: "male",
+  dob: Wed, 08 Jul 1998,
+  specialization: "orthopedic surgeon",
+  salary: 100000,
+  department_id: 7,
+  created_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 12:54:01.794218000 UTC +00:00>] 
+
+
+
+
+2. find all patients who have appoinment with a doctor.
+
+employee = Employee.find_by(id: 6)
+
+3.0.0 :002 > employee.patients.each {|patient| puts patient.name}
+  Patient Load (1.1ms)  SELECT "patients".* FROM "patients" INNER JOIN "opd_details" ON "patients"."id" = "opd_details"."patient_id" WHERE "opd_details"."employee_id" = $1  [["employee_id", 6]]                                                              
+Ram kumar                                                                                                            
+Shyam kumar  
+
+*** The has_one :through Association :--
+
+A has_one :through association sets up a one-to-one connection with another model. This association indicates that the declaring model can be matched with one instance of another model by proceeding through a third model. 
+
+class Employee < ApplicationRecord
+  #has_many :opd_details
+  #has_many :patients, through: :opd_details
+  has_one :opd_detail
+  has_one :patient, through: :opd_detail
+end
+
+class Patient < ApplicationRecord
+  #has_many :opd_details
+  #has_many :employees, through: :opd_details
+  has_one :opd_detail
+end
+
+class OpdDetail < ApplicationRecord
+  belongs_to :employee
+  belongs_to :patient  
+end
+
+query 1:- find one patient of a particular doctor.
+
+3.0.0 :001 > employee = Employee.find_by(id: 6)
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 6], ["LIMIT", 1]]
+ =>               
+#<Employee:0x000055835a508e70
+... 
+3.0.0 :002 > employee.patient
+  Patient Load (1.2ms)  SELECT "patients".* FROM "patients" INNER JOIN "opd_details" ON "patients"."id" = "opd_details"."patient_id" WHERE "opd_details"."employee_id" = $1 LIMIT $2  [["employee_id", 6], ["LIMIT", 1]]
+ => 
+#<Patient:0x00007f53985aa788
+ id: 1,
+ name: "Ram kumar",
+ gender: "male",
+ dob: Wed, 23 Sep 1998,
+ address: "hodal",
+ created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 11:57:04.174980000 UTC +00:00> 
+ 
+
+
+
+ *** The has_and_belongs_to_many Association
+
+A has_and_belongs_to_many association creates a direct many-to-many connection with another model, with no intervening model. This association indicates that each instance of the declaring model refers to zero or more instances of another model. 
+
+
+
