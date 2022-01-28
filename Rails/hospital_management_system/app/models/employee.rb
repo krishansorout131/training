@@ -11,4 +11,5 @@ class Employee < ApplicationRecord
   #has_many :patients, through: :opd_details
   has_one :opd_detail
   has_one :patient, through: :opd_detail
+  has_many :feedbacks, as: :feedback
 end
