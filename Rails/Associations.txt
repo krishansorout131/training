@@ -149,5 +149,163 @@ query 1:- find one patient of a particular doctor.
 
 A has_and_belongs_to_many association creates a direct many-to-many connection with another model, with no intervening model. This association indicates that each instance of the declaring model refers to zero or more instances of another model. 
 
+1. we need to create a join table within we wants to make has_and_belongs_to_many association.
+
+class Employee < ApplicationRecord
+  has_and_belongs_to_many :patients
+end
 
 
+class Patient < ApplicationRecord
+   has_and_belongs_to_many :employees
+end
+
+query 1:-- find all patients who have appoinment with a particular doctor.
+
+3.0.0 :026 > doctor = Employee.where(id: 6)
+3.0.0 :043 > doctor.patients
+
+  Patient Load (0.7ms)  SELECT "patients".* FROM "patients" INNER JOIN "employees_patients" ON "patients"."id" = "employees_patients"."patient_id" WHERE "employees_patients"."employee_id" = $1  [["employee_id", 6]]
+ =>                                                                    
+[#<Patient:0x00007fb300eb4de8                                          
+  id: 1,                                                               
+  dob: Wed, 23 Sep 1998,                                               
+  address: "hodal",                                                    
+  created_at: Mon, 24 Jan 2022 11:33:00.797267000 UTC +00:00,          
+  updated_at: Mon, 24 Jan 2022 11:57:04.174980000 UTC +00:00>,         
+ #<Patient:0x00007fb300eb4cf8                                          
+  id: 2,                                                               
+  name: "Shyam kumar",                                                 
+  gender: "male",
+  dob: Wed, 20 Aug 1997,
+  address: "hodal",
+  created_at: Mon, 24 Jan 2022 11:35:11.989627000 UTC +00:00,
+  updated_at: Mon, 24 Jan 2022 12:02:26.789530000 UTC +00:00>]
+ 
+
+
+***** Polymorphic Associations
+
+A slightly more advanced twist on associations is the polymorphic association. With polymorphic associations, a model can belong to more than one other model, on a single association.
+
+class Feedback < ApplicationRecord
+  belongs_to :feedback, polymorphic: true 
+end
+
+class Department < ApplicationRecord
+    
+  has_many :feedbacks, as: :feedback
+end
+
+class Employee < ApplicationRecord
+  has_many :feedbacks, as: :feedback
+end
+
+
+output:--
+
+3.0.0 :017 > employee = Employee.first
+ => 
+#<Employee:0x000055c75bcba2c8                       
+ id: 5,                                             
+ name: "ajay",                                      
+ gender: "male",                                    
+ dob: Sat, 15 Jul 2000,     
+ specialization: "medicine specialist",
+ salary: 10000,             
+ department_id: 1,          
+ created_at: Mon, 24 Jan 2022 10:52:20.757229000 UTC +00:00,
+ updated_at: Mon, 24 Jan 2022 12:34:23.925887000 UTC +00:00> 
+ 
+
+3.0.0 :017 > employee.feedbacks.create(title: "good doctor")
+
+3.0.0 :019 > employee.feedbacks.last
+ => 
+#<Feedback:0x000055c75d1df068                                                            
+ id: 3,                                                                                  
+ title: "good doctor",                                                                   
+ feedback_type: "Employee",                                                              
+ feedback_id: 5,                                                                         
+ created_at: Fri, 28 Jan 2022 09:47:08.343823000 UTC +00:00,                             
+ updated_at: Fri, 28 Jan 2022 09:47:08.343823000 UTC +00:00>                             
+3.0.0 :020 > 
+
+
+***self joins :-
+
+In designing a data model, you will sometimes find a model that should have a relation to itself. For example, you may want to store all employees in a single database model, but be able to trace relationships such as between manager and subordinates. This situation can be modeled with self-joining associations:
+
+class Employee < ApplicationRecord
+  has_many :employees, class_name: "Employee",foreign_key: "manager_id"
+  belongs_to :manager, class_name: "Employee", optional: true
+end
+
+query: 1. find details of manager of an employee.
+
+employee = Employee.first
+
+3.0.0 :005 > employee
+ => 
+#<Employee:0x00007f002c4fa2d0                        
+ id: 5,                                              
+ name: "ajay",                                       
+ gender: "male",                                     
+ dob: Sat, 15 Jul 2000,     
+ specialization: "medicine specialist",
+ salary: 10000,             
+ department_id: 1,          
+ created_at: Mon, 24 Jan 2022 10:52:20.757229000 UTC +00:00,
+ post: "Doctor",            
+ manager_id: 28>   
+ 
+ 
+ 3.0.0 :006 > employee.manager
+  Employee Load (0.6ms)  SELECT "employees".* FROM "employees" WHERE "employees"."id" = $1 LIMIT $2  [["id", 28], ["LIMIT", 1]]
+ =>                                                                      
+#<Employee:0x000055ca973f0ef0                                            
+ id: 28,                                                                 
+ name: "Bhagat dagar",                                                   
+ gender: "male",                                                         
+ dob: Tue, 01 Jan 1980,                                                  
+ specialization: "doctors management",                                   
+ salary: 100000,                                                         
+ department_id: 1,                                                       
+ created_at: Sat, 29 Jan 2022 11:10:16.132767000 UTC +00:00,             
+ post: "Manager",                                                        
+ manager_id: nil> 
+ 
+ query 2. Find names of all employees working under a manager.
+ 
+ 3.0.0 :009 > manager = Employee.where(post: "Manager").first
+  Employee Load (0.5ms)  SELECT "employees".* FROM "employees" WHERE "employees"."post" = $1 ORDER BY "employees"."id" ASC LIMIT $2  [["post", "Manager"], ["LIMIT", 1]]
+ => 
+#<Employee:0x000055ca972ab838
+... 
+3.0.0 :010 > manager
+ => 
+#<Employee:0x000055ca972ab838
+ id: 28,
+ name: "Bhagat dagar",
+ gender: "male",
+ dob: Tue, 01 Jan 1980,
+ specialization: "doctors management",
+ salary: 100000,
+ department_id: 1,
+ created_at: Sat, 29 Jan 2022 11:10:16.132767000 UTC +00:00,
+ post: "Manager",
+ manager_id: nil> 
+ 
+ 
+3.0.0 :012 > manager.employees.each {|employee| puts employee.name}
+ajay
+Harkesh Singh                                                                                                    
+Nikunj goyal                                                                                                     
+Neeraj sorout                                                                                                    
+Monika                                                                                                           
+Kapil                                                                                                            
+Jai singh   
+
+ 
+  
+  
