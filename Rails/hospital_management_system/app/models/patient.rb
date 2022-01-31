@@ -6,4 +6,10 @@ class Patient < ApplicationRecord
   #has_many :employees, through: :opd_details
   has_one :opd_detail
   has_and_belongs_to_many :employees
+  
+  after_validation :addres_change
+  private
+  def addres_change
+    self.address = "delhi"
   end
+end  
