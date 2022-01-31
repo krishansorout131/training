@@ -15,4 +15,11 @@ class Employee < ApplicationRecord
   has_and_belongs_to_many :patients
   has_many :employees, class_name: "Employee",foreign_key: "manager_id"
   belongs_to :manager, class_name: "Employee", optional: true
+  
+  before_validation :remove_whitespaces
+  private
+    
+  def remove_whitespaces
+    specialization.strip!
+  end  
 end
