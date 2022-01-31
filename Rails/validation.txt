@@ -94,3 +94,207 @@ error:--
  => "Address gurugram is reserved." 
  
  
+ *** format :--
+
+This helper validates the attributes' values by testing whether they match a given regular expression, which is specified using the :with option.
+
+class Employee < ApplicationRecord
+  validates :salary, presence: true 
+  validates :specialization, presence: true
+  validates :salary, comparison: { greater_than_or_equal_to: 10000 }
+  validates :name, format: { with: /\A[a-zA-Z]+\z/}                        <-----------
+end
+
+
+output:--
+3.0.0 :003 > employee = Employee.create(name: "@mohit", gender: "male", specialization: "Ward boy", salary: 15000)
+ => 
+#<Employee:0x0000555919715760                                                                                              
+...                                                                                                                        
+3.0.0 :004 > employee.errors.objects.first.full_message
+ => "Name is invalid" 
+
+3.0.0 :005 > employee = Employee.create(name: "123mohit", gender: "male", specialization: "Ward boy", salary: 15000)
+ => 
+#<Employee:0x000055591a8b7e28                                                                                              
+...                                                         
+3.0.0 :006 > employee.errors.objects.first.full_message
+ => "Name is invalid" 
+3.0.0 :007 > 
+
+*** inclusion
+
+This helper validates that the attributes' values are included in a given set. In fact, this set can be any enumerable object.
+
+class Patient < ApplicationRecord
+  validates :address, exclusion: { in: %w(delhi gurugram), message: "%{value} is reserved." }
+  validates :address, inclusion: { in: %w(hodal palwal faridabad), message: "not accepting %{value}"}
+end
+
+output:--
+
+3.0.0 :001 > patient = Patient.create(name: "ravinder", gender: "male", address: "hisar")
+ => 
+#<Patient:0x00005615c2833690                               
+...                                                        
+3.0.0 :002 > patient.errors.objects.first.full_message
+ => "Address not accepting hisar"                                 
+ 
+
+*** length
+
+This helper validates the length of the attributes' values. It provides a variety of options, so you can specify length constraints in different ways:
+
+
+    :minimum - The attribute cannot have less than the specified length.
+    :maximum - The attribute cannot have more than the specified length.
+    :in (or :within) - The attribute length must be included in a given interval. The value for this option must be a range.
+    :is - The attribute length must be equal to the given value.
+ 
+ class Patient < ApplicationRecord
+  validates :address, exclusion: { in: %w(delhi gurugram), message: "%{value} is reserved." }
+  validates :address, inclusion: { in: %w(hodal palwal faridabad), message: "not accepting %{value}"}
+  validates :name, length: { minimum: 3 , message: "name should be greater then 3 words"}
+end
+
+ 3.0.0 :005 > patient = Patient.create(name: "ra", gender: "male", address: "hodal")
+ => 
+#<Patient:0x000055cde4ddc860                                                         
+...                                                                                  
+3.0.0 :006 > patient.errors.objects[0].message
+ => "name should be greater then 3 words" 
+ 
+ ** numericality
+
+This helper validates that your attributes have only numeric values. By default, it will match an optional sign followed by an integer or floating point number.
+
+class Employee < ApplicationRecord
+  validates :salary, presence: true 
+  #validates :specialization, presence: true
+  #validates :salary, comparison: { greater_than_or_equal_to: 10000 }
+  validates :name, format: { with: /\A[a-zA-Z]+\z/}
+  validates :salary, numericality: { only_integer: true}           <------
+end
+
+output:--
+
+3.0.0 :001 > employee = Employee.create(name: "robin", gender: "male", salary: 15000.500)
+ => 
+#<Employee:0x00007f49dc9c4c30                                                                                        
+...                                                                                                                  
+3.0.0 :002 > employee.errors.objects.first.full_message
+ => "Salary must be an integer" 
+
+
+** absence
+
+This helper validates that the specified attributes are absent. It uses the present? method to check if the value is not either nil or a blank string, that is, a string that is either empty or consists of whitespace.
+
+class Employee < ApplicationRecord
+  validates :salary, presence: true 
+  #validates :specialization, presence: true
+  validates :salary, comparison: { greater_than_or_equal_to: 10000 }
+  validates :name, format: { with: /\A[a-zA-Z]+\z/}
+  validates :salary, numericality: { only_integer: true}
+  validates :specialization, absence: true
+end
+
+output:--
+3.0.0 :001 > employee = Employee.create(name: "robin", gender: "male",specialization: "ward boy", salary: 12000)
+ => 
+#<Employee:0x000055623b192768                                                                                       
+...                                                                                                                 
+3.0.0 :002 > employee.errors.objects.first.full_message
+ => "Specialization must be blank" 
+3.0.0 :003 > 
+      
+** uniqueness
+
+This helper validates that the attribute's value is unique right before the object gets saved. It does not create a uniqueness constraint in the database, so it may happen that two different database connections create two records with the same value for a column that you intend to be unique. To avoid that, you must create a unique index on that column in your database.
+
+class Employee < ApplicationRecord
+  validates :name, uniqueness: true
+end
+      
+output:--
+
+3.0.0 :001 > employee = Employee.create(name: "Shiva", gender: "male", salary: 12000)
+  TRANSACTION (0.6ms)  BEGIN
+  Employee Exists? (2.0ms)  SELECT 1 AS one FROM "employees" WHERE "employees"."name" = $1 LIMIT $2  [["name", "Shiva"], ["LIMIT", 1]]                                                                                                         
+  TRANSACTION (0.5ms)  ROLLBACK                                                                                     
+ =>                                                                                                                 
+#<Employee:0x000055d8c93d0a70                                                                           
+...                         
+3.0.0 :002 > employee.errors.objects.first.full_message
+ => "Name has already been taken" 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ***** Common Validation Options:--
+ 
+ 3.1 :allow_nil
+
+The :allow_nil option skips the validation when the value being validated is nil.
+
+class Patient < ApplicationRecord
+  validates :address, exclusion: { in: %w(delhi gurugram), message: "%{value} is reserved." }
+  validates :address, inclusion: { in: %w(hodal palwal faridabad), message: "not accepting %{value}"}, allow_nil: true   <----
+  validates :name, length: { minimum: 3 , message: "name should be greater then 3 words"}
+end
+
+3.0.0 :003 > patient = Patient.create(name: "Raj", gender: "male")   
+3.0.0 :005 > patient
+ => 
+<Patient:0x0000562245f90f70                                             
+ id: 9,                                                                  
+ name: "Raj",                                                            
+ gender: "male",                             
+ dob: nil,                                   
+ address: nil,                               
+ created_at: Thu, 27 Jan 2022 07:18:53.172227000 UTC +00:00,
+ updated_at: Thu, 27 Jan 2022 07:18:53.172227000 UTC +00:00> 
+ 
+
+
+class Patient < ApplicationRecord
+  validates :address, exclusion: { in: %w(delhi gurugram), message: "%{value} is reserved." }
+  validates :address, inclusion: { in: %w(hodal palwal faridabad), message: "not accepting %{value}"}, allow_blank: true #allow_nil: true
+  validates :name, length: { minimum: 3 , message: "name should be greater then 3 words"}
+
+end
+
+
+3.0.0 :001 > patient = Patient.create(name: "sumit", gender: "male")
+  TRANSACTION (0.5ms)  BEGIN
+  Patient Create (1.2ms)  INSERT INTO "patients" ("name", "gender", "dob", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "sumit"], ["gender", "male"], ["dob", nil], ["address", nil], ["created_at", "2022-01-27 07:46:27.445475"], ["updated_at", "2022-01-27 07:46:27.445475"]]
+  TRANSACTION (29.9ms)  COMMIT                                                 
+ =>                             
+ 
+ 
+ ** Strict Validations
+
+You can also specify validations to be strict and raise ActiveModel::StrictValidationFailed when the object is invalid.
+ 
+ class Employee < ApplicationRecord
+  validates :salary, presence: true 
+  validates :specialization, presence: { strict: true }                 <-------------
+  validates :salary, comparison: { greater_than_or_equal_to: 10000 }
+  validates :name, format: { with: /\A[a-zA-Z]+\z/}
+  validates :salary, numericality: { only_integer: true}
+  #validates :specialization, absence: true
+  validates :name, uniqueness: true
+end
+
+output:--
+
+    3.0.0 :001 > employee = Employee.create(name: "sumit", gender: "male", salary: 15000)
+/home/beryl/.rvm/gems/ruby-3.0.0/gems/activemodel-7.0.1/lib/active_model/errors.rb:316:in `add': Specialization can't be blank (ActiveModel::StrictValidationFailed)                                                                            
+
+
+
+
