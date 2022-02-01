@@ -9,11 +9,19 @@ class Patient < ApplicationRecord
   
   after_validation :addres_change
   before_save :check
+  validate :age_check
   private
   def addres_change
     self.address = "delhi"
   end
   def check
     self.name.capitalize!
+  end  
+
+  def age_check
+    age = ((Time.zone.now - self.dob.to_time) / (1.year.seconds)).to_i
+    if age < 8
+      self.errors.add :dob, "Patient's age must be greater than 8 year"
+    end
   end  
 end  
