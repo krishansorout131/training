@@ -9,15 +9,26 @@ class Patient < ApplicationRecord
   
   after_validation :addres_change
   before_save :check
+  after_save :after_check
+  around_save :around_check
   validate :age_check
+
   private
   def addres_change
     self.address = "delhi"
   end
   def check
+    self.name.downcase!
+  end
+  def around_check
+    self.name.upcase!
+    yield
+    puts "new value saved #{self.name}"
+  end  
+  
+  def after_check
     self.name.capitalize!
   end  
-
   def age_check
     age = ((Time.zone.now - self.dob.to_time) / (1.year.seconds)).to_i
     if age < 8
