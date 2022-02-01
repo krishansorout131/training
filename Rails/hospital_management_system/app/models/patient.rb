@@ -8,8 +8,12 @@ class Patient < ApplicationRecord
   has_and_belongs_to_many :employees
   
   after_validation :addres_change
+  before_save :check
   private
   def addres_change
     self.address = "delhi"
   end
+  def check
+    self.name.capitalize!
+  end  
 end  
