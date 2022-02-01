@@ -1,10 +1,12 @@
 class Department < ApplicationRecord
   has_many :employees  
   has_many :feedbacks, as: :feedback
-  before_create :downcase_check
-  after_create :after_capitalize
-  around_create :around_upcase
+  #before_create :downcase_check
+  #after_create :after_capitalize
+  #around_create :around_upcase
   before_update :update_name
+  after_update :after_capitalize
+  around_update :around_upcase
 
   private
   def downcase_check
