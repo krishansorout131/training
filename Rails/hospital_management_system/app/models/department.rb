@@ -4,6 +4,7 @@ class Department < ApplicationRecord
   before_create :downcase_check
   after_create :after_capitalize
   around_create :around_upcase
+  before_update :update_name
 
   private
   def downcase_check
@@ -16,5 +17,8 @@ class Department < ApplicationRecord
   end  
   def after_capitalize
     self.name.upcase!
-  end  
+  end 
+  def update_name
+    self.name.strip!
+  end   
 end
