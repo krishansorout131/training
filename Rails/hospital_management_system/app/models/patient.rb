@@ -7,7 +7,7 @@ class Patient < ApplicationRecord
   has_one :opd_detail
   has_and_belongs_to_many :employees
   
-  after_validation :addres_change
+  after_validation :addres_change, if: :address_empty?
   before_save :check
   after_save :after_check
   around_save :around_check
@@ -15,6 +15,15 @@ class Patient < ApplicationRecord
   after_initialize :initialize_obj
   after_find :find_record
   
+private
+def address_empty?
+  if self.address == nil
+    return true
+  else
+    return false
+  end
+end
+
   private
   def addres_change
     self.address = "delhi"
