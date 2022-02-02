@@ -15,16 +15,15 @@ class Patient < ApplicationRecord
   after_initialize :initialize_obj
   after_find :find_record
   
-private
-def address_empty?
-  if self.address == nil
-    return true
-  else
-    return false
-  end
-end
-
   private
+  def address_empty?
+    if self.address == nil
+      return true
+    else
+      return false
+    end
+  end
+
   def addres_change
     self.address = "delhi"
   end
