@@ -12,6 +12,7 @@ class Patient < ApplicationRecord
   after_save :after_check
   around_save :around_check
   validate :age_check
+  after_initialize :initialize_obj
 
   private
   def addres_change
@@ -34,5 +35,9 @@ class Patient < ApplicationRecord
     if age < 8
       self.errors.add :dob, "Patient's age must be greater than 8 year"
     end
+  end 
+  
+  def initialize_obj
+    puts "A new object is initailized"
   end  
 end  
