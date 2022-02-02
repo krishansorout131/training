@@ -1,0 +1,355 @@
+                                
+                                ------------------------>  Active Record Callbacks  <---------------------------
+                                
+ *** Callbacks are methods that get called at certain moments of an object's life cycle. With callbacks it is possible to write code that will run whenever an Active Record object is created, saved, updated, deleted, validated, or loaded from the database.
+ 
+ *** The Object Life Cycle
+
+During the normal operation of a Rails application, objects may be created, updated, and destroyed. Active Record provides hooks into this object life cycle so that you can control your application and its data.
+
+Callbacks allow you to trigger logic before or after an alteration of an object's state.
+
+
+** Available Callbacks :-
+
+* before_validation :-
+
+3.0.0 :009 > employee = Employee.create(name: "Shaheed khan", gender: "male",specialization: "      hospital management       ", dob: "12-
+05-1997",salary: 80000, post: "Manager", department_id: 5)
+
+class Employee < ApplicationRecord
+   before_validation :remove_whitespaces
+  private
+    
+  def remove_whitespaces
+    specialization.strip!
+  end  
+end
+
+output:-- 3.0.0 :004 > employee
+ => 
+#<Employee:0x000055b3fd638ce0                                              
+ id: 32,                                                                   
+ name: "Shaheed khan",                                                     
+ gender: "male",                                                           
+ dob: Mon, 12 May 1997,     
+ specialization: "hospital management",
+ salary: 80000,             
+ department_id: 5,          
+ created_at: Mon, 31 Jan 2022 12:13:56.785505000 UTC +00:00,
+ post: "Manager",           
+ manager_id: nil>                                  
+                               
+ 
+*** after_validation(*args, &block) 
+
+  3.0.0 :001 > patient = Patient.create(name: "Rajat", gender: "male", dob: "23-04-2000" )
+  TRANSACTION (0.4ms)  BEGIN
+  
+class Patient < ApplicationRecord
+  
+  after_validation :addres_change
+  private
+  def addres_change
+    self.address = "delhi"
+  end
+end  
+                                
+  output:--
+  
+3.0.0 :005 > patient
+ => 
+#<Patient:0x000055b3fdb70410                 
+ id: 16,                                     
+ name: "Rajat",                              
+ gender: "male",                             
+ dob: Sun, 23 Apr 2000,                      
+ address: "delhi",                           
+ created_at: Mon, 31 Jan 2022 12:42:22.319175000 UTC +00:00,
+ updated_at: Mon, 31 Jan 2022 12:42:22.319175000 UTC +00:00>
+ 
+ 
+** before_save , around_save , before_create   :--
+
+class Patient < ApplicationRecord
+  before_save :check
+  after_save :after_check
+  around_save :around_check
+ 
+  private
+  
+  def check
+    self.name.downcase!
+  end
+  def around_check
+    self.name.upcase!
+    yield
+    puts "new value saved #{self.name}"
+  end  
+  
+  def after_check
+    self.name.capitalize!
+  end  
+end                               
+
+
+output:--
+
+3.0.0 :003 > patient = Patient.create(name: "ravi SINGH", gender: "male", dob: "20-03-1998" )
+
+3.0.0 :002 > patient
+ => 
+#<Patient:0x00005579b5f19878                 
+ id: 35,                                     
+ name: "Ravi singh",                         
+ gender: "male",                             
+ dob: Fri, 20 Mar 1998,                      
+ address: "delhi",                           
+ created_at: Tue, 01 Feb 2022 12:02:21.353095000 UTC +00:00,
+ updated_at: Tue, 01 Feb 2022 12:02:21.353095000 UTC +00:00> 
+ 
+
+*** before_update:--
+
+class Department < ApplicationRecord
+  
+  before_update :update_name
+
+  private
+  def update_name
+    self.name.strip!
+  end   
+end
+
+output:--
+
+3.0.0 :003 > department = Department.last
+  Department Load (0.8ms)  SELECT "departments".* FROM "departments" ORDER BY "departments"."id" DESC LIMIT $1  [["LIMIT", 1]]
+ =>                                                   
+#<Department:0x00005579b6d7b010   
+
+3.0.0 :005 > department.update(name: "      Mri departent  ")
+  TRANSACTION (0.3ms)  BEGIN
+  Department Update (0.7ms)  UPDATE "departments" SET "updated_at" = $1 WHERE "departments"."id" = $2  [["updated_at", "2022-02-01 12:07:46.902711"], ["id", 14]]                              
+  TRANSACTION (34.0ms)  COMMIT                       
+ => true    
+ 
+ 3.0.0 :006 > department
+ => 
+#<Department:0x00005579b6d7b010                    
+ id: 14,                                           
+ name: "Mri departent",                            
+ created_at: Tue, 01 Feb 2022 10:45:41.298419000 UTC +00:00,
+ updated_at: Tue, 01 Feb 2022 12:07:46.902711000 UTC +00:00> 
+3.0.0 :007 > 
+
+
+*** before_update, around_update, after_update:--
+
+class Department < ApplicationRecord
+
+  before_update :update_name
+  after_update :after_capitalize
+  around_update :around_upcase
+
+  private
+    
+  def around_upcase
+    self.name.capitalize!
+    yield
+    puts "new value saved #{self.name}"
+  end  
+  def after_capitalize
+    self.name.upcase!
+  end 
+  def update_name
+    self.name.strip!
+  end   
+end
+
+
+output:--
+
+3.0.0 :001 > department = Department.last
+  Department Load (0.5ms)  SELECT "departments".* FROM "departments" ORDER BY "departments"."id" DESC LIMIT $1  [["LIMIT", 1]]
+ =>                                       
+#<Department:0x00007f85b04c8780
+...                         
+3.0.0 :002 > department.update(name: "   mri department   ")
+  TRANSACTION (0.3ms)  BEGIN
+  Department Update (0.7ms)  UPDATE "departments" SET "name" = $1, "updated_at" = $2 WHERE "departments"."id" = $3  [["name", "Mri department"], ["updated_at", "2022-02-01 12:30:53.792892"], ["id", 14]]
+new value saved Mri department
+  TRANSACTION (38.6ms)  COMMIT
+ => true 
+ 
+ 3.0.0 :004 > department
+ => 
+#<Department:0x00007f85b0ad4340     
+ id: 14,                            
+ name: "Mri department",            
+ created_at: Tue, 01 Feb 2022 10:45:41.298419000 UTC +00:00,
+ updated_at: Tue, 01 Feb 2022 12:30:53.792892000 UTC +00:00> 
+ 
+ 
+ *** before_destroy :--
+ 
+ class OpdDetail < ApplicationRecord
+   
+  before_destroy :destroy_details
+  
+  private
+
+  def destroy_details
+    puts "Thankyou #{self.patient.name} for taking treatment from our hospital"
+  end  
+end
+
+output:--
+
+3.0.0 :011 > opd = OpdDetail.last
+  OpdDetail Load (0.5ms)  SELECT "opd_details".* FROM "opd_details" ORDER BY "opd_details"."id" DESC LIMIT $1  [["LIMIT", 1]]
+ =>                                           
+#<OpdDetail:0x0000561fae95bb08                
+...             
+
+3.0.0 :012 > opd
+ => 
+#<OpdDetail:0x0000561fae95bb08                             
+ id: 14,                                                   
+ patient_id: 9,                                            
+ employee_id: 12,                                          
+ created_at: Tue, 01 Feb 2022 13:12:12.132818000 UTC +00:00,
+ updated_at: Tue, 01 Feb 2022 13:12:12.132818000 UTC +00:00> 
+3.0.0 :013 > 
+
+
+
+3.0.0 :013 > opd.destroy
+  TRANSACTION (0.2ms)  BEGIN
+  Patient Load (0.3ms)  SELECT "patients".* FROM "patients" WHERE "patients"."id" = $1 LIMIT $2  [["id", 9], ["LIMIT", 1]]
+
+Thanku Raj for taking treatment from our hospital                                                                                <----------
+
+  OpdDetail Destroy (0.4ms)  DELETE FROM "opd_details" WHERE "opd_details"."id" = $1  [["id", 14]]
+  TRANSACTION (37.9ms)  COMMIT                             
+ =>                                                        
+#<OpdDetail:0x0000561fae95bb08                             
+ id: 14,                                                   
+ patient_id: 9,                                            
+ employee_id: 12,                                          
+ created_at: Tue, 01 Feb 2022 13:12:12.132818000 UTC +00:00,
+ updated_at: Tue, 01 Feb 2022 13:12:12.132818000 UTC +00:00> 
+3.0.0 :014 > 
+
+
+
+
+** after_initialize :-
+
+after_initialize :initialize_obj
+
+  def initialize_obj
+    puts "A new object is initailized"
+  end  
+  
+ 
+output:--
+
+3.0.0 :029 > patient = Patient.new
+A new object is initailized
+ => #<Patient:0x000055e260c008a8 id: nil, name: nil, gender: nil, dob: nil, address: nil, created_at: nil, updated_at: nil> 
+3.0.0 :030 > 
+              
+
+** after_find :--
+
+after_find :find_record
+
+def find_record
+    puts "#{name} is present in database"
+  end                
+  
+output:--
+
+3.0.0 :036 > patients = Patient.last
+  Patient Load (0.6ms)  SELECT "patients".* FROM "patients" ORDER BY "patients"."id" DESC LIMIT $1  [["LIMIT", 1]]
+RAVI SINGH is present in database                                                     
+A new object is initailized                                                           
+ =>                                                                                   
+#<Patient:0x00007fb29c421930                                                          
+...                            
+
+*** after_touch :-
+
+after_touch :touched
+  private
+  
+  def touched
+    puts "you have touched an object"
+  end  
+  
+  output:--
+  3.0.0 :074 > patient = Patient.last
+  
+  3.0.0 :073 > patient.touch
+  TRANSACTION (0.3ms)  BEGIN
+  Patient Update (0.8ms)  UPDATE "patients" SET "updated_at" = $1 WHERE "patients"."id" = $2  [["updated_at", "2022-02-02 09:11:03.587419"], ["id", 41]]                                                          
+  TRANSACTION (48.1ms)  COMMIT                                          
+ => true                                                                
+3.0.0 :074 > 
+                   
+
+*** Conditional Callbacks :--
+
+after_validation :addres_change, if: :address_empty?
+
+private
+  def address_empty?
+    if self.address == nil
+      return true
+    else
+      return false
+    end
+  end
+
+  def addres_change
+    self.address = "delhi"
+  end
+  
+output:-- 
+3.0.0 :074 > patient = Patient.create(name: "poonam", gender: "female", dob: "20-03-1996" )
+                       
+3.0.0 :076 > patient
+ => 
+#<Patient:0x000055e261979e58                 
+ id: 42,                                     
+ name: "Poonam",                             
+ gender: "female",                           
+ dob: Wed, 20 Mar 1996,                      
+ address: "delhi",                           
+ created_at: Wed, 02 Feb 2022 09:17:34.637347000 UTC +00:00,
+ updated_at: Wed, 02 Feb 2022 09:17:34.637347000 UTC +00:00> 
+ 
+ 
+ **** after_commit :-
+ 
+ after_commit :patient_created
+ 
+ def patient_created
+    puts "patient created successfully"
+  end 
+  
+ output:-
+ 
+ 3.0.0 :078 > patient = Patient.create(name: "kavita", gender: "female", dob: "20-03-1993",address: "hodal" )
+A new object is initailized
+  TRANSACTION (0.4ms)  BEGIN                                
+  Patient Create (0.8ms)  INSERT INTO "patients" ("name", "gender", "dob", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["name", "KAVITA"], ["gender", "female"], ["dob", "1993-03-20"], ["address", "hodal"], ["created_at", "2022-02-02 09:21:47.318507"], ["updated_at", "2022-02-02 09:21:47.318507"]]
+new value saved KAVITA                                      
+  TRANSACTION (48.9ms)  COMMIT                              
+patient created successfully                                
+ =>                                                         
+#<Patient:0x000055e261b480b8
+...                        
+
+
