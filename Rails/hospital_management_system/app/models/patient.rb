@@ -13,7 +13,8 @@ class Patient < ApplicationRecord
   around_save :around_check
   validate :age_check
   after_initialize :initialize_obj
-
+  after_find :find_record
+  
   private
   def addres_change
     self.address = "delhi"
@@ -39,5 +40,8 @@ class Patient < ApplicationRecord
   
   def initialize_obj
     puts "A new object is initailized"
+  end  
+  def find_record
+    puts "#{name} is present in database"
   end  
 end  
