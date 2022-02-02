@@ -14,6 +14,7 @@ class Patient < ApplicationRecord
   validate :age_check
   after_initialize :initialize_obj
   after_find :find_record
+  after_commit :patient_created
   
   private
   def address_empty?
@@ -51,5 +52,8 @@ class Patient < ApplicationRecord
   end  
   def find_record
     puts "#{name} is present in database"
+  end
+  def patient_created
+    puts "patient created successfully"
   end  
 end  
