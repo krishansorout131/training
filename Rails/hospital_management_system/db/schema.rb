@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_070125) do
+ActiveRecord::Schema.define(version: 2022_01_29_105023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 2022_01_28_070125) do
     t.string "specialization"
     t.integer "salary"
     t.bigint "department_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.string "post"
+    t.bigint "manager_id"
+  end
+
+  create_table "employees_patients", id: false, force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "patient_id", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "title"
+    t.string "feedback_type"
+    t.integer "feedback_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -49,6 +63,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_070125) do
   end
 
   add_foreign_key "employees", "departments"
+  add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "opd_details", "employees"
   add_foreign_key "opd_details", "patients"
 end
