@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "departments#index"
-
+  get "/employees" => "employees#employees"
+  get "/department/:id" => "departments#department_employees"
+  get "/employees/managers" => "employees#managers"
+  get "/employees/managers/:id" => "employees#manager_subordinates"
 end
