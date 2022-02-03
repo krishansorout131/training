@@ -1,0 +1,6 @@
+<h1>All Employees Under <%= @manager_name.titleize%></h1>
+<ul>
+  <% @manager_employees.each do |employee|%>
+    <li> <%= employee.name.titleize %> </li>
+  <%end%>  
+<ul>

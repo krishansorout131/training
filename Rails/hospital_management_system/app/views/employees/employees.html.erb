@@ -1,0 +1,6 @@
+<h1>List Of All Employees</h1>
+<ul>
+  <% @employees.each do |employee|%>
+    <li> <%= employee.name.titleize%> </li><br>
+  <%end%>  
+</ul>

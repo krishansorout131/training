@@ -1,0 +1,6 @@
+<h1>All Managers</h1>
+<ul>
+  <% @managers.each do |manager|%>
+    <li> <%= link_to manager.name.titleize, "/employees/managers/#{manager.id}" %> </li><br>
+  <%end%>
+</ul>
