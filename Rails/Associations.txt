@@ -151,6 +151,11 @@ A has_and_belongs_to_many association creates a direct many-to-many connection w
 
 1. we need to create a join table within we wants to make has_and_belongs_to_many association.
 
+** inserting data into join table:-
+
+3.0.0 :026 > doctor = Employee.find(9)
+doctor.patients << Patient.last
+
 class Employee < ApplicationRecord
   has_and_belongs_to_many :patients
 end
