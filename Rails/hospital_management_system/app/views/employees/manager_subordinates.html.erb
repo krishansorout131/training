@@ -1,6 +1,12 @@
+<h3> Id : <%= @manager_details.id%> </h3>
+<h3> Name : <%= @manager_details.name %></h3>
+<h3> Gender : <%= @manager_details.gender %></h3>
+<h3> Date Of Birth : <%= @manager_details.dob.strftime("%d-%m-%Y") %></h3>
+<h3> Specialization : <%= @manager_details.specialization %></h3>
+
 <h1>All Employees Under <%= @manager_name.titleize%></h1>
 <ul>
   <% @manager_employees.each do |employee|%>
-    <li> <%= employee.name.titleize %> </li>
+    <li> <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> </li><br>
   <%end%>  
 <ul>
