@@ -1,0 +1,16 @@
+<h1>Details Of Dr. <%= @doctor.name%></h1>
+<h3> Id : <%= @doctor.id %></h3>
+<h3> Name : <%= @doctor.name %></h3>
+<h3> Gender : <%= @doctor.gender %></h3>
+<h3> Date Of Birth : <%= @doctor.dob.strftime("%d-%m-%Y") %></h3>
+<h3> Specialization : <%= @doctor.specialization %></h3>
+
+<h1>All Patients Of Dr. <%= @doctor.name %></h1>
+
+<ul>
+  <% @doctor_patients.each do |patient| %>
+    <li> <%= link_to patient.name.titleize, "/doctors/patients/#{patient.id}" %> </li>
+  <%end%>  
+</ul>
+
+<%= link_to "previous", "/doctors"%>
