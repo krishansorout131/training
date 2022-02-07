@@ -27,7 +27,9 @@ class EmployeesController < ApplicationController
     @idp = params[:idp]
   end 
 
-  def employee_form
-
+  def create
+    @employee = Employee.new(name: params[:name],dob: params[:dob], gender: params[:gender],specialization: params[:specialization],salary: params[:salary],department_id: params[:department_id], post: params[:post],manager_id: params[:manager_id])
+    @employee.save
+    redirect_to "/employees/#{@employee.id}"
   end  
 end
