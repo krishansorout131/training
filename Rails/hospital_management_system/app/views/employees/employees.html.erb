@@ -1,8 +1,13 @@
+<style>
+
+</style>
+
 <h1>List Of All Employees</h1>
-<ul>
+<a href="/employees/new">Create New Employee</a>
+<ol>
   <% @employees.each do |employee|%>
     <li> <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> </li><br>
   <%end%>  
-</ul>
+</ol>
 
 <%=link_to "previous", "/"%>

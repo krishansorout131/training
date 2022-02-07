@@ -4,3 +4,5 @@
 <h3> Gender : <%= @employee.gender %></h3>
 <h3> Date Of Birth : <%= @employee.dob.strftime("%d-%m-%Y") %></h3>
 <h3> Specialization : <%= @employee.specialization %></h3>
+
+<%= link_to "previous", "/patients/#{@idp}"%>
