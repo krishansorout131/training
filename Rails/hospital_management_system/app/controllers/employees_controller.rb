@@ -24,5 +24,10 @@ class EmployeesController < ApplicationController
   end  
   def doctor_details
     @employee = Employee.find(params[:id])
+    @idp = params[:idp]
   end 
+
+  def employee_form
+
+  end  
 end
