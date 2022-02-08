@@ -4,3 +4,5 @@
 <h3> Gender : <%= @patient.gender %></h3>
 <h3> Date Of Birth : <%= @patient.dob.strftime("%d-%m-%Y") %></h3>
 <h3> Addres : <%= @patient.address %></h3> <br>
+
+<%= link_to "previous", "/doctors/#{@did}"%>

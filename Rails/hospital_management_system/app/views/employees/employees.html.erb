@@ -1,13 +1,13 @@
-<style>
 
-</style>
-
-<h1>List Of All Employees</h1>
-<a href="/employees/new">Create New Employee</a>
+<h1 style="color:green; text-align:center;">List Of All Employees</h1>
+<a href="/employees/new" style="margin-left:5%;background-color:rgb(185, 248, 234);display: inline-block;text-decoration:none;">Create New Employee</a>
 <ol>
   <% @employees.each do |employee|%>
-    <li> <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> </li><br>
-  <%end%>  
+    <li style="margin-left:40%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
+    &nbsp &nbsp<%= link_to "Destroy this Employee", "/employee/destroy/#{employee.id}", method: :delete %>  
+    &nbsp &nbsp <%= link_to "Edit this Employee", "/employee/edit/#{employee.id}" %>
+    </li><br>
+     
+    <%end%>  
 </ol>
-
-<%=link_to "previous", "/"%>
+<div style="font-size:25px;margin-left:5% ;margin-bottom:10%"><%=link_to "previous", "/"%></div><%= select_tag(:city_id, '<option value="1">Lisbon</option>...') %>
