@@ -1,13 +1,20 @@
-<h1>List Of All Departments </h1>
+<h1 style="color:green; text-align:center;">List Of All Departments </h1>
 <ul>
   <% @departments.each do |department| %>
-    <li> <%= link_to department.name.titleize, "/department/#{department.id}" %> </li><br>
+    <li style="margin-left:40%; color: green;" > <%= link_to department.name.titleize, "/department/#{department.id}" %> </li><br>
   <%end%>
 </ul>
 
-<%= link_to "Click to see all employees", "/employees" %> <br><br>
-<%= link_to "Click to see all managers", "/employees/managers" %> <br><br>
+<div style="margin-left:5%;background-color:rgb(185, 248, 234);display: inline-block;" >
+  <%= link_to "Click to see all employees", "/employees" %> 
+</div>
 
-<%= link_to "Click to see all patients", "/patients" %> <br><br>
-
-<%= link_to "Click to see all doctors", "/doctors" %>
+<div style="margin-left:10%;background-color:rgb(185, 248, 234);display: inline-block;" >
+  <%= link_to "Click to see all managers", "/employees/managers" %> 
+</div>
+<div style="margin-left:10%;background-color:rgb(185, 248, 234);display: inline-block;" >
+  <%= link_to "Click to see all patients", "/patients" %> 
+</div>
+<div style="margin-left:10%;background-color:rgb(185, 248, 234);display: inline-block;" >
+  <%= link_to "Click to see all doctors", "/doctors" %>  
+</div><br><br>
