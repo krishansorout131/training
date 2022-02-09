@@ -1,13 +1,69 @@
 
+
+
+<%= form_with url: "/search", method: :get do |form| %>
+  <%= form.label :name, "Search for Employee :" %>
+  <%= form.text_field :name %><br><br>
+  <%= form.label :salary, "Search for salary :" %>
+  <%= form.text_field :salary %><br><br>
+  <%= form.label :dob, "Search for D.O.B :" %>
+  <%= form.date_field :dob %><br><br>
+
+  <%= form.submit "Search" %>
+<% end %>
+<br>
+
+
+<a href="/employees/new" style="background-color:rgb(185, 248, 234);display: inline-block;text-decoration:none;">Create New Employee</a>
+
+<% if @name != nil and @name != "" %>
+  
+  <ol>
+    <h2 style="color:green; text-align:center;">All Employees Filtered With Name</h2>
+    <% @search_name.each do |employee|%>
+      <li style="margin-left:35%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
+      &nbsp &nbsp<%= link_to "Destroy this Employee", "/employee/destroy/#{employee.id}", method: :delete %>  
+      &nbsp &nbsp <%= link_to "Edit this Employee", "/employee/edit/#{employee.id}" %></li><br>
+     
+    <%end%>  
+  </ol>
+<% end %>
+
+<% if @salary !=nil and @salary != ""%>
+  <ol>
+    <h2 style="color:green; text-align:center;">All Employees Filtered With Salary</h2>
+    <% @search_salary.each do |employee|%>
+      <li style="margin-left:35%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
+      &nbsp &nbsp<%= link_to "Destroy this Employee", "/employee/destroy/#{employee.id}", method: :delete %>  
+      &nbsp &nbsp <%= link_to "Edit this Employee", "/employee/edit/#{employee.id}" %>
+      </li><br>
+     
+    <%end%>  
+  </ol>
+<% end %>
+
+<% if @dob != nil and @dob != "" %>
+  <ol>
+    <h2 style="color:green; text-align:center;">All Employees Filtered With D.O.B </h2>
+    <% @search_dob.each do |employee|%>
+      <li style="margin-left:35%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
+      &nbsp &nbsp<%= link_to "Destroy this Employee", "/employee/destroy/#{employee.id}", method: :delete %>  
+      &nbsp &nbsp <%= link_to "Edit this Employee", "/employee/edit/#{employee.id}" %>
+      </li><br>
+     
+    <%end%>  
+  </ol>
+<% end %>
+
 <h1 style="color:green; text-align:center;">List Of All Employees</h1>
-<a href="/employees/new" style="margin-left:5%;background-color:rgb(185, 248, 234);display: inline-block;text-decoration:none;">Create New Employee</a>
 <ol>
   <% @employees.each do |employee|%>
-    <li style="margin-left:40%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
+    <li style="margin-left:35%; color: green;" > <%= link_to employee.name.titleize, "/employees/#{employee.id}"%> 
     &nbsp &nbsp<%= link_to "Destroy this Employee", "/employee/destroy/#{employee.id}", method: :delete %>  
     &nbsp &nbsp <%= link_to "Edit this Employee", "/employee/edit/#{employee.id}" %>
     </li><br>
      
-    <%end%>  
+  <%end%>  
 </ol>
-<div style="font-size:25px;margin-left:5% ;margin-bottom:10%"><%=link_to "previous", "/"%></div><%= select_tag(:city_id, '<option value="1">Lisbon</option>...') %>
+
+<div style="font-size:25px;margin-left:5% ;margin-bottom:10%"><%=link_to "previous", "/"%>
