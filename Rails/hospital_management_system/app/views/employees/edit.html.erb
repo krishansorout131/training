@@ -1,0 +1,25 @@
+<% if @employee.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <ul>
+        <% @employee.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+ 
+    </div>
+  <% end %>
+
+<%= form_for @employee do |f| %>
+  Name: <%= f.text_field :name %><br><br>
+  Gender: <%= f.radio_button("gender", "Male") %> Male 
+  <%= f.radio_button("gender", "Female") %> Female <br><br>
+  D.O.B :<%= f.date_field :dob%><br><br>
+  Specialization: <%= f.text_field :specialization %><br><br>
+  Salary: <%= f.number_field :salary%><br><br>
+  Department Id: <%= f.select :department_id, options_for_select(1 .. 7)%> <br><br>
+  Post: <%= f.text_field :post%><br><br>
+  Manager Id: <%= f.select :manager_id, options_for_select([28,32])%><br><br>
+
+   <%= f.submit %>
+<% end %>
