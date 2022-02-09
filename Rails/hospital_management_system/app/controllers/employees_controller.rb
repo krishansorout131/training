@@ -3,10 +3,18 @@ class EmployeesController < ApplicationController
 
   def employees 
     @employees = Employee.all
+    @name = params[:name]
+    @search_name = Employee.where("name ilike ? ", "#{@name}%")
+    @salary = params[:salary]
+    @search_salary = Employee.where("salary >= ?", @salary)
+    @dob = params[:dob]
+    @search_dob = Employee.where("dob <= ?", @dob)
   end 
+
   def managers
     @managers = Employee.where(post: "Manager")
   end 
+
   def manager_subordinates
     @manager_employees = Employee.find(params[:id]).employees
     @manager_name = Employee.find(params[:id]).name
@@ -30,12 +38,12 @@ class EmployeesController < ApplicationController
 
   def employee_form
     @employee = Employee.new
-    debugger
+    
   end
 
   def create
     @employee = Employee.new(employee_params)
-    debugger
+    
     # @employee = Employee.new(name: params[:name],dob: params[:dob], gender: params[:gender],specialization: params[:specialization],salary: params[:salary],department_id: params[:department_id], post: params[:post],manager_id: params[:manager_id])
     if @employee.save
       redirect_to "/employees/#{@employee.id}"
@@ -57,15 +65,19 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    @employee = Employee.update(employee_params)
-
-    # @employee = Employee.new(name: params[:name],dob: params[:dob], gender: params[:gender],specialization: params[:specialization],salary: params[:salary],department_id: params[:department_id], post: params[:post],manager_id: params[:manager_id])
-   # if @employee.save
+    @employee = Employee.find(params[:id])
+    @employee.update(employee_params)
+    
+    if @employee.save
       redirect_to "/employees/#{@employee.id}"
-    #else
-      render :employee_form, status: :unprocessable_entity 
-   # end
+    else
+      render :edit, status: :unprocessable_entity 
+    end
+    # @employee = Employee.new(name: params[:name],dob: params[:dob], gender: params[:gender],specialization: params[:specialization],salary: params[:salary],department_id: params[:department_id], post: params[:post],manager_id: params[:manager_id])
+    
   end
+ 
+
   private
 
   def employee_params
