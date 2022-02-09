@@ -1,20 +1,18 @@
+<div class="create"><a href="/employees/new" >Create New Employee</a>
+</div>
 
-
-
+<div class="form">
 <%= form_with url: "/search", method: :get do |form| %>
-  <%= form.label :name, "Search for Employee :" %>
-  <%= form.text_field :name %><br><br>
-  <%= form.label :salary, "Search for salary :" %>
-  <%= form.text_field :salary %><br><br>
-  <%= form.label :dob, "Search for D.O.B :" %>
-  <%= form.date_field :dob %><br><br>
+  <%= form.label :name, "Search for Employee :", class: "head" %>
+  <%= form.text_field :name , class: "input" %><br><br>
+  <%= form.label :salary, "Search for salary :", class: "head" %>
+  <%= form.text_field :salary , class: "input"%><br><br>
+  <%= form.label :dob, "Search for D.O.B :", class: "head" %>
+  <%= form.date_field :dob , class: "input"%><br><br>
 
-  <%= form.submit "Search" %>
+  <%= form.submit "Search", class: "submit" %>
 <% end %>
-<br>
-
-
-<a href="/employees/new" style="background-color:rgb(185, 248, 234);display: inline-block;text-decoration:none;">Create New Employee</a>
+</div>
 
 <% if @name != nil and @name != "" %>
   
