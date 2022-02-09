@@ -1,0 +1,9 @@
+<h1 style="color:green;">List Of All Patients</h1>
+<a href="/patients/new">Create New Patient</a>
+<ol>
+  <% @patients.each do |patient|%>
+    <li> <%= link_to patient.name.titleize, "/patients/#{patient.id}" %> </li><br>
+  <%end%>  
+</ol>
+
+<%=link_to "previous", "/"%>
