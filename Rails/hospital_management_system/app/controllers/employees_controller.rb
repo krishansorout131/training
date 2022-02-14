@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
 
 
   def employees 
-    @employees = Employee.all
+    @employees = Employee.all.paginate(page: params[:page])
     @name = params[:name]
     @search_name = Employee.where("name ilike ? ", "#{@name}%")
     @salary = params[:salary]

@@ -1,0 +1,53 @@
+<style>
+#title {
+border:2px solid tomato;    
+margin-left:40%;
+color:black;
+background-color:dodgerBlue;
+display: inline-block;
+}  
+#fieldset{
+display: inline-block;
+margin-left: 33%;    
+}
+#label{
+color : green;
+float: left;
+}
+
+#input{
+width: 250px;
+float: right;
+}
+#gender{
+margin-left:1% ;    
+}
+
+</style>
+
+
+<h3 id="title">Create New Employee</h3>
+<form action="" id="form1">
+<fieldset id="fieldset">
+<label for="ename" id="label" id="label"> Name :</label>    
+<input type="text" id="input" name="name" placeholder="Enter employee name"><br><br>
+<label for="gender" id="label">Gender :</label>
+<input type="radio" id="gender" name="gender">
+<label for="m" >male</label>
+<input type="radio" id="f" name="gender">
+<label for="f" >female</label><br><br>
+<label for="age" id="label">D.O.B :</label>
+<input type="date" id="input" name="dob" ><br><br>
+<label for="specialization" id="label">Specialization :</label>
+<input type="text" name="specialization" id="input" placeholder="Enter employee's specialization"><br><br>
+<label for="salary"id="label">Salary :</label>
+<input type="number" name="salary" id="input"><br><br>
+<label for="department" id="label">Department Id :</label>
+<input type="number" name="department_id" id="input"><br><br>
+<label for="ename" id="label"> Post :</label>    
+<input type="text" id="input" name="post" placeholder="Enter employee's post"><br><br>
+<label for="manager_id" id="label">Manager Id :</label>
+<input type="number" name="manager_id" id="input"><br><br>
+
+</fieldset>
+</form>
