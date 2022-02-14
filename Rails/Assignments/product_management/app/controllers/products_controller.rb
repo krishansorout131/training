@@ -4,7 +4,12 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.where(user_id: session[:user_id]).paginate(:page => params[:page])
+    if params[:name] != nil
+      #@products = Product.where(user_id: session[:user_id], name: params[:name]).paginate(:page => params[:page])
+      @products = Product.where("user_id = ? and name ilike ? ", session[:user_id], "#{params[:name]}%").paginate(:page => params[:page])
+    else
+      @products = Product.where(user_id: session[:user_id]).paginate(:page => params[:page])
+    end
   end
   
   def new
