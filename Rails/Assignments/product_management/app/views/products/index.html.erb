@@ -1,0 +1,18 @@
+<div class = "logout">
+<%= link_to "Create Product", new_product_path %> |   
+<%= link_to "Logout", "/logout" %>
+</div>
+<%= flash[:message] %><br>
+<h1 class= "list">List Of All Products</h1><br><br>
+
+<ol class = "list">
+<% if @products.count == 0 %>
+<h1> No Products Found Create new Product First</h1>
+<% end %>
+<% @products.each do |product| %>
+  <li> <%= product.name%>  <%= link_to "edit product", edit_product_path(product) , class: "link1"%>  
+  <%= button_to "delete product", product_path(product), method: :delete , class: "btn"%> </li><br>
+<% end %>    
+</ol>
+
+<%= will_paginate @products %>

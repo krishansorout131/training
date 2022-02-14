@@ -1,0 +1,19 @@
+<div class="pform">
+<%= form_for @product do |form| %>
+    
+    <div>
+      <%= form.label :name  %>
+      <%= form.text_field :name %>
+    </div><br>
+   
+    <div>
+    <%= form.label :price  %>
+      <%= form.number_field :price %>
+    </div>
+    
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  </div>

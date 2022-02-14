@@ -1,0 +1,17 @@
+<%= flash[:message] %><br>
+<div class="register"><%= link_to "Register", new_user_path %> |
+<%= link_to "login", "/" %>
+</div>
+
+<div class="form">
+  <p>Enter Details for login </p>
+  <%= form_with url: "/login", method: :get do |form| %>
+  <%= form.label :name, "Username :", class: "head" %>
+  <%= form.text_field :name , class: "input" %><br><br>
+  <%= form.label :password, "Password :", class: "head" %>
+  <%= form.password_field :password , class: "input"%><br><br>
+
+  <%= form.submit "login", class: "submit" %>
+<% end %>
+</div>
+
