@@ -5,6 +5,13 @@
 <%= flash[:message] %><br>
 <h1 class= "list">List Of All Products</h1><br><br>
 
+<%= form_with url: "/search", method: :get do |f| %>
+  <%= f.label :name, "Serach product :"%>
+  <%= f.text_field :name%>
+  <br>
+  <%= f.submit "Serach" %>
+<% end %>
+
 <ol class = "list">
 <% if @products.count == 0 %>
 <h1> No Products Found Create new Product First</h1>
