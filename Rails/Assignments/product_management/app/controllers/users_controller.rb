@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     
     if @user.save
+      UserMailer.welcome_email(@user).deliver_now
       redirect_to "/"
     else
       render :new, status: :unprocessable_entity 
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :dob, :password, :address, :terms_of_services, :password_confirmation)
+    params.require(:user).permit(:name, :email, :dob, :password, :address, :terms_of_services, :password_confirmation)
   end
 
 end
