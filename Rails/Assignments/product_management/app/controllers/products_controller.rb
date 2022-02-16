@@ -4,12 +4,20 @@ class ProductsController < ApplicationController
 
 
   def index
-    if params[:name] != nil
-      #@products = Product.where(user_id: session[:user_id], name: params[:name]).paginate(:page => params[:page])
-      @products = Product.where("user_id = ? and name ilike ? ", session[:user_id], "#{params[:name]}%").paginate(:page => params[:page])
-    else
+    if (params[:name] == nil and params[:price] == nil) or (params[:price] == "0" and params[:name] == "")
       @products = Product.where(user_id: session[:user_id]).paginate(:page => params[:page])
+    elsif params[:name] != "" and params[:price] == "0"
+      @products = Product.where(user_id: session[:user_id]).where("name ilike ?", "#{params[:name]}%").paginate(:page => params[:page])
+    elsif params[:price] != "0" and params[:name] == ""
+      @products = Product.where(user_id: session[:user_id]).where("price < ? ", "#{params[:price]}").paginate(:page => params[:page])
+    else
+      @products = Product.where(user_id: session[:user_id]).where("price < ? and name ilike ?", "#{params[:price]}", "#{params[:name]}%").paginate(:page => params[:page])
     end
+    
+    @count = @products.count
+    if @count == 0
+      flash[:message] = "No Products Found Create new Product First"
+    end  
   end
   
   def new

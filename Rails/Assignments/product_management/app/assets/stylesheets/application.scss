@@ -1,0 +1,158 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap"; 
+
+ .register{
+
+    float: right;
+ }
+
+ .error1{
+text-align: center;
+color:red;
+ }
+
+.form{
+    
+    margin:auto;
+    color: rgb(54, 50, 10);
+    width:fit-content;
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 20px;
+   
+}
+.form p {
+    font-size: 22px;
+}
+.form .input:hover {
+    height:20px;
+}
+.pform{
+    margin-left: 33%;
+    margin-top: 5%;
+    color: rgb(23, 143, 107);
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.input{
+    width: 250px;
+    float:right;
+    border-radius: 20px;
+}
+
+.submit{
+    width: 100px;
+    height: 40px;
+    
+    font-size: 20px;
+    margin-left: 35%;
+}
+
+.footer{
+
+    text-align:center;
+    border: 2px solid green;
+    margin-top: 10%;
+
+}
+
+.logout{
+
+    float:right;
+}
+
+.list{
+    margin-left: 35%;
+    color: rgb(27, 145, 214);
+}
+
+.link1{
+    padding-left: 80px;
+}
+.btn{
+    width: 120px;
+    height: 30px;
+    background-color: blanchedalmond; 
+}
+
+.pname{
+    padding-bottom: 5px;
+}
+
+.registeruser{
+    margin-left: 40%;
+    margin-top: 5%;
+}
+
+.newuser{
+    display: inline-block;
+    border: 2px solid black;
+    margin-left: 33%;
+    padding: 20px;
+    border-radius: 20px;
+    color: chocolate;
+}
+.subbtn{
+    margin-left: 35%;
+    width: 120px;
+    height: 30px;
+    background-color: rgb(138, 88, 13); 
+    font-size: 18px;
+}
+
+.not_found{
+    text-align: center;
+    font-size: 22px;
+    color: rgb(64, 201, 201);
+}
+
+.product_list{
+    padding: 10px;
+    margin-left: 35%;
+    color: rgb(214, 27, 152);
+}
+.product_list th{
+    color:black;
+}
+.product_list td{
+    padding: 5px 10px;
+
+}
+
+.pagination{
+    
+    color: brown;   
+    font-size: 20px;
+}
+.delete{
+    margin-top: 15PX;
+}
+
+#customRange2{
+    width:400px;
+    float:right;
+    margin-right: 56%;
+}
+
+.back{
+    font-size: 25px;
+    margin-left: 15px;
+}

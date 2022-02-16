@@ -2,24 +2,37 @@
 <%= link_to "Create Product", new_product_path %> |   
 <%= link_to "Logout", "/logout" %>
 </div>
-<%= flash[:message] %><br>
+
 <h1 class= "list">List Of All Products</h1><br><br>
-
+<% if @count > 0 %>
 <%= form_with url: "/search", method: :get do |f| %>
-  <%= f.label :name, "Serach product :"%>
+  <%= f.label :name, "Search product :"%>
   <%= f.text_field :name%>
+  <br clear ="all">
+  <%= f.label :price, "Search Product with price:" %>
+  <%= f.range_field :price, value: 0, :min => 0, :max => 50000, :class => "form-range", :id => "customRange2" %>
   <br>
-  <%= f.submit "Serach" %>
+  <%= f.submit "Search" %>
 <% end %>
-
-<ol class = "list">
-<% if @products.count == 0 %>
-<h1> No Products Found Create new Product First</h1>
 <% end %>
-<% @products.each do |product| %>
-  <li> <%= product.name%>  <%= link_to "edit product", edit_product_path(product) , class: "link1"%>  
-  <%= button_to "delete product", product_path(product), method: :delete , class: "btn"%> </li><br>
-<% end %>    
-</ol>
+<div class="not_found"> <%= flash[:message] %> </div><br>
 
-<%= will_paginate @products %>
+<% if @count > 0 %>
+<table class="product_list">
+  <tr>
+    <th>Name</th> 
+    <th>price</th>
+    <th>edit</th> 
+    <th>delete</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr> <td> <%= product.name %> </td> 
+      <td> <%= product.price %> </td> 
+      <td> <%= link_to "edit product", edit_product_path(product) %></td>  
+      <td><%= button_to "delete product", product_path(product), method: :delete , class: "delete"%> </li><br></td>
+    </tr>
+  <% end %>    
+</table>
+<% end %><br><br>
+<%= link_to "back to products", products_path, class: "back"%><br>
+<div class="pagination"><%= will_paginate @products %></div>
