@@ -41,6 +41,8 @@ beryl@beryl-HP-ProBook-6460b:~/Desktop/myapp$ rake db:drop
 Dropped database 'myapp_development'
 Database 'myapp_test' does not exist
  
+***** Delete .git file if needed :--   rm -rf .git
+
                                                     
 *** starting serever :--
 rails server
