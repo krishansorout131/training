@@ -14,7 +14,7 @@ class Api::V1::ProductsController < ActionController::Base
     end  
     render json: { data: ActiveModelSerializers::SerializableResource.new(products,each_serializer:ProductSerializer)}
   end 
-  
+
   def show
     if params[:category_id].present?
       category = Category.find_by(id: params[:category_id])
@@ -36,9 +36,12 @@ class Api::V1::ProductsController < ActionController::Base
   
   def create
     category = Category.find_by(id: params[:category_id])
-    product = category.products.create(product_params)
-    render json: { data: product}
-
+    if category.present?
+      product = category.products.create(product_params)
+      render json: { data: product}
+    else
+      render json: { data: "Category Not Found"}  
+    end
   end
   
   def update
