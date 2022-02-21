@@ -12,9 +12,9 @@ class Api::V1::ProductsController < ActionController::Base
     else
       products = Product.all   
     end  
-    render json: { data: products}
+    render json: { data: ActiveModelSerializers::SerializableResource.new(products,each_serializer:ProductSerializer)}
   end 
-    
+  
   def show
     if params[:category_id].present?
       category = Category.find_by(id: params[:category_id])
