@@ -2,13 +2,17 @@ class Api::V1::ProductsController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   def index
-    category = Category.find_by(id: params[:category_id])
-    if category.present?
-      products = category.products
+    if params[:category_id].present?
+      category = Category.find_by(id: params[:category_id])
+      if category.present?
+        products = category.products
+      else
+        render json: { data: "Category Not Found"} and return
+      end 
     else
-      products = Product.all  
-    end    
-      render json: { data: products}
+      products = Product.all   
+    end  
+    render json: { data: products}
   end 
     
   def show
