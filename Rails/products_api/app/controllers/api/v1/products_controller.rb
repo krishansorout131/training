@@ -43,10 +43,18 @@ class Api::V1::ProductsController < ActionController::Base
   
   def update
     category = Category.find_by(id: params[:category_id])
-    product = category.products.find_by(id: params[:id])
-    product.update(product_params)
-    render json: { data: product}
-  end 
+    if category.present?
+      product = category.products.find_by(id: params[:id])
+      if product.present?
+        product.update(product_params)
+        render json: { data: product}
+      else
+        render json: { data: "Product Not Found"}  
+      end
+    else
+      render json: { data: "Category Not Found"}  
+    end
+  end   
   
   def destroy
     category = Category.find_by(id: params[:category_id])
