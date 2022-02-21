@@ -12,38 +12,21 @@ class Api::V1::ProductsController < ActionController::Base
   end 
     
   def show
-    category = Category.find(params[:id])
-    render json: { data: category}
+    if params[:category_id].present?
+      category = Category.find_by(id: params[:category_id])
+      if category.present?
+        product = category.products.find_by(id: params[:id])
+        if product.present?
+          render json: { data: product}
+        else  
+          render json: {data: "Product Not Found"}  and return
+        end 
+      else
+        render json: { data: "category Not Found"} and return
+      end     
+    else  
+      product = Product.find_by(id: params[:id])
+      render json: { data: product}
+    end
   end  
-
-  def create
-    cat = Category.create cat_params
-    render json: { data: cat }
-  end 
-
-  def update
-    category = Category.find(params[:id])
-    category.update(cat_params)
-
-    render json: {data: "name updated succesfully"}
-  end  
-  
-
-  def destroy
-    cat = Category.find_by(id: params[:id])
-    cat.destroy
-    render json: { data: 'YEss' }
-  end
-
-
-
-  
-  private
-
-  def cat_params
-    #params.require(:category).permit(:name) #if we send data from body as json then use this
-    params.permit(:name) #if we send data as key and value in params / through url
-  end
-
-
 end    
