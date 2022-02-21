@@ -41,6 +41,12 @@ class Api::V1::ProductsController < ActionController::Base
 
   end
   
+  def update
+    category = Category.find_by(id: params[:category_id])
+    product = category.products.find_by(id: params[:id])
+    product.update(product_params)
+    render json: { data: product}
+  end  
   
   private 
 
