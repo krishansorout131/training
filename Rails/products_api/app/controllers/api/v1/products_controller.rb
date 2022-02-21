@@ -32,5 +32,19 @@ class Api::V1::ProductsController < ActionController::Base
       product = Product.find_by(id: params[:id])
       render json: { data: product}
     end
+  end 
+  
+  def create
+    category = Category.find_by(id: params[:category_id])
+    product = category.products.create(product_params)
+    render json: { data: product}
+
+  end
+  
+  
+  private 
+
+  def product_params
+    params.require(:product).permit(:name, :price)
   end  
 end    
