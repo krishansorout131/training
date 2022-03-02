@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    
     if @user.save
-      UserMailer.welcome_email(@user).deliver_now
+      ReportWorker.perform_in(1.minutes, @user.id)
+      # ReportWorker.new.perform(@user.email)
       redirect_to "/"
     else
       render :new, status: :unprocessable_entity 
