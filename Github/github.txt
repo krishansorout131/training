@@ -233,3 +233,27 @@ Before adding a new SSH key to the ssh-agent to manage your keys, you should hav
     $ ssh-add ~/.ssh/id_ed25519
 
 
+***** handling multiple ssh keys:-
+
+1st.     beryl@beryl-HP-ProBook-6460b:~$ ssh-keygen
+generate new ssh key 
+
+2nd.  beryl@beryl-HP-ProBook-6460b:~/.ssh$ cat id_rsa_training.pub
+Add key into ssh keys on github
+
+3rd.  beryl@beryl-HP-ProBook-6460b:~$ nano config
+
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+
+
+Host github.com-training  ======> change this name to any new name
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_training   ====>  change this name as new generated ssh key and save
+
+beryl@beryl-HP-ProBook-6460b:~$ git clone git@github.com-training:krishansorout131/training.git
+=====> take clone with git@github.com-training the newly added host name in the config file
+
