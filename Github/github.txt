@@ -257,3 +257,6 @@ IdentityFile ~/.ssh/id_rsa_training   ====>  change this name as new generated s
 beryl@beryl-HP-ProBook-6460b:~$ git clone git@github.com-training:krishansorout131/training.git
 =====> take clone with git@github.com-training the newly added host name in the config file
 
+
+
+hii i am krishan.
